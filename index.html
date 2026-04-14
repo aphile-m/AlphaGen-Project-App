@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian — Partnership Decision Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1814;
+  --ink-2: #3d3a35;
+  --ink-3: #6b6760;
+  --ink-4: #9b9790;
+  --paper: #faf8f4;
+  --paper-2: #f2efe9;
+  --paper-3: #e8e4db;
+  --gold: #b8976a;
+  --gold-light: #f0e6d3;
+  --gold-dark: #8a6c45;
+  --teal: #2d6b6b;
+  --teal-light: #daeaea;
+  --red: #8b3a3a;
+  --red-light: #f5dede;
+  --green: #3a6b4a;
+  --green-light: #d8eadd;
+  --amber: #7a5c2a;
+  --amber-light: #f5e8d0;
+  --shadow-sm: 0 1px 3px rgba(26,24,20,0.08);
+  --shadow-md: 0 4px 16px rgba(26,24,20,0.1);
+  --shadow-lg: 0 12px 40px rgba(26,24,20,0.14);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); min-height: 100vh; line-height: 1.6; }
+
+/* ── Auth Screen ── */
+#auth-screen {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 2rem; background: var(--ink);
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(184,151,106,0.15) 0%, transparent 60%),
+                    radial-gradient(ellipse at 80% 20%, rgba(45,107,107,0.12) 0%, transparent 50%);
+}
+.auth-card {
+  width: 100%; max-width: 420px;
+  background: var(--paper); border-radius: 16px;
+  padding: 2.5rem; box-shadow: var(--shadow-lg);
+}
+.auth-logo { font-family: var(--serif); font-size: 1.8rem; color: var(--ink); margin-bottom: 0.25rem; }
+.auth-logo span { color: var(--gold); }
+.auth-tagline { font-size: 0.8rem; color: var(--ink-3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2rem; }
+.auth-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border: 1px solid var(--paper-3); border-radius: var(--radius-sm); overflow: hidden; }
+.auth-tab { flex: 1; padding: 0.6rem; font-size: 0.85rem; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--ink-3); transition: all 0.2s; }
+.auth-tab.active { background: var(--ink); color: var(--paper); }
+.form-group { margin-bottom: 1rem; }
+.form-label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--ink-3); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.form-input { width: 100%; padding: 0.65rem 0.9rem; border: 1px solid var(--paper-3); border-radius: var(--radius-sm); font-family: var(--sans); font-size: 0.9rem; color: var(--ink); background: var(--paper); transition: border-color 0.2s; }
+.form-input:focus { outline: none; border-color: var(--gold); }
+.form-select { width: 100%; padding: 0.65rem 0.9rem; border: 1px solid var(--paper-3); border-radius: var(--radius-sm); font-family: var(--sans); font-size: 0.9rem; color: var(--ink); background: var(--paper); cursor: pointer; }
+.btn-primary { width: 100%; padding: 0.75rem; background: var(--ink); color: var(--paper); border: none; border-radius: var(--radius-sm); font-family: var(--sans); font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.2s; letter-spacing: 0.02em; }
+.btn-primary:hover { background: var(--ink-2); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.auth-error { background: var(--red-light); color: var(--red); padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); font-size: 0.82rem; margin-bottom: 1rem; display: none; }
+
+/* ── App Layout ── */
+#app { display: none; min-height: 100vh; }
+
+/* ── Top Nav ── */
+.topnav {
+  background: var(--ink); color: var(--paper);
+  padding: 0 1.5rem; height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(26,24,20,0.3);
+}
+.nav-logo { font-family: var(--serif); font-size: 1.3rem; }
+.nav-logo span { color: var(--gold); }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+.nav-user { font-size: 0.82rem; color: rgba(250,248,244,0.6); }
+.nav-user strong { color: var(--paper); }
+.nav-signout { font-size: 0.78rem; padding: 0.35rem 0.75rem; border: 1px solid rgba(250,248,244,0.2); border-radius: var(--radius-sm); background: transparent; color: rgba(250,248,244,0.7); cursor: pointer; transition: all 0.2s; }
+.nav-signout:hover { background: rgba(250,248,244,0.1); color: var(--paper); }
+
+/* ── Main Layout ── */
+.app-body { display: flex; min-height: calc(100vh - 56px); }
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 220px; flex-shrink: 0;
+  background: var(--paper-2); border-right: 1px solid var(--paper-3);
+  padding: 1.25rem 0; position: sticky; top: 56px; height: calc(100vh - 56px); overflow-y: auto;
+}
+.sidebar-section { padding: 0 1rem 1rem; }
+.sidebar-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 0.5rem; padding: 0 0.5rem; }
+.nav-item { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.85rem; color: var(--ink-2); transition: all 0.15s; border: none; background: transparent; width: 100%; text-align: left; }
+.nav-item:hover { background: var(--paper-3); }
+.nav-item.active { background: var(--ink); color: var(--paper); }
+.nav-item .ni-icon { font-size: 0.9rem; width: 18px; text-align: center; }
+.nav-badge { margin-left: auto; font-size: 0.7rem; padding: 0.1rem 0.45rem; border-radius: 99px; font-weight: 600; }
+.nb-open { background: var(--red-light); color: var(--red); }
+.nb-count { background: var(--paper-3); color: var(--ink-3); }
+
+/* ── Main Content ── */
+.main-content { flex: 1; padding: 2rem; overflow-x: hidden; }
+
+/* ── Page Header ── */
+.page-header { margin-bottom: 2rem; }
+.page-title { font-family: var(--serif); font-size: 2rem; color: var(--ink); margin-bottom: 0.25rem; }
+.page-subtitle { font-size: 0.85rem; color: var(--ink-3); }
+
+/* ── Stats Row ── */
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.stat-card { background: var(--paper); border: 1px solid var(--paper-3); border-radius: var(--radius); padding: 1rem 1.1rem; }
+.stat-label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-4); margin-bottom: 0.3rem; }
+.stat-value { font-family: var(--serif); font-size: 1.9rem; color: var(--ink); line-height: 1; }
+.stat-sub { font-size: 0.75rem; color: var(--ink-3); margin-top: 0.2rem; }
+
+/* ── Progress Track ── */
+.progress-section { background: var(--paper); border: 1px solid var(--paper-3); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 2rem; }
+.progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.progress-title { font-size: 0.85rem; font-weight: 600; color: var(--ink); }
+.progress-pct { font-family: var(--serif); font-size: 1.1rem; color: var(--gold-dark); }
+.progress-phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+.phase-progress { }
+.phase-prog-label { font-size: 0.72rem; color: var(--ink-3); margin-bottom: 0.3rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.prog-bar { height: 5px; background: var(--paper-3); border-radius: 99px; overflow: hidden; }
+.prog-fill { height: 100%; background: var(--gold); border-radius: 99px; transition: width 0.4s ease; }
+.prog-fill.green { background: var(--green); }
+.prog-fill.teal { background: var(--teal); }
+
+/* ── Decision Cards ── */
+.phase-section { margin-bottom: 2.5rem; }
+.phase-heading { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+.phase-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.75rem; border-radius: 99px; }
+.phase-tag-1 { background: var(--gold-light); color: var(--gold-dark); }
+.phase-tag-2 { background: var(--teal-light); color: var(--teal); }
+.phase-tag-3 { background: var(--red-light); color: var(--red); }
+.phase-heading h2 { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); }
+
+.decision-card {
+  background: var(--paper); border: 1px solid var(--paper-3);
+  border-radius: var(--radius); margin-bottom: 0.75rem;
+  overflow: hidden; transition: box-shadow 0.2s;
+}
+.decision-card:hover { box-shadow: var(--shadow-sm); }
+.dc-header { display: flex; align-items: flex-start; gap: 0.875rem; padding: 1rem 1.1rem; cursor: pointer; }
+.dc-priority { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+.p-must { background: var(--red-light); color: var(--red); }
+.p-should { background: var(--amber-light); color: var(--amber); }
+.p-can { background: var(--teal-light); color: var(--teal); }
+.dc-main { flex: 1; min-width: 0; }
+.dc-title { font-weight: 600; font-size: 0.92rem; color: var(--ink); line-height: 1.4; }
+.dc-desc { font-size: 0.8rem; color: var(--ink-3); margin-top: 0.15rem; line-height: 1.4; }
+.dc-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; flex-shrink: 0; }
+.status-badge { font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 99px; white-space: nowrap; }
+.sb-open { background: var(--red-light); color: var(--red); }
+.sb-progress { background: var(--amber-light); color: var(--amber); }
+.sb-decided { background: var(--green-light); color: var(--green); }
+.sb-pending { background: var(--paper-3); color: var(--ink-3); }
+.dc-chevron { font-size: 0.75rem; color: var(--ink-4); transition: transform 0.2s; }
+.dc-chevron.open { transform: rotate(90deg); }
+
+.dc-body { display: none; padding: 0 1.1rem 1.1rem; border-top: 1px solid var(--paper-3); }
+.dc-body.open { display: block; }
+
+.dc-section { margin-top: 1rem; }
+.dc-section-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); margin-bottom: 0.5rem; }
+.info-box { background: var(--paper-2); border-radius: var(--radius-sm); padding: 0.875rem; font-size: 0.84rem; color: var(--ink-2); line-height: 1.65; }
+.info-box strong { color: var(--ink); font-weight: 600; }
+
+.options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.6rem; }
+.option-item { border: 1px solid var(--paper-3); border-radius: var(--radius-sm); padding: 0.75rem; cursor: pointer; transition: all 0.15s; }
+.option-item:hover { border-color: var(--gold); background: var(--gold-light); }
+.option-item.chosen { border-color: var(--gold); background: var(--gold-light); }
+.opt-title { font-size: 0.82rem; font-weight: 600; color: var(--ink); margin-bottom: 0.2rem; }
+.option-item.chosen .opt-title { color: var(--gold-dark); }
+.opt-detail { font-size: 0.77rem; color: var(--ink-3); line-height: 1.45; }
+
+/* ── Verification Bar ── */
+.verify-bar { background: var(--paper-2); border: 1px solid var(--paper-3); border-radius: var(--radius-sm); padding: 0.875rem; margin-top: 1rem; }
+.verify-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); margin-bottom: 0.6rem; }
+.verify-users { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
+.verify-user { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; padding: 0.3rem 0.6rem; border-radius: 99px; border: 1px solid var(--paper-3); background: var(--paper); }
+.vu-dot { width: 7px; height: 7px; border-radius: 50%; }
+.vu-confirmed { background: var(--green); }
+.vu-pending { background: var(--paper-3); }
+.vu-name { color: var(--ink-2); }
+
+.btn-confirm { padding: 0.55rem 1.2rem; background: var(--ink); color: var(--paper); border: none; border-radius: var(--radius-sm); font-family: var(--sans); font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.btn-confirm:hover { background: var(--ink-2); }
+.btn-confirm:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-confirm.confirmed { background: var(--green); }
+.btn-secondary { padding: 0.55rem 1rem; background: transparent; color: var(--ink-3); border: 1px solid var(--paper-3); border-radius: var(--radius-sm); font-family: var(--sans); font-size: 0.82rem; cursor: pointer; transition: all 0.15s; }
+.btn-secondary:hover { border-color: var(--ink-3); color: var(--ink); }
+.btn-danger { padding: 0.55rem 1rem; background: transparent; color: var(--red); border: 1px solid var(--red-light); border-radius: var(--radius-sm); font-family: var(--sans); font-size: 0.82rem; cursor: pointer; }
+
+/* ── Comments ── */
+.comments-section { margin-top: 1rem; }
+.comment { display: flex; gap: 0.6rem; margin-bottom: 0.75rem; }
+.comment-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--gold-light); color: var(--gold-dark); font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.comment-bubble { flex: 1; }
+.comment-meta { font-size: 0.73rem; color: var(--ink-4); margin-bottom: 0.2rem; }
+.comment-meta strong { color: var(--ink-3); }
+.comment-text { font-size: 0.83rem; color: var(--ink-2); background: var(--paper-2); padding: 0.55rem 0.75rem; border-radius: 0 var(--radius-sm) var(--radius-sm) var(--radius-sm); line-height: 1.5; }
+
+.comment-input-row { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+.comment-input { flex: 1; padding: 0.55rem 0.75rem; border: 1px solid var(--paper-3); border-radius: var(--radius-sm); font-family: var(--sans); font-size: 0.83rem; color: var(--ink); background: var(--paper); }
+.comment-input:focus { outline: none; border-color: var(--gold); }
+.btn-send { padding: 0.55rem 0.9rem; background: var(--gold); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.82rem; font-weight: 600; transition: background 0.2s; }
+.btn-send:hover { background: var(--gold-dark); }
+
+/* ── Attachments ── */
+.attachments-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+.attachment-chip { display: flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.65rem; border: 1px solid var(--paper-3); border-radius: var(--radius-sm); font-size: 0.78rem; color: var(--ink-2); background: var(--paper); cursor: pointer; transition: all 0.15s; text-decoration: none; }
+.attachment-chip:hover { border-color: var(--teal); color: var(--teal); }
+.att-icon { font-size: 0.85rem; }
+.btn-attach { display: flex; align-items: center; gap: 0.35rem; padding: 0.35rem 0.65rem; border: 1px dashed var(--paper-3); border-radius: var(--radius-sm); font-size: 0.78rem; color: var(--ink-4); background: transparent; cursor: pointer; transition: all 0.15s; }
+.btn-attach:hover { border-color: var(--gold); color: var(--gold-dark); }
+
+/* ── Add Item Panel ── */
+.add-item-btn { display: flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.1rem; background: var(--gold); color: white; border: none; border-radius: var(--radius-sm); font-family: var(--sans); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 1.5rem; }
+.add-item-btn:hover { background: var(--gold-dark); }
+
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,24,20,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 1.5rem; }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--paper); border-radius: var(--radius); padding: 1.75rem; width: 100%; max-width: 580px; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg); }
+.modal-title { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 0.25rem; }
+.modal-sub { font-size: 0.82rem; color: var(--ink-3); margin-bottom: 1.5rem; }
+.modal-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+
+/* ── Toast ── */
+.toast { position: fixed; bottom: 1.5rem; right: 1.5rem; background: var(--ink); color: var(--paper); padding: 0.75rem 1.1rem; border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 500; z-index: 9999; transform: translateY(80px); opacity: 0; transition: all 0.3s; pointer-events: none; max-width: 320px; }
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.success { background: var(--green); }
+.toast.error { background: var(--red); }
+
+/* ── Activity Feed ── */
+.activity-item { display: flex; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid var(--paper-3); }
+.activity-item:last-child { border-bottom: none; }
+.act-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; }
+.act-icon-decision { background: var(--gold-light); }
+.act-icon-comment { background: var(--teal-light); }
+.act-icon-verify { background: var(--green-light); }
+.act-body { flex: 1; min-width: 0; }
+.act-text { font-size: 0.83rem; color: var(--ink-2); line-height: 1.4; }
+.act-text strong { color: var(--ink); }
+.act-time { font-size: 0.72rem; color: var(--ink-4); margin-top: 0.15rem; }
+
+/* ── Empty State ── */
+.empty-state { text-align: center; padding: 3rem 1rem; color: var(--ink-4); }
+.empty-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.empty-title { font-size: 0.95rem; font-weight: 600; color: var(--ink-3); margin-bottom: 0.25rem; }
+.empty-desc { font-size: 0.82rem; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .sidebar.mobile-open { display: block; position: fixed; left: 0; top: 56px; width: 100%; height: calc(100vh - 56px); z-index: 50; border-right: none; }
+  .main-content { padding: 1.25rem; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .progress-phases { grid-template-columns: 1fr; }
+  .options-grid { grid-template-columns: 1fr; }
+  .modal { padding: 1.25rem; }
+  .dc-right { flex-direction: row; align-items: center; gap: 0.5rem; }
+  .topnav { padding: 0 1rem; }
+  .nav-user { display: none; }
+  .hamburger { display: block !important; }
+  .page-title { font-size: 1.5rem; }
+}
+.hamburger { display: none; background: transparent; border: none; color: var(--paper); font-size: 1.2rem; cursor: pointer; padding: 0.25rem; }
+
+/* ── File upload hidden ── */
+.file-input { display: none; }
+
+/* ── Divider ── */
+.divider { height: 1px; background: var(--paper-3); margin: 1rem 0; }
+
+/* ── Loading ── */
+.loading-overlay { position: fixed; inset: 0; background: var(--ink); display: flex; align-items: center; justify-content: center; z-index: 9998; transition: opacity 0.4s; }
+.loading-overlay.hidden { opacity: 0; pointer-events: none; }
+.loading-logo { font-family: var(--serif); font-size: 2rem; color: var(--paper); }
+.loading-logo span { color: var(--gold); }
+.loading-dots { display: flex; gap: 6px; margin-top: 1rem; justify-content: center; }
+.loading-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: pulse 1.2s ease-in-out infinite; }
+.loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.loading-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes pulse { 0%,100%{opacity:0.3;transform:scale(0.8)} 50%{opacity:1;transform:scale(1)} }
+
+textarea.form-input { resize: vertical; min-height: 80px; }
+.action-bar { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+.tag { font-size: 0.72rem; padding: 0.2rem 0.55rem; border-radius: 99px; background: var(--paper-3); color: var(--ink-3); font-weight: 500; }
+.decisions-list { }
+.filter-bar { display: flex; gap: 0.5rem; margin-bottom: 1.25rem; flex-wrap: wrap; align-items: center; }
+.filter-btn { font-size: 0.78rem; padding: 0.35rem 0.75rem; border: 1px solid var(--paper-3); border-radius: 99px; background: transparent; cursor: pointer; color: var(--ink-3); transition: all 0.15s; }
+.filter-btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.filter-search { flex: 1; min-width: 160px; max-width: 280px; padding: 0.35rem 0.75rem; border: 1px solid var(--paper-3); border-radius: var(--radius-sm); font-family: var(--sans); font-size: 0.82rem; color: var(--ink); background: var(--paper); }
+.filter-search:focus { outline: none; border-color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div class="loading-overlay" id="loading">
+  <div style="text-align:center">
+    <div class="loading-logo">Meridi<span>an</span></div>
+    <div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div>
+  </div>
+</div>
+
+<!-- Auth Screen -->
+<div id="auth-screen">
+  <div class="auth-card">
+    <div class="auth-logo">Meridi<span>an</span></div>
+    <div class="auth-tagline">Partnership Decision Hub</div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchAuthTab('login')">Sign in</button>
+      <button class="auth-tab" onclick="switchAuthTab('signup')">Create account</button>
+    </div>
+    <div class="auth-error" id="auth-error"></div>
+    <div id="login-form">
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="login-email" placeholder="you@example.com"></div>
+      <div class="form-group"><label class="form-label">Password</label><input class="form-input" type="password" id="login-password" placeholder="••••••••"></div>
+      <button class="btn-primary" onclick="handleLogin()" id="login-btn">Sign in</button>
+    </div>
+    <div id="signup-form" style="display:none">
+      <div class="form-group"><label class="form-label">Full name</label><input class="form-input" type="text" id="signup-name" placeholder="Your name"></div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="signup-email" placeholder="you@example.com"></div>
+      <div class="form-group"><label class="form-label">Password</label><input class="form-input" type="password" id="signup-password" placeholder="Min 6 characters"></div>
+      <div class="form-group">
+        <label class="form-label">Your role</label>
+        <select class="form-select" id="signup-role">
+          <option value="">Select role...</option>
+          <option value="Partner — Iroko relationship">Partner — Iroko relationship</option>
+          <option value="Partner — SA banks">Partner — SA banks</option>
+          <option value="Partner — Non-bank investors">Partner — Non-bank investors</option>
+          <option value="Observer">Observer</option>
+        </select>
+      </div>
+      <button class="btn-primary" onclick="handleSignup()" id="signup-btn">Create account</button>
+    </div>
+  </div>
+</div>
+
+<!-- Main App -->
+<div id="app">
+  <nav class="topnav">
+    <div style="display:flex;align-items:center;gap:0.75rem">
+      <button class="hamburger" onclick="toggleSidebar()">☰</button>
+      <div class="nav-logo">Meridi<span>an</span></div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-user">Signed in as <strong id="nav-user-name">—</strong></div>
+      <button class="nav-signout" onclick="handleSignout()">Sign out</button>
+    </div>
+  </nav>
+
+  <div class="app-body">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Navigation</div>
+        <button class="nav-item active" onclick="showView('dashboard',this)"><span class="ni-icon">◈</span> Dashboard</button>
+        <button class="nav-item" onclick="showView('decisions',this)"><span class="ni-icon">◉</span> Decisions <span class="nav-badge nb-open" id="badge-open">—</span></button>
+        <button class="nav-item" onclick="showView('activity',this)"><span class="ni-icon">◎</span> Activity</button>
+        <button class="nav-item" onclick="showView('progress',this)"><span class="ni-icon">◐</span> Progress</button>
+      </div>
+      <div class="sidebar-section" style="border-top:1px solid var(--paper-3);padding-top:1rem">
+        <div class="sidebar-label">Phases</div>
+        <button class="nav-item" onclick="showView('decisions',this);filterPhase(1)"><span class="ni-icon" style="color:var(--gold-dark)">①</span> Before you agree</button>
+        <button class="nav-item" onclick="showView('decisions',this);filterPhase(2)"><span class="ni-icon" style="color:var(--teal)">②</span> Before Iroko</button>
+        <button class="nav-item" onclick="showView('decisions',this);filterPhase(3)"><span class="ni-icon" style="color:var(--red)">③</span> At the table</button>
+      </div>
+    </aside>
+
+    <main class="main-content" id="main-content">
+      <!-- Views rendered by JS -->
+    </main>
+  </div>
+</div>
+
+<!-- Add Decision Modal -->
+<div class="modal-overlay" id="add-modal">
+  <div class="modal">
+    <div class="modal-title">Add decision item</div>
+    <div class="modal-sub">Add a new item for the partnership to consider</div>
+    <div class="form-group"><label class="form-label">Title *</label><input class="form-input" id="new-title" placeholder="Short, clear decision title"></div>
+    <div class="form-group"><label class="form-label">Description *</label><input class="form-input" id="new-desc" placeholder="One-line description of the decision"></div>
+    <div class="form-group">
+      <label class="form-label">Phase *</label>
+      <select class="form-select" id="new-phase">
+        <option value="1">Phase 1 — Before you agree as a partnership</option>
+        <option value="2">Phase 2 — Before you approach Iroko</option>
+        <option value="3">Phase 3 — At the Iroko table</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Priority *</label>
+      <select class="form-select" id="new-priority">
+        <option value="must">Must decide first — blocks everything else</option>
+        <option value="should">Should decide before moving on</option>
+        <option value="can">Can be decided in parallel</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Context / background information *</label><textarea class="form-input" id="new-context" placeholder="What does the team need to know to make this decision?"></textarea></div>
+    <div class="form-group"><label class="form-label">Options (one per line) *</label><textarea class="form-input" id="new-options" placeholder="Option A: Description&#10;Option B: Description&#10;Option C: Description"></textarea></div>
+    <div class="form-group"><label class="form-label">Who needs to verify this decision</label>
+      <div id="verify-checkboxes" style="display:flex;flex-direction:column;gap:0.4rem;margin-top:0.25rem"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-primary" onclick="submitNewDecision()" style="flex:1">Add decision</button>
+      <button class="btn-secondary" onclick="closeAddModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Hidden file input -->
+<input type="file" class="file-input" id="file-input" multiple>
+
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+// ── CONFIG — replace with your Supabase project values ──
+const SUPABASE_URL = window.SUPABASE_URL || 'https://ewdloawwudqkdrstqfet.supabase.co';
+const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV3ZGxvYXd3dWRxa2Ryc3RxZmV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxODc5NDYsImV4cCI6MjA5MTc2Mzk0Nn0.xMOdn6c9sQwrUoEpBk9MZUFHFSV0CLFTUrlyzkgRqUM';
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ── State ──
+let currentUser = null;
+let currentProfile = null;
+let allDecisions = [];
+let allUsers = [];
+let allComments = [];
+let allVerifications = [];
+let allAttachments = [];
+let allActivity = [];
+let currentView = 'dashboard';
+let activePhaseFilter = null;
+let activeStatusFilter = null;
+
+// ── Seed data (used if DB is empty) ──
+const SEED_DECISIONS = [
+  { id:'seed-1', phase:1, priority:'must', title:'Equity split and vesting', description:'How ownership is divided and what each partner must earn fully', context:'Equal thirds is simple and defensible if all three partners are contributing equally from day one. Consider weighting if one partner is contributing capital, carrying significantly more risk, or if the Iroko relationship has a determinable monetary value. A 3-month cliff then monthly vest over 24 months means a partner who leaves in month 4 owns only a small fraction.', options:['Equal thirds, no weighting — simple, works if contributions are genuinely equal', 'Weighted by contribution — reflect unequal capital, risk or relationship value', 'Equal now, adjustable at 12-month review based on actual contribution', 'Equal thirds + performance kicker for the partner originating each closed deal'], status:'open', created_by:'system', created_at: new Date().toISOString(), required_verifiers:[] },
+  { id:'seed-2', phase:1, priority:'must', title:'Decision-making rule', description:'How the three of you resolve disagreements and make binding decisions', context:'With three equal partners, a simple 2-of-3 majority vote breaks every deadlock. Distinguish between operational decisions (any partner can act within their defined role without a vote) and strategic decisions (require majority). Strategic decisions include: signing any agreement with Iroko or investors, taking on debt, admitting a new partner, dissolving the company.', options:['2/3 majority on all decisions — any two partners can move forward', 'Tiered: operational decisions per role, strategic decisions require 2/3', 'Unanimous required only for dissolution, new partners and equity changes'], status:'open', created_by:'system', created_at: new Date().toISOString(), required_verifiers:[] },
+  { id:'seed-3', phase:1, priority:'must', title:'Personal financial runway', description:'How each partner sustains themselves during the build phase', context:'All three of you have quit your jobs. The most common cause of early partnership breakdown is unequal financial sacrifice creating resentment. You need honest runway numbers from each partner, an agreed minimum draw if Iroko provides working capital, and a clear policy on side income during the build phase.', options:['Full sweat equity — each partner self-funds, no shared draw', 'Shared minimum draw from Iroko advance split equally three ways', 'Shared minimum draw weighted by individual financial need', 'Partners self-fund but side income is permitted with disclosure'], status:'open', created_by:'system', created_at: new Date().toISOString(), required_verifiers:[] },
+  { id:'seed-4', phase:1, priority:'must', title:'Roles and accountability', description:'Who owns what — specifically enough to hold each other accountable', context:'You have a natural division: P1 owns the Iroko relationship, P2 owns SA bank investor relationships, P3 owns non-bank investor relationships. But roles need to go further — who is MD? Who manages compliance? Who keeps the introduction register? Role ambiguity leads to duplication or gaps.', options:['P1 as MD: Iroko relationship, negotiation, introduction register. P2: SA bank outreach. P3: non-bank outreach. Shared: compliance and legal', 'Rotating MD by quarter with defined handover process', 'Equal co-MD structure with domain-specific authority'], status:'open', created_by:'system', created_at: new Date().toISOString(), required_verifiers:[] },
+  { id:'seed-5', phase:1, priority:'should', title:'Conflict of interest policy', description:'What happens when a partner is individually approached about a relevant opportunity', context:'In a small market like SA institutional finance, individuals get calls. Someone will approach P2 directly about a deal that could be partnership business. You need a clear first-refusal rule before this happens. Define "relevant" narrowly — African credit, structured finance, deals that Iroko could structure.', options:['Full first refusal — any African credit opportunity offered to partnership first', 'Narrow first refusal — only applies to Iroko-type deals specifically', 'Disclose and decide case by case within 48 hours'], status:'open', created_by:'system', created_at: new Date().toISOString(), required_verifiers:[] },
+  { id:'seed-6', phase:1, priority:'should', title:'Exit and dissolution terms', description:'What a fair exit looks like — agreed before anyone wants one', context:'Agree now: voluntary exit — does the departing partner retain vested shares or must they sell back? At what valuation formula? What is the notice period (60–90 days is standard)? What happens to their originated deal tail fees? What triggers involuntary removal — non-performance, breach, criminal matter?', options:['Vested shares retained on exit, unvested lapse. 60-day notice. Tail fees follow the originating partner individually.', 'All shares must be offered back to remaining partners at formula valuation on exit', 'Vested shares retained. 90-day notice. Tail fees split 50/50 between departing and remaining partners.'], status:'open', created_by:'system', created_at: new Date().toISOString(), required_verifiers:[] },
+  { id:'seed-7', phase:2, priority:'must', title:'FAIS compliance pathway', description:'How you operate legally from day one before your own licence is in place', context:'You cannot legally have substantive investor conversations about Iroko\'s products without either your own FSP licence or an appointed representative arrangement under an existing licensee. The FSP licence takes 6–12 months. The appointed representative route can be set up in weeks. Get a legal opinion before your first investor conversation — a compliance breach in a small market is reputationally fatal.', options:['Pure introducer model — warm introductions only, no product explanation. Get legal opinion confirming this is sufficient.', 'Appointed representative under existing FSP licence — fastest path, ~weeks to set up', 'Apply for own FSP licence immediately and operate as pure introducer in the interim', 'Appointed representative immediately + own FSP application in parallel'], status:'open', created_by:'system', created_at: new Date().toISOString(), required_verifiers:[] },
+  { id:'seed-8', phase:2, priority:'must', title:'Working capital strategy', description:'How you fund operations between now and your first fee receipt', context:'You have four realistic options. The strongest position is a modest Iroko advance as the primary source, with personal savings as backstop. The Iroko advance request is most credible if framed as milestone-based tranches tied to delivery. SEFA is worth pursuing once you have a signed Iroko agreement — the contract qualifies as the underlying asset.', options:['Pure sweat equity — each partner self-funds. Requires 6+ months personal runway each.', 'Iroko milestone-based advance — tranches tied to: signing, 3 introductions, first NDA/term sheet', 'Friends and family bridge — simple loan agreement repayable from first fee', 'SEFA bridging finance — apply once Iroko agreement is signed', 'Combination: Iroko advance primary, personal savings backstop'], status:'open', created_by:'system', created_at: new Date().toISOString(), required_verifiers:[] },
+  { id:'seed-9', phase:2, priority:'must', title:'Named investor pipeline', description:'The SA investor targets you bring to the Iroko meeting', context:'Walking in without named targets reduces you from a credible placement agent to a general intermediary with good intentions. You need minimum 6–8 named institutions with specific individual contacts, which partner owns the relationship, and an honest warmth rating. SA bank credit desks are the most natural first targets — they have African credit mandates and Marula is structurally designed for them.', options:['Prepare full pipeline table: institution, contact, seniority, owner partner, warmth rating, likely deal size, next action', 'Identify top 5 highest-probability targets only and go deep on those first', 'Broad pipeline of 15+ targets to demonstrate market depth'], status:'open', created_by:'system', created_at: new Date().toISOString(), required_verifiers:[] },
+  { id:'seed-10', phase:2, priority:'should', title:'Iroko partnership model to anchor on', description:'Which option you present first and which you concede to', context:'Option A (sweat equity) is your anchor — 1.25–1.5% fees, 24-month tail, SA exclusivity, no cost to Iroko. Present it first. If Iroko resists the fee rate, introduce Options B or C as alternatives that give them a better rate in exchange for working capital. Agree your walk-away minimum before the meeting: below 0.6% the economics do not work on any model.', options:['Anchor: Option A sweat equity (1.25–1.5%, 24-month tail, SA exclusivity)', 'Concession 1: Option B1 modest advance (R25–35k/month, 1.0% fee, 18-month tail)', 'Concession 2: Option C retainer (R20k/month not recouped, 0.875% fee, activity commitments)', 'Walk-away threshold: below 0.6% on any model'], status:'open', created_by:'system', created_at: new Date().toISOString(), required_verifiers:[] },
+  { id:'seed-11', phase:2, priority:'should', title:'Non-negotiable clauses in the Iroko agreement', description:'Your must-haves vs nice-to-haves in the introducer agreement', context:'Non-negotiable: tail clause (24 months minimum), named pipeline protection (registered contacts are exclusively yours for the tail period), pipeline transfer clause (if partnership dissolves you cooperate with handover and retain tail fee rights), hard currency invoicing for USD/EUR deals. Nice-to-have: SA market exclusivity 12 months, deal origination fee 0.25–0.5% on borrower side, performance fast-track bonus.', options:['Hold firm on all four non-negotiables. Trade exclusivity and origination fee if needed.', 'Prioritise tail clause and pipeline protection above all. Everything else is tradeable.', 'Accept 18-month tail if Iroko insists, but pipeline protection and hard currency are absolute minimums.'], status:'open', created_by:'system', created_at: new Date().toISOString(), required_verifiers:[] },
+  { id:'seed-12', phase:3, priority:'must', title:'Who leads the Iroko meeting and speaks to what', description:'Agreed roles in the room so you present as one unified team', context:'The most dangerous thing in a first meeting with a boutique like Iroko is talking over each other or contradicting each other on commercial terms. One person frames the discussion (P1 — Iroko relationship owner), one presents the investor pipeline by institution type (P2 and P3 jointly), one handles commercial and fee questions. If any commercial question arises that is not pre-agreed, the lead says "we will confirm and follow up by [specific date]" — never speculate.', options:['P1 leads and frames. P2/P3 present their respective pipelines. P1 handles commercial questions.', 'P1 leads throughout. P2 and P3 speak when directly addressed about their relationships.', 'Rotate lead by agenda item with pre-agreed handover signals.'], status:'open', created_by:'system', created_at: new Date().toISOString(), required_verifiers:[] },
+  { id:'seed-13', phase:3, priority:'must', title:'Walk-away conditions', description:'The terms below which you decline — agreed before you sit down', context:'Knowing your walk-away conditions in advance is what gives you genuine negotiating power. The most important to pre-agree: minimum fee rate (0.6% as a floor on any model), minimum tail period (12 months absolute minimum — below this the clause has no practical value), and any agreement requiring personal surety for advances. Do not agree to personal surety under any circumstances.', options:['Floor: 0.6% fee, 12-month tail, no personal surety. Walk if any of these are breached.', 'Floor: 0.75% fee, 18-month tail, no personal surety on advances over R100k.', 'Floor: 0.6% fee, 12-month tail. Personal surety acceptable only on advances under R50k total.'], status:'open', created_by:'system', created_at: new Date().toISOString(), required_verifiers:[] },
+  { id:'seed-14', phase:3, priority:'should', title:'Timeline commitments you are willing to make', description:'What you will promise on delivery — and what you will not', context:'Iroko will ask when you expect your first close. Over-promising is the fastest way to damage the relationship before it has started. Commit to activity milestones you can control (meetings, NDAs, term sheets) rather than close dates which depend on variables outside your control. A credible answer: first investor meetings within 30 days of signing, first NDA or term sheet within 90 days, first close within 6 months.', options:['Commit to activity milestones only: 3 investor meetings in 30 days, 1 NDA in 90 days. No close date commitment.', 'Commit to 8 formal introductions within 6 months (Option C terms) with monthly activity reporting.', 'Soft target of first close within 6 months stated as aspiration, not contractual commitment.'], status:'open', created_by:'system', created_at: new Date().toISOString(), required_verifiers:[] },
+];
+
+// ── Init ──
+async function init() {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session) {
+    currentUser = session.user;
+    await loadProfile();
+    await loadAll();
+    showApp();
+  } else {
+    showAuth();
+  }
+  document.getElementById('loading').classList.add('hidden');
+}
+
+async function loadProfile() {
+  const { data } = await supabase.from('profiles').select('*').eq('id', currentUser.id).single();
+  currentProfile = data;
+}
+
+async function loadAll() {
+  const [d, u, c, v, att] = await Promise.all([
+    supabase.from('decisions').select('*').order('phase').order('created_at'),
+    supabase.from('profiles').select('*'),
+    supabase.from('comments').select('*').order('created_at'),
+    supabase.from('verifications').select('*'),
+    supabase.from('attachments').select('*'),
+  ]);
+  allDecisions = d.data || [];
+  allUsers = u.data || [];
+  allComments = c.data || [];
+  allVerifications = v.data || [];
+  allAttachments = att.data || [];
+
+  // Seed if empty
+  if (allDecisions.length === 0) {
+    await seedDecisions();
+    const { data } = await supabase.from('decisions').select('*').order('phase').order('created_at');
+    allDecisions = data || [];
+  }
+  updateBadges();
+}
+
+async function seedDecisions() {
+  const rows = SEED_DECISIONS.map(d => ({
+    phase: d.phase, priority: d.priority, title: d.title,
+    description: d.description, context: d.context,
+    options: d.options, status: d.status,
+    created_by: currentUser.id, required_verifiers: []
+  }));
+  await supabase.from('decisions').insert(rows);
+}
+
+// ── Auth ──
+function showAuth() { document.getElementById('auth-screen').style.display='flex'; document.getElementById('app').style.display='none'; }
+function showApp() {
+  document.getElementById('auth-screen').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('nav-user-name').textContent = currentProfile?.full_name || currentUser.email;
+  renderView('dashboard');
+}
+
+window.switchAuthTab = (tab) => {
+  document.querySelectorAll('.auth-tab').forEach((t,i) => t.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='signup')));
+  document.getElementById('login-form').style.display = tab==='login'?'block':'none';
+  document.getElementById('signup-form').style.display = tab==='signup'?'block':'none';
+  document.getElementById('auth-error').style.display = 'none';
+};
+
+window.handleLogin = async () => {
+  const btn = document.getElementById('login-btn');
+  btn.disabled = true; btn.textContent = 'Signing in...';
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) { showAuthError(error.message); btn.disabled=false; btn.textContent='Sign in'; return; }
+  currentUser = data.user;
+  await loadProfile();
+  await loadAll();
+  showApp();
+};
+
+window.handleSignup = async () => {
+  const btn = document.getElementById('signup-btn');
+  btn.disabled = true; btn.textContent = 'Creating account...';
+  const email = document.getElementById('signup-email').value;
+  const password = document.getElementById('signup-password').value;
+  const name = document.getElementById('signup-name').value;
+  const role = document.getElementById('signup-role').value;
+  if (!name||!email||!password||!role) { showAuthError('Please fill in all fields.'); btn.disabled=false; btn.textContent='Create account'; return; }
+  const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { full_name: name, role } } });
+  if (error) { showAuthError(error.message); btn.disabled=false; btn.textContent='Create account'; return; }
+  currentUser = data.user;
+  // Insert profile
+  await supabase.from('profiles').upsert({ id: currentUser.id, full_name: name, email, role });
+  await loadProfile();
+  await loadAll();
+  showApp();
+};
+
+window.handleSignout = async () => {
+  await supabase.auth.signOut();
+  currentUser = null; currentProfile = null;
+  showAuth();
+};
+
+function showAuthError(msg) {
+  const el = document.getElementById('auth-error');
+  el.textContent = msg; el.style.display = 'block';
+}
+
+// ── Navigation ──
+window.showView = (view, btn) => {
+  currentView = view;
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  activePhaseFilter = null; activeStatusFilter = null;
+  renderView(view);
+  if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('mobile-open');
+};
+
+window.toggleSidebar = () => document.getElementById('sidebar').classList.toggle('mobile-open');
+window.filterPhase = (p) => { activePhaseFilter = p; };
+
+function renderView(view) {
+  const mc = document.getElementById('main-content');
+  if (view === 'dashboard') mc.innerHTML = renderDashboard();
+  else if (view === 'decisions') mc.innerHTML = renderDecisionsPage();
+  else if (view === 'activity') mc.innerHTML = renderActivityPage();
+  else if (view === 'progress') mc.innerHTML = renderProgressPage();
+  bindDecisionCards();
+}
+
+// ── Dashboard ──
+function renderDashboard() {
+  const total = allDecisions.length;
+  const decided = allDecisions.filter(d=>d.status==='decided').length;
+  const open = allDecisions.filter(d=>d.status==='open').length;
+  const inProgress = allDecisions.filter(d=>d.status==='in_progress').length;
+  const pct = total ? Math.round(decided/total*100) : 0;
+
+  const p1 = allDecisions.filter(d=>d.phase===1);
+  const p2 = allDecisions.filter(d=>d.phase===2);
+  const p3 = allDecisions.filter(d=>d.phase===3);
+  const p1pct = p1.length ? Math.round(p1.filter(d=>d.status==='decided').length/p1.length*100) : 0;
+  const p2pct = p2.length ? Math.round(p2.filter(d=>d.status==='decided').length/p2.length*100) : 0;
+  const p3pct = p3.length ? Math.round(p3.filter(d=>d.status==='decided').length/p3.length*100) : 0;
+
+  const recentComments = [...allComments].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at)).slice(0,5);
+
+  return `
+  <div class="page-header">
+    <div class="page-title">Dashboard</div>
+    <div class="page-subtitle">Iroko Securities partnership — go-to-market decision tracker</div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-label">Total items</div><div class="stat-value">${total}</div><div class="stat-sub">across 3 phases</div></div>
+    <div class="stat-card"><div class="stat-label">Decided</div><div class="stat-value" style="color:var(--green)">${decided}</div><div class="stat-sub">${pct}% complete</div></div>
+    <div class="stat-card"><div class="stat-label">Open</div><div class="stat-value" style="color:var(--red)">${open}</div><div class="stat-sub">needs attention</div></div>
+    <div class="stat-card"><div class="stat-label">In progress</div><div class="stat-value" style="color:var(--amber)">${inProgress}</div><div class="stat-sub">being discussed</div></div>
+  </div>
+  <div class="progress-section">
+    <div class="progress-header"><div class="progress-title">Overall go-to-market readiness</div><div class="progress-pct">${pct}%</div></div>
+    <div class="prog-bar" style="margin-bottom:1rem"><div class="prog-fill" style="width:${pct}%"></div></div>
+    <div class="progress-phases">
+      <div class="phase-progress"><div class="phase-prog-label">Phase 1 — Before you agree (${p1.filter(d=>d.status==='decided').length}/${p1.length})</div><div class="prog-bar"><div class="prog-fill" style="width:${p1pct}%"></div></div></div>
+      <div class="phase-progress"><div class="phase-prog-label">Phase 2 — Before Iroko (${p2.filter(d=>d.status==='decided').length}/${p2.length})</div><div class="prog-bar"><div class="prog-fill teal" style="width:${p2pct}%"></div></div></div>
+      <div class="phase-progress"><div class="phase-prog-label">Phase 3 — At the table (${p3.filter(d=>d.status==='decided').length}/${p3.length})</div><div class="prog-bar"><div class="prog-fill green" style="width:${p3pct}%"></div></div></div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem">
+    <div>
+      <div style="font-family:var(--serif);font-size:1.1rem;margin-bottom:1rem;color:var(--ink)">Priority decisions needed</div>
+      ${allDecisions.filter(d=>d.priority==='must'&&d.status!=='decided').slice(0,4).map(d=>`
+        <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.75rem 0;border-bottom:1px solid var(--paper-3);cursor:pointer" onclick="showView('decisions',null);setTimeout(()=>openCard('${d.id}'),100)">
+          <div class="dc-priority p-must" style="flex-shrink:0">!</div>
+          <div>
+            <div style="font-size:0.85rem;font-weight:600;color:var(--ink)">${d.title}</div>
+            <div style="font-size:0.78rem;color:var(--ink-3)">Phase ${d.phase}</div>
+          </div>
+          <div class="status-badge sb-open" style="margin-left:auto;flex-shrink:0">Open</div>
+        </div>`).join('')}
+      ${allDecisions.filter(d=>d.priority==='must'&&d.status!=='decided').length===0?'<div class="empty-state"><div class="empty-icon">✓</div><div class="empty-title">All must-decide items resolved</div></div>':''}
+    </div>
+    <div>
+      <div style="font-family:var(--serif);font-size:1.1rem;margin-bottom:1rem;color:var(--ink)">Recent comments</div>
+      ${recentComments.map(c => {
+        const d = allDecisions.find(x=>x.id===c.decision_id);
+        const u = allUsers.find(x=>x.id===c.user_id);
+        return `<div style="padding:0.65rem 0;border-bottom:1px solid var(--paper-3)">
+          <div style="font-size:0.78rem;color:var(--ink-4);margin-bottom:0.15rem"><strong style="color:var(--ink-3)">${u?.full_name||'User'}</strong> on <em>${d?.title||'Unknown'}</em></div>
+          <div style="font-size:0.82rem;color:var(--ink-2)">${c.content.substring(0,100)}${c.content.length>100?'…':''}</div>
+        </div>`;
+      }).join('')}
+      ${recentComments.length===0?'<div class="empty-state"><div class="empty-icon">💬</div><div class="empty-title">No comments yet</div></div>':''}
+    </div>
+  </div>`;
+}
+
+// ── Decisions Page ──
+function renderDecisionsPage() {
+  const phases = [1,2,3];
+  const phaseNames = ['Before you agree as a partnership','Before you approach Iroko','At the Iroko table'];
+  const phaseTagClass = ['phase-tag-1','phase-tag-2','phase-tag-3'];
+
+  let filtered = [...allDecisions];
+  if (activePhaseFilter) filtered = filtered.filter(d=>d.phase===activePhaseFilter);
+
+  return `
+  <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+    <div><div class="page-title">Decisions</div><div class="page-subtitle">Track, discuss and verify every partnership decision</div></div>
+    <button class="add-item-btn" onclick="openAddModal()">+ Add decision item</button>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn ${!activeStatusFilter?'active':''}" onclick="setStatusFilter(null)">All</button>
+    <button class="filter-btn ${activeStatusFilter==='open'?'active':''}" onclick="setStatusFilter('open')">Open</button>
+    <button class="filter-btn ${activeStatusFilter==='in_progress'?'active':''}" onclick="setStatusFilter('in_progress')">In progress</button>
+    <button class="filter-btn ${activeStatusFilter==='decided'?'active':''}" onclick="setStatusFilter('decided')">Decided</button>
+    <input class="filter-search" type="text" placeholder="Search decisions..." oninput="filterSearch(this.value)">
+  </div>
+  <div class="decisions-list" id="decisions-list">
+  ${phases.map((phase,pi) => {
+    const phaseItems = filtered.filter(d=>d.phase===phase);
+    if (phaseItems.length===0) return '';
+    return `
+    <div class="phase-section">
+      <div class="phase-heading">
+        <span class="phase-tag ${phaseTagClass[pi]}">Phase ${phase}</span>
+        <h2>${phaseNames[pi]}</h2>
+      </div>
+      ${phaseItems.map(d => renderDecisionCard(d)).join('')}
+    </div>`;
+  }).join('')}
+  </div>`;
+}
+
+function renderDecisionCard(d) {
+  const priorityClass = {must:'p-must',should:'p-should',can:'p-can'}[d.priority]||'p-can';
+  const priorityLabel = {must:'!',should:'~',can:'?'}[d.priority]||'?';
+  const statusClass = {open:'sb-open',in_progress:'sb-progress',decided:'sb-decided',pending_verify:'sb-pending'}[d.status]||'sb-open';
+  const statusLabel = {open:'Open',in_progress:'In progress',decided:'Decided',pending_verify:'Pending verify'}[d.status]||'Open';
+  const comments = allComments.filter(c=>c.decision_id===d.id);
+  const attachments = allAttachments.filter(a=>a.decision_id===d.id);
+  const verifications = allVerifications.filter(v=>v.decision_id===d.id);
+  const options = Array.isArray(d.options) ? d.options : [];
+  const requiredVerifiers = Array.isArray(d.required_verifiers) ? d.required_verifiers : [];
+
+  // Selected option for current user
+  const myChoice = verifications.find(v=>v.user_id===currentUser?.id);
+
+  return `
+  <div class="decision-card" id="dc-${d.id}">
+    <div class="dc-header" onclick="toggleCard('${d.id}')">
+      <div class="dc-priority ${priorityClass}">${priorityLabel}</div>
+      <div class="dc-main">
+        <div class="dc-title">${d.title}</div>
+        <div class="dc-desc">${d.description}</div>
+        <div style="display:flex;gap:0.4rem;margin-top:0.4rem;flex-wrap:wrap">
+          ${comments.length>0?`<span class="tag">💬 ${comments.length}</span>`:''}
+          ${attachments.length>0?`<span class="tag">📎 ${attachments.length}</span>`:''}
+          ${verifications.length>0?`<span class="tag">✓ ${verifications.length} verified</span>`:''}
+        </div>
+      </div>
+      <div class="dc-right">
+        <span class="status-badge ${statusClass}">${statusLabel}</span>
+        <span class="dc-chevron" id="chev-${d.id}">▶</span>
+      </div>
+    </div>
+    <div class="dc-body" id="body-${d.id}">
+      <div class="dc-section">
+        <div class="dc-section-label">Background & context</div>
+        <div class="info-box">${d.context}</div>
+      </div>
+      ${options.length>0?`
+      <div class="dc-section">
+        <div class="dc-section-label">Options</div>
+        <div class="options-grid">
+          ${options.map((opt,i)=>{
+            const letter = String.fromCharCode(65+i);
+            const isChosen = myChoice?.chosen_option===i;
+            return `<div class="option-item ${isChosen?'chosen':''}" onclick="selectOption('${d.id}',${i})">
+              <div class="opt-title">Option ${letter}</div>
+              <div class="opt-detail">${opt}</div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>`:''}
+
+      <div class="dc-section">
+        <div class="verify-bar">
+          <div class="verify-label">Partner verification</div>
+          <div class="verify-users">
+            ${allUsers.map(u=>{
+              const v = verifications.find(vv=>vv.user_id===u.id);
+              return `<div class="verify-user">
+                <div class="vu-dot ${v?'vu-confirmed':'vu-pending'}"></div>
+                <span class="vu-name">${u.full_name}${v&&v.chosen_option!==null&&v.chosen_option!==undefined?` — Opt. ${String.fromCharCode(65+v.chosen_option)}`:''}</span>
+              </div>`;
+            }).join('')}
+          </div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <button class="btn-confirm ${myChoice?'confirmed':''}" onclick="confirmDecision('${d.id}')" ${d.status==='decided'?'disabled':''}>
+              ${myChoice?'✓ Confirmed':'Confirm my decision'}
+            </button>
+            ${d.status!=='decided'?`<button class="btn-secondary" onclick="setStatus('${d.id}','in_progress')">Mark in progress</button>`:''}
+            ${currentProfile?.role?.includes('Partner')&&d.status!=='decided'?`<button class="btn-danger" onclick="setStatus('${d.id}','decided')">Mark as decided</button>`:''}
+          </div>
+        </div>
+      </div>
+
+      <div class="dc-section">
+        <div class="dc-section-label">Attachments</div>
+        <div class="attachments-row" id="att-${d.id}">
+          ${attachments.map(a=>`<a class="attachment-chip" href="${a.url}" target="_blank"><span class="att-icon">📎</span>${a.name}</a>`).join('')}
+          <button class="btn-attach" onclick="triggerUpload('${d.id}')">+ Attach file</button>
+        </div>
+        <input type="file" id="file-${d.id}" style="display:none" onchange="uploadFile('${d.id}',this)">
+      </div>
+
+      <div class="dc-section comments-section">
+        <div class="dc-section-label">Comments (${comments.length})</div>
+        ${comments.map(c=>{
+          const u = allUsers.find(x=>x.id===c.user_id);
+          const initials = (u?.full_name||'?').split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
+          return `<div class="comment">
+            <div class="comment-avatar">${initials}</div>
+            <div class="comment-bubble">
+              <div class="comment-meta"><strong>${u?.full_name||'User'}</strong> · ${formatDate(c.created_at)}</div>
+              <div class="comment-text">${c.content}</div>
+            </div>
+          </div>`;
+        }).join('')}
+        <div class="comment-input-row">
+          <input class="comment-input" id="ci-${d.id}" placeholder="Add a comment..." onkeydown="if(event.key==='Enter')postComment('${d.id}')">
+          <button class="btn-send" onclick="postComment('${d.id}')">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ── Activity Page ──
+function renderActivityPage() {
+  const items = [...allComments].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+  return `
+  <div class="page-header"><div class="page-title">Activity</div><div class="page-subtitle">All comments and updates across every decision</div></div>
+  ${items.length===0?'<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-title">No activity yet</div><div class="empty-desc">Comments and updates will appear here</div></div>':''}
+  ${items.map(c=>{
+    const d = allDecisions.find(x=>x.id===c.decision_id);
+    const u = allUsers.find(x=>x.id===c.user_id);
+    const initials = (u?.full_name||'?').split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
+    return `<div class="activity-item">
+      <div class="act-icon act-icon-comment"><span style="font-size:0.85rem">💬</span></div>
+      <div class="act-body">
+        <div class="act-text"><strong>${u?.full_name||'User'}</strong> commented on <strong>${d?.title||'a decision'}</strong>: "${c.content.substring(0,120)}${c.content.length>120?'…':''}"</div>
+        <div class="act-time">${formatDate(c.created_at)}</div>
+      </div>
+    </div>`;
+  }).join('')}`;
+}
+
+// ── Progress Page ──
+function renderProgressPage() {
+  const phases = [1,2,3];
+  const phaseNames = ['Before you agree','Before you approach Iroko','At the Iroko table'];
+  return `
+  <div class="page-header"><div class="page-title">Progress</div><div class="page-subtitle">Go-to-market readiness by phase and category</div></div>
+  ${phases.map((p,pi)=>{
+    const items = allDecisions.filter(d=>d.phase===p);
+    const done = items.filter(d=>d.status==='decided').length;
+    const pct = items.length ? Math.round(done/items.length*100) : 0;
+    return `
+    <div style="background:var(--paper);border:1px solid var(--paper-3);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+        <div style="font-family:var(--serif);font-size:1rem;color:var(--ink)">Phase ${p}: ${phaseNames[pi]}</div>
+        <div style="font-size:0.85rem;color:var(--ink-3)">${done} / ${items.length} decided</div>
+      </div>
+      <div class="prog-bar" style="margin-bottom:1rem"><div class="prog-fill ${pi===1?'teal':pi===2?'green':''}" style="width:${pct}%"></div></div>
+      ${items.map(d=>`
+      <div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0;border-bottom:1px solid var(--paper-3)">
+        <div class="dc-priority ${d.priority==='must'?'p-must':d.priority==='should'?'p-should':'p-can'}" style="flex-shrink:0">${d.priority==='must'?'!':'~'}</div>
+        <div style="flex:1;font-size:0.84rem;color:var(--ink-2)">${d.title}</div>
+        <span class="status-badge ${d.status==='decided'?'sb-decided':d.status==='in_progress'?'sb-progress':'sb-open'}">${d.status==='decided'?'Decided':d.status==='in_progress'?'In progress':'Open'}</span>
+        <div style="display:flex;gap:0.3rem">
+          ${allUsers.map(u=>{
+            const v = allVerifications.find(vv=>vv.decision_id===d.id&&vv.user_id===u.id);
+            return `<div title="${u.full_name}" style="width:8px;height:8px;border-radius:50%;background:${v?'var(--green)':'var(--paper-3)'}"></div>`;
+          }).join('')}
+        </div>
+      </div>`).join('')}
+    </div>`;
+  }).join('')}`;
+}
+
+// ── Interactions ──
+window.toggleCard = (id) => {
+  const body = document.getElementById('body-'+id);
+  const chev = document.getElementById('chev-'+id);
+  if (!body) return;
+  const open = body.classList.contains('open');
+  body.classList.toggle('open',!open);
+  chev.classList.toggle('open',!open);
+};
+
+window.openCard = (id) => {
+  const body = document.getElementById('body-'+id);
+  const chev = document.getElementById('chev-'+id);
+  if (body) { body.classList.add('open'); chev.classList.add('open'); body.scrollIntoView({behavior:'smooth',block:'center'}); }
+};
+
+window.setStatusFilter = (s) => { activeStatusFilter = s; renderView('decisions'); };
+window.filterSearch = (q) => {
+  document.querySelectorAll('.decision-card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(q.toLowerCase()) ? '' : 'none';
+  });
+};
+
+window.selectOption = async (decisionId, optionIndex) => {
+  if (!currentUser) return;
+  await supabase.from('verifications').upsert({ decision_id:decisionId, user_id:currentUser.id, chosen_option:optionIndex, confirmed:false }, { onConflict:'decision_id,user_id' });
+  const { data } = await supabase.from('verifications').select('*');
+  allVerifications = data || [];
+  refreshCard(decisionId);
+};
+
+window.confirmDecision = async (decisionId) => {
+  if (!currentUser) return;
+  const existing = allVerifications.find(v=>v.decision_id===decisionId&&v.user_id===currentUser.id);
+  if (!existing) { toast('Please select an option first','error'); return; }
+  await supabase.from('verifications').upsert({ decision_id:decisionId, user_id:currentUser.id, chosen_option:existing.chosen_option, confirmed:true }, { onConflict:'decision_id,user_id' });
+  const { data } = await supabase.from('verifications').select('*');
+  allVerifications = data || [];
+  // Check if all users confirmed
+  const d = allDecisions.find(x=>x.id===decisionId);
+  const confirmed = allVerifications.filter(v=>v.decision_id===decisionId&&v.confirmed);
+  if (allUsers.length > 0 && confirmed.length >= allUsers.length) {
+    await setStatus(decisionId, 'decided');
+    toast('All partners confirmed — decision verified!','success');
+  } else {
+    toast('Your confirmation recorded','success');
+    refreshCard(decisionId);
+  }
+  updateBadges();
+};
+
+window.setStatus = async (decisionId, status) => {
+  await supabase.from('decisions').update({ status }).eq('id', decisionId);
+  const idx = allDecisions.findIndex(d=>d.id===decisionId);
+  if (idx>-1) allDecisions[idx].status = status;
+  refreshCard(decisionId);
+  updateBadges();
+};
+
+window.postComment = async (decisionId) => {
+  const input = document.getElementById('ci-'+decisionId);
+  const content = input?.value?.trim();
+  if (!content || !currentUser) return;
+  await supabase.from('comments').insert({ decision_id:decisionId, user_id:currentUser.id, content });
+  const { data } = await supabase.from('comments').select('*').order('created_at');
+  allComments = data || [];
+  input.value = '';
+  refreshCard(decisionId);
+};
+
+window.triggerUpload = (id) => document.getElementById('file-'+id)?.click();
+
+window.uploadFile = async (decisionId, input) => {
+  const file = input.files[0];
+  if (!file) return;
+  const path = `${decisionId}/${Date.now()}-${file.name}`;
+  const { data: upload, error } = await supabase.storage.from('attachments').upload(path, file);
+  if (error) { toast('Upload failed: '+error.message,'error'); return; }
+  const { data: { publicUrl } } = supabase.storage.from('attachments').getPublicUrl(path);
+  await supabase.from('attachments').insert({ decision_id:decisionId, name:file.name, url:publicUrl, uploaded_by:currentUser.id });
+  const { data } = await supabase.from('attachments').select('*');
+  allAttachments = data || [];
+  toast('File attached','success');
+  refreshCard(decisionId);
+};
+
+// ── Add Decision Modal ──
+window.openAddModal = async () => {
+  const { data: users } = await supabase.from('profiles').select('*');
+  allUsers = users || [];
+  const box = document.getElementById('verify-checkboxes');
+  box.innerHTML = allUsers.map(u=>`<label style="display:flex;align-items:center;gap:0.5rem;font-size:0.84rem;cursor:pointer"><input type="checkbox" value="${u.id}" style="cursor:pointer"> ${u.full_name} (${u.role||''})</label>`).join('');
+  document.getElementById('add-modal').classList.add('open');
+};
+
+window.closeAddModal = () => document.getElementById('add-modal').classList.remove('open');
+
+window.submitNewDecision = async () => {
+  const title = document.getElementById('new-title').value.trim();
+  const desc = document.getElementById('new-desc').value.trim();
+  const phase = parseInt(document.getElementById('new-phase').value);
+  const priority = document.getElementById('new-priority').value;
+  const context = document.getElementById('new-context').value.trim();
+  const optionsRaw = document.getElementById('new-options').value.trim();
+  if (!title||!desc||!context||!optionsRaw) { toast('Please fill in all required fields','error'); return; }
+  const options = optionsRaw.split('\n').map(o=>o.trim()).filter(Boolean);
+  const required_verifiers = [...document.querySelectorAll('#verify-checkboxes input:checked')].map(i=>i.value);
+  const { error } = await supabase.from('decisions').insert({ title, description:desc, phase, priority, context, options, required_verifiers, status:'open', created_by:currentUser.id });
+  if (error) { toast('Error: '+error.message,'error'); return; }
+  const { data } = await supabase.from('decisions').select('*').order('phase').order('created_at');
+  allDecisions = data || [];
+  closeAddModal();
+  renderView('decisions');
+  toast('Decision item added','success');
+  ['new-title','new-desc','new-context','new-options'].forEach(id=>document.getElementById(id).value='');
+};
+
+// ── Helpers ──
+function refreshCard(id) {
+  const d = allDecisions.find(x=>x.id===id);
+  if (!d) return;
+  const card = document.getElementById('dc-'+id);
+  if (!card) return;
+  const wasOpen = document.getElementById('body-'+id)?.classList.contains('open');
+  card.outerHTML = renderDecisionCard(d);
+  if (wasOpen) { const b=document.getElementById('body-'+id); const c=document.getElementById('chev-'+id); if(b){b.classList.add('open');c.classList.add('open');} }
+}
+
+function updateBadges() {
+  const open = allDecisions.filter(d=>d.status==='open').length;
+  const el = document.getElementById('badge-open');
+  if (el) { el.textContent = open; el.style.display = open>0?'':'none'; }
+}
+
+function formatDate(iso) {
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+
+function toast(msg, type='') {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = 'toast show '+(type||'');
+  setTimeout(()=>el.classList.remove('show'),3000);
+}
+
+function bindDecisionCards() { /* events bound inline */ }
+
+// Start
+init();
+</script>
+</body>
+</html>
