@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meridian — Partnership Decision Hub</title>
+<title>AlphaGen — Go-To-Market App</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -53,9 +53,7 @@ body { font-family: var(--sans); background: var(--paper); color: var(--ink); mi
 .auth-logo { font-family: var(--serif); font-size: 1.8rem; color: var(--ink); margin-bottom: 0.25rem; }
 .auth-logo span { color: var(--gold); }
 .auth-tagline { font-size: 0.8rem; color: var(--ink-3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2rem; }
-.auth-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border: 1px solid var(--paper-3); border-radius: var(--radius-sm); overflow: hidden; }
-.auth-tab { flex: 1; padding: 0.6rem; font-size: 0.85rem; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--ink-3); transition: all 0.2s; }
-.auth-tab.active { background: var(--ink); color: var(--paper); }
+.auth-note { font-size: 0.8rem; color: var(--ink-4); text-align: center; margin-top: 1rem; line-height: 1.5; }
 .form-group { margin-bottom: 1rem; }
 .form-label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--ink-3); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.4rem; }
 .form-input { width: 100%; padding: 0.65rem 0.9rem; border: 1px solid var(--paper-3); border-radius: var(--radius-sm); font-family: var(--sans); font-size: 0.9rem; color: var(--ink); background: var(--paper); transition: border-color 0.2s; }
@@ -306,7 +304,7 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 <!-- Loading Screen -->
 <div class="loading-overlay" id="loading">
   <div style="text-align:center">
-    <div class="loading-logo">Meridi<span>an</span></div>
+    <div class="loading-logo">Alpha<span>Gen</span></div>
     <div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div>
   </div>
 </div>
@@ -314,34 +312,15 @@ textarea.form-input { resize: vertical; min-height: 80px; }
 <!-- Auth Screen -->
 <div id="auth-screen">
   <div class="auth-card">
-    <div class="auth-logo">Meridi<span>an</span></div>
-    <div class="auth-tagline">Partnership Decision Hub</div>
-    <div class="auth-tabs">
-      <button class="auth-tab active" onclick="switchAuthTab('login')">Sign in</button>
-      <button class="auth-tab" onclick="switchAuthTab('signup')">Create account</button>
-    </div>
+    <div class="auth-logo">Alpha<span>Gen</span></div>
+    <div class="auth-tagline">Go-To-Market App</div>
     <div class="auth-error" id="auth-error"></div>
     <div id="login-form">
       <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="login-email" placeholder="you@example.com"></div>
-      <div class="form-group"><label class="form-label">Password</label><input class="form-input" type="password" id="login-password" placeholder="••••••••"></div>
+      <div class="form-group"><label class="form-label">Password</label><input class="form-input" type="password" id="login-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')handleLogin()"></div>
       <button class="btn-primary" onclick="handleLogin()" id="login-btn">Sign in</button>
     </div>
-    <div id="signup-form" style="display:none">
-      <div class="form-group"><label class="form-label">Full name</label><input class="form-input" type="text" id="signup-name" placeholder="Your name"></div>
-      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="signup-email" placeholder="you@example.com"></div>
-      <div class="form-group"><label class="form-label">Password</label><input class="form-input" type="password" id="signup-password" placeholder="Min 6 characters"></div>
-      <div class="form-group">
-        <label class="form-label">Your role</label>
-        <select class="form-select" id="signup-role">
-          <option value="">Select role...</option>
-          <option value="Partner — Iroko relationship">Partner — Iroko relationship</option>
-          <option value="Partner — SA banks">Partner — SA banks</option>
-          <option value="Partner — Non-bank investors">Partner — Non-bank investors</option>
-          <option value="Observer">Observer</option>
-        </select>
-      </div>
-      <button class="btn-primary" onclick="handleSignup()" id="signup-btn">Create account</button>
-    </div>
+    <div class="auth-note">Access is by invitation only.<br>Contact Aphile if you need an account.</div>
   </div>
 </div>
 
@@ -350,7 +329,7 @@ textarea.form-input { resize: vertical; min-height: 80px; }
   <nav class="topnav">
     <div style="display:flex;align-items:center;gap:0.75rem">
       <button class="hamburger" onclick="toggleSidebar()">☰</button>
-      <div class="nav-logo">Meridi<span>an</span></div>
+      <div class="nav-logo">Alpha<span>Gen</span></div>
     </div>
     <div class="nav-right">
       <div class="nav-user">Signed in as <strong id="nav-user-name">—</strong></div>
@@ -523,39 +502,15 @@ function showApp() {
   renderView('dashboard');
 }
 
-window.switchAuthTab = (tab) => {
-  document.querySelectorAll('.auth-tab').forEach((t,i) => t.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='signup')));
-  document.getElementById('login-form').style.display = tab==='login'?'block':'none';
-  document.getElementById('signup-form').style.display = tab==='signup'?'block':'none';
-  document.getElementById('auth-error').style.display = 'none';
-};
-
 window.handleLogin = async () => {
   const btn = document.getElementById('login-btn');
   btn.disabled = true; btn.textContent = 'Signing in...';
-  const email = document.getElementById('login-email').value;
+  const email = document.getElementById('login-email').value.trim();
   const password = document.getElementById('login-password').value;
+  if (!email || !password) { showAuthError('Please enter your email and password.'); btn.disabled=false; btn.textContent='Sign in'; return; }
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) { showAuthError(error.message); btn.disabled=false; btn.textContent='Sign in'; return; }
+  if (error) { showAuthError('Invalid email or password.'); btn.disabled=false; btn.textContent='Sign in'; return; }
   currentUser = data.user;
-  await loadProfile();
-  await loadAll();
-  showApp();
-};
-
-window.handleSignup = async () => {
-  const btn = document.getElementById('signup-btn');
-  btn.disabled = true; btn.textContent = 'Creating account...';
-  const email = document.getElementById('signup-email').value;
-  const password = document.getElementById('signup-password').value;
-  const name = document.getElementById('signup-name').value;
-  const role = document.getElementById('signup-role').value;
-  if (!name||!email||!password||!role) { showAuthError('Please fill in all fields.'); btn.disabled=false; btn.textContent='Create account'; return; }
-  const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { full_name: name, role } } });
-  if (error) { showAuthError(error.message); btn.disabled=false; btn.textContent='Create account'; return; }
-  currentUser = data.user;
-  // Insert profile
-  await supabase.from('profiles').upsert({ id: currentUser.id, full_name: name, email, role });
   await loadProfile();
   await loadAll();
   showApp();
@@ -614,7 +569,7 @@ function renderDashboard() {
   return `
   <div class="page-header">
     <div class="page-title">Dashboard</div>
-    <div class="page-subtitle">Iroko Securities partnership — go-to-market decision tracker</div>
+    <div class="page-subtitle">AlphaGen go-to-market decision tracker</div>
   </div>
   <div class="stats-row">
     <div class="stat-card"><div class="stat-label">Total items</div><div class="stat-value">${total}</div><div class="stat-sub">across 3 phases</div></div>
@@ -766,7 +721,7 @@ function renderDecisionCard(d) {
               ${myChoice?'✓ Confirmed':'Confirm my decision'}
             </button>
             ${d.status!=='decided'?`<button class="btn-secondary" onclick="setStatus('${d.id}','in_progress')">Mark in progress</button>`:''}
-            ${currentProfile?.role?.includes('Partner')&&d.status!=='decided'?`<button class="btn-danger" onclick="setStatus('${d.id}','decided')">Mark as decided</button>`:''}
+            ${d.status!=='decided'?`<button class="btn-danger" onclick="setStatus('${d.id}','decided')">Mark as decided</button>`:''}
           </div>
         </div>
       </div>
