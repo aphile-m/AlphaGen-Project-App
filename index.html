@@ -402,6 +402,7 @@ textarea.fi{resize:vertical;min-height:72px}
     <div class="ssec">
       <div class="slbl">Pipeline</div>
       <button class="si" onclick="goV('opportunities',this)"><span class="ic">&#9670;</span>Opportunities<span class="sbadge" id="oppbadge" style="display:none;background:var(--bluel);color:var(--blue)"></span></button>
+      <button class="si" onclick="goV('introductions',this)"><span class="ic">&#9733;</span>Investor targets<span class="sbadge" id="introbadge" style="display:none;background:var(--teall);color:var(--teal)"></span></button>
     </div>
     <div class="sdiv"></div>
     <div class="ssec">
@@ -436,6 +437,23 @@ textarea.fi{resize:vertical;min-height:72px}
     </div>
     <div class="view" id="v-progress"></div>
     <div class="view" id="v-activity"></div>
+
+    <div class="view" id="v-introductions">
+      <div class="pgh" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+        <div><div class="pgt">Investor targets</div><div class="pgs">Entities and individuals to register with Iroko &mdash; your named pipeline register</div></div>
+        <button class="btnadd" onclick="openIntroModal()">+ Add target</button>
+      </div>
+      <div class="fbar">
+        <button class="fbtn on" onclick="window.introF=null;renderIntros();document.querySelectorAll('#v-introductions .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">All</button>
+        <button class="fbtn" onclick="window.introF='sa_bank';renderIntros();document.querySelectorAll('#v-introductions .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">SA Banks</button>
+        <button class="fbtn" onclick="window.introF='pension';renderIntros();document.querySelectorAll('#v-introductions .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Pension funds</button>
+        <button class="fbtn" onclick="window.introF='asset_manager';renderIntros();document.querySelectorAll('#v-introductions .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Asset managers</button>
+        <button class="fbtn" onclick="window.introF='dfi';renderIntros();document.querySelectorAll('#v-introductions .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">DFIs</button>
+        <button class="fbtn" onclick="window.introF='insurance';renderIntros();document.querySelectorAll('#v-introductions .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Insurance</button>
+        <button class="fbtn" onclick="window.introF='other';renderIntros();document.querySelectorAll('#v-introductions .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Other</button>
+      </div>
+      <div id="intro-list"></div>
+    </div>
     <div class="view" id="v-opportunities">
       <div class="pgh" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem">
         <div><div class="pgt">Opportunities</div><div class="pgs">Pipeline of deals, introductions and revenue possibilities across all four pillars</div></div>
@@ -495,20 +513,34 @@ textarea.fi{resize:vertical;min-height:72px}
         </div>
       </div>
       <div class="cv" id="ct-calc">
-        <div class="slbl2">Deal parameters</div>
-        <div class="slrow"><span class="sllbl">Deal size ($m)</span><input type="range" min="1" max="500" value="50" step="1" id="s-deal" oninput="updCalc()"><span class="slval" id="sv-deal">$50m</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:.875rem">
+          <div class="slbl2" style="margin:0">Deal parameters</div>
+          <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap">
+            <span style="font-size:.75rem;color:var(--ink3)">ZAR rate:</span>
+            <input type="number" id="zar-rate" value="18.50" step="0.1" min="1" style="width:70px;padding:.3rem .5rem;border:1px solid var(--paper3);border-radius:var(--rs);font-family:var(--sans);font-size:.82rem;color:var(--ink);background:var(--paper);text-align:center" oninput="updCalc()">
+            <span style="font-size:.75rem;color:var(--ink3)">R/$</span>
+            <button id="zar-toggle" onclick="toggleZAR()" style="padding:.3rem .75rem;border:1px solid var(--paper3);border-radius:var(--rs);background:var(--paper);font-family:var(--sans);font-size:.75rem;font-weight:600;cursor:pointer;color:var(--ink3);transition:all .15s">USD</button>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem;flex-wrap:wrap">
+          <span class="sllbl" style="width:120px;flex-shrink:0;font-size:.78rem;color:var(--ink2)">Deal size ($m)</span>
+          <input type="range" min="1" max="500" value="50" step="1" id="s-deal" oninput="syncDealInput();updCalc()" style="flex:1;accent-color:var(--gold)">
+          <input type="number" id="s-deal-num" value="50" min="1" max="2000" step="1" style="width:72px;padding:.3rem .5rem;border:1px solid var(--paper3);border-radius:var(--rs);font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--ink);background:var(--paper);text-align:center" oninput="syncDealSlider();updCalc()">
+          <span style="font-size:.75rem;color:var(--ink3);flex-shrink:0">$m</span>
+        </div>
         <div class="slrow"><span class="sllbl">Upfront fee (%)</span><input type="range" min="0.1" max="1.5" value="0.5" step="0.05" id="s-fee" oninput="updCalc()"><span class="slval" id="sv-fee">0.50%</span></div>
         <div class="slrow"><span class="sllbl">Strip (bp/yr)</span><input type="range" min="0" max="60" value="30" step="5" id="s-strip" oninput="updCalc()"><span class="slval" id="sv-strip">30bp</span></div>
         <div class="slrow"><span class="sllbl">Tenor (years)</span><input type="range" min="1" max="10" value="5" step="1" id="s-tenor" oninput="updCalc()"><span class="slval" id="sv-tenor">5yr</span></div>
         <div class="slrow"><span class="sllbl">Origination %</span><input type="range" min="10" max="70" value="40" step="1" id="s-oc" oninput="updCalc()"><span class="slval" id="sv-oc">40%</span></div>
         <div class="slrow"><span class="sllbl">Execution %</span><input type="range" min="10" max="70" value="40" step="1" id="s-ec" oninput="updCalc()"><span class="slval" id="sv-ec">40%</span></div>
-        <div class="slbl2">Income breakdown</div>
+        <div class="slbl2" id="calc-currency-lbl">Income breakdown &mdash; USD</div>
         <div class="mgrid">
           <div class="metric"><div class="mval" id="cfee">$250k</div><div class="mlbl">Upfront fee</div></div>
           <div class="metric"><div class="mval" id="csyr">$150k</div><div class="mlbl">Strip / year</div></div>
           <div class="metric"><div class="mval" id="cstot">$750k</div><div class="mlbl">Total strip</div></div>
           <div class="metric"><div class="mval" id="ctot">$1.0m</div><div class="mlbl">Combined total</div></div>
         </div>
+        <div class="slbl2">Partner distribution</div>
         <div class="mgrid">
           <div class="metric"><div class="mval" id="coe">$400k</div><div class="mlbl">Origination partner</div></div>
           <div class="metric"><div class="mval" id="cee">$400k</div><div class="mlbl">Execution partner</div></div>
@@ -846,6 +878,64 @@ textarea.fi{resize:vertical;min-height:72px}
   </div>
 </div>
 
+
+<!-- INTRODUCTION TARGET MODAL -->
+<div class="mov" id="intromodal">
+  <div class="modal" style="max-width:640px">
+    <div class="mtitle" id="intro-mt">Add investor target</div>
+    <div class="msub">Register this target with the Iroko team as part of your named pipeline</div>
+    <input type="hidden" id="it-id">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.875rem">
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Institution name *</label><input class="fi" id="it-inst" placeholder="e.g. Nedbank Group Treasury"></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Contact person *</label><input class="fi" id="it-contact" placeholder="e.g. John Smith"></div>
+      <div class="fg"><label class="fl">Contact title / role</label><input class="fi" id="it-title" placeholder="e.g. Head of Credit"></div>
+      <div class="fg"><label class="fl">Contact email</label><input class="fi" type="email" id="it-email" placeholder="e.g. j.smith@nedbank.co.za"></div>
+      <div class="fg"><label class="fl">Investor type *</label><select class="fsel" id="it-type">
+        <option value="sa_bank">SA bank &mdash; credit / treasury desk</option>
+        <option value="pension">Pension fund</option>
+        <option value="asset_manager">Asset manager</option>
+        <option value="insurance">Insurance company</option>
+        <option value="dfi">Development finance institution (DFI)</option>
+        <option value="family_office">Family office / private wealth</option>
+        <option value="sovereign">Sovereign wealth fund</option>
+        <option value="hedge_fund">Hedge fund</option>
+        <option value="other">Other</option>
+      </select></div>
+      <div class="fg"><label class="fl">Country</label><input class="fi" id="it-country" value="South Africa" placeholder="Country"></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Relationship strength</label>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:.4rem;margin-top:.35rem" id="it-strength-picker">
+          <button type="button" class="strength-btn" data-val="1" onclick="pickStrength(1)" style="padding:.5rem;border:1px solid var(--paper3);border-radius:var(--rs);font-size:.75rem;cursor:pointer;background:var(--paper);transition:all .15s">1 &mdash; Cold</button>
+          <button type="button" class="strength-btn" data-val="2" onclick="pickStrength(2)" style="padding:.5rem;border:1px solid var(--paper3);border-radius:var(--rs);font-size:.75rem;cursor:pointer;background:var(--paper);transition:all .15s">2 &mdash; Known</button>
+          <button type="button" class="strength-btn" data-val="3" onclick="pickStrength(3)" style="padding:.5rem;border:1px solid var(--paper3);border-radius:var(--rs);font-size:.75rem;cursor:pointer;background:var(--paper);transition:all .15s">3 &mdash; Warm</button>
+          <button type="button" class="strength-btn" data-val="4" onclick="pickStrength(4)" style="padding:.5rem;border:1px solid var(--paper3);border-radius:var(--rs);font-size:.75rem;cursor:pointer;background:var(--paper);transition:all .15s">4 &mdash; Strong</button>
+          <button type="button" class="strength-btn" data-val="5" onclick="pickStrength(5)" style="padding:.5rem;border:1px solid var(--paper3);border-radius:var(--rs);font-size:.75rem;cursor:pointer;background:var(--paper);transition:all .15s">5 &mdash; Direct</button>
+        </div>
+        <input type="hidden" id="it-strength" value="3">
+      </div>
+      <div class="fg"><label class="fl">Owner partner</label><select class="fsel" id="it-owner"></select></div>
+      <div class="fg"><label class="fl">Registration status</label><select class="fsel" id="it-status">
+        <option value="target">Target &mdash; not yet notified to Iroko</option>
+        <option value="registered">Registered &mdash; formally notified to Iroko</option>
+        <option value="meeting_booked">Meeting booked</option>
+        <option value="meeting_held">Meeting held</option>
+        <option value="nda_signed">NDA signed</option>
+        <option value="term_sheet">Term sheet stage</option>
+        <option value="not_pursuing">Not pursuing</option>
+      </select></div>
+      <div class="fg"><label class="fl">Est. ticket size ($m)</label><input class="fi" type="number" id="it-ticket" placeholder="e.g. 50" min="0"></div>
+      <div class="fg"><label class="fl">Date registered with Iroko</label><input class="fi" type="date" id="it-regdate"></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Mandate / investment mandate</label><input class="fi" id="it-mandate" placeholder="e.g. African credit, USD bonds, EM sovereign debt"></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Next action</label><input class="fi" id="it-na" placeholder="e.g. Send Marula teaser, follow up on meeting date"></div>
+      <div class="fg"><label class="fl">Next action due date</label><input class="fi" type="date" id="it-nadate"></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Notes</label><textarea class="fi" id="it-notes" placeholder="Relationship history, context, how we know them..."></textarea></div>
+    </div>
+    <div class="macts">
+      <button class="btnp" onclick="submitIntro()" style="flex:1" id="it-submit-btn">Add target</button>
+      <button class="btns" onclick="closeIntroModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 
@@ -855,7 +945,9 @@ const SU='https://ewdloawwudqkdrstqfet.supabase.co';
 const SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV3ZGxvYXd3dWRxa2Ryc3RxZmV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxODc5NDYsImV4cCI6MjA5MTc2Mzk0Nn0.xMOdn6c9sQwrUoEpBk9MZUFHFSV0CLFTUrlyzkgRqUM';
 const sb=createClient(SU,SK);
 const SV='8';
-let me=null,myP=null,decs=[],users=[],coms=[],vers=[],atts=[],opps=[],docs=[],minutes=[],proposals=[];
+let me=null,myP=null,decs=[],users=[],coms=[],vers=[],atts=[],opps=[],docs=[],minutes=[],proposals=[],intros=[];
+window.introF=null;
+let zarMode=false;
 window.stF=null;window.phF=null;window.srF='';window.oppF=null;window.mmF=null;
 
 /* ─── SEEDS ──────────────────────────────────────────────────────────────── */
@@ -899,20 +991,24 @@ async function loadAll(){
     sb.from('documents').select('*').order('created_at',{ascending:false}),
     sb.from('meeting_minutes').select('*').order('meeting_date',{ascending:false}),
     sb.from('proposals').select('*').order('created_at',{ascending:false}),
+    sb.from('investor_targets').select('*').order('created_at',{ascending:false}),
   ]);
-  decs=d.data||[];users=u.data||[];coms=c.data||[];vers=v.data||[];atts=a.data||[];
-  opps=op.data||[];docs=dc.data||[];minutes=mm.data||[];proposals=pr.data||[];
-  const sv=localStorage.getItem('ag_sv');
-  if(!decs.length||sv!==SV){
-    if(decs.length&&sv!==SV){
-      const touched=new Set([...coms.map(x=>x.decision_id),...vers.map(x=>x.decision_id)]);
-      const del=decs.filter(d=>!touched.has(d.id)).map(d=>d.id);
-      if(del.length)await sb.from('decisions').delete().in('id',del);
-    }
+  decs=d.data?.filter(x=>!x.title.startsWith('__seed_v'))||[];users=u.data||[];coms=c.data||[];vers=v.data||[];atts=a.data||[];
+  opps=op.data||[];docs=dc.data||[];minutes=mm.data||[];proposals=pr.data||[];intros=intr.data||[];
+  // Seed check: use a marker decision in the DB (title='__seed_v'+SV) rather than
+  // localStorage so it works correctly across all browsers/devices/partners.
+  const seedMarker=decs.find(d=>d.title==='__seed_v'+SV);
+  if(!seedMarker){
+    // Remove any stale seeds from previous versions (marker rows + untouched decisions)
+    const touched=new Set([...coms.map(x=>x.decision_id),...vers.map(x=>x.decision_id)]);
+    const stale=decs.filter(d=>!touched.has(d.id)||d.title.startsWith('__seed_v'));
+    if(stale.length)await sb.from('decisions').delete().in('id',stale.map(d=>d.id));
+    // Insert fresh seed decisions
     await sb.from('decisions').insert(SEEDS.map(s=>({...s,status:'open',created_by:me.id})));
-    localStorage.setItem('ag_sv',SV);
+    // Insert the marker so no other browser/device re-seeds
+    await sb.from('decisions').insert({title:'__seed_v'+SV,description:'',phase:1,priority:'can',context:'Seed version marker — do not delete.',options:[],required_verifiers:[],status:'decided',created_by:me.id});
     const{data}=await sb.from('decisions').select('*').order('phase').order('created_at');
-    decs=data||[];
+    decs=(data||[]).filter(x=>!x.title.startsWith("__seed_v"));
   }
   updBadge();
 }
@@ -948,6 +1044,7 @@ window.goV=(v,btn)=>{
   else if(v==='progress')renderProg();
   else if(v==='activity')renderAct();
   else if(v==='opportunities')renderOpps();
+  else if(v==='introductions')renderIntros();
   else if(v==='documents')renderDocs();
   else if(v==='minutes')renderMinutes();
   else if(v==='commission'){updPool();updCalc();}
@@ -1172,14 +1269,63 @@ function renderProg(){
 
 /* ─── ACTIVITY ───────────────────────────────────────────────────────────── */
 function renderAct(){
-  const items=[...coms].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
-  document.getElementById('v-activity').innerHTML=`
-  <div class="pgh"><div class="pgt">Activity</div><div class="pgs">All comments and updates across every decision</div></div>
-  ${!items.length?'<div class="empty"><div class="empi">&#128203;</div><div class="empt">No activity yet</div><div class="empd">Comments and updates will appear here</div></div>':''}
-  ${items.map(c=>{
+  const events=[];
+  coms.forEach(c=>{
     const d=decs.find(x=>x.id===c.decision_id),u=users.find(x=>x.id===c.user_id);
-    return`<div class="acti"><div class="actic">&#128172;</div><div class="actb"><div class="actt"><strong>${u?.full_name||'User'}</strong> on <strong>${d?.title||'a decision'}</strong> &mdash; "${c.content.substring(0,120)}${c.content.length>120?'&hellip;':''}"</div><div class="acttm">${fmtD(c.created_at)}</div></div></div>`;
-  }).join('')}`;
+    events.push({ts:new Date(c.created_at),icon:'&#128172;',iconC:'var(--teal)',
+      txt:`<strong>${u?.full_name||'User'}</strong> commented on <strong>${d?.title||'a decision'}</strong> &mdash; <em>"${c.content.substring(0,100)}${c.content.length>100?'&hellip;':''}"</em>`});
+  });
+  proposals.forEach(p=>{
+    const d=decs.find(x=>x.id===p.decision_id),u=users.find(x=>x.id===p.proposed_by);
+    const fL={title:'Title',description:'Description',context:'Context',options:'Options',priority:'Priority'}[p.field]||p.field;
+    events.push({ts:new Date(p.created_at),icon:'&#9998;',iconC:'var(--amber)',
+      txt:`<strong>${u?.full_name||'User'}</strong> proposed amendment to <strong>${d?.title||'a decision'}</strong> &mdash; ${fL}${p.reason?' ('+p.reason+')':''}`});
+    (p.votes||[]).forEach(v=>{
+      const voter=users.find(x=>x.id===v.user_id);
+      events.push({ts:new Date(p.updated_at||p.created_at),icon:v.vote==='yes'?'&#10003;':'&#10007;',iconC:v.vote==='yes'?'var(--green)':'var(--red)',
+        txt:`<strong>${voter?.full_name||'User'}</strong> voted <strong style="color:${v.vote==='yes'?'var(--green)':'var(--red)'}">${v.vote==='yes'?'Approve':'Reject'}</strong> on amendment to <strong>${d?.title||'a decision'}</strong>`});
+    });
+    if(p.status==='approved'||p.status==='rejected'){
+      events.push({ts:new Date(p.updated_at||p.created_at),icon:p.status==='approved'?'&#9654;':'&#9726;',iconC:p.status==='approved'?'var(--green)':'var(--red)',
+        txt:`Amendment to <strong>${d?.title||'a decision'}</strong> was <strong>${p.status}</strong>`});
+    }
+  });
+  vers.filter(v=>v.confirmed).forEach(v=>{
+    const d=decs.find(x=>x.id===v.decision_id),u=users.find(x=>x.id===v.user_id);
+    const optL=v.chosen_option!=null?' (Option '+String.fromCharCode(65+v.chosen_option)+')':'';
+    events.push({ts:new Date(v.created_at||0),icon:'&#10003;',iconC:'var(--green)',
+      txt:`<strong>${u?.full_name||'User'}</strong> confirmed: <strong>${d?.title||'a decision'}</strong>${optL}`});
+  });
+  opps.forEach(o=>{
+    const u=users.find(x=>x.id===o.owner_id);
+    events.push({ts:new Date(o.created_at),icon:'&#9670;',iconC:'var(--blue)',
+      txt:`Opportunity <strong>${o.title}</strong> added${u?' by '+u.full_name:''}`});
+    if(o.updated_at&&o.updated_at!==o.created_at){
+      const stL={idea:'Idea',qualifying:'Qualifying',developing:'Developing',ready:'Ready',on_hold:'On hold',passed:'Passed'}[o.stage]||o.stage;
+      events.push({ts:new Date(o.updated_at),icon:'&#8635;',iconC:'var(--blue)',
+        txt:`Opportunity <strong>${o.title}</strong> updated &mdash; stage: <strong>${stL}</strong>`});
+    }
+  });
+  intros.forEach(i=>{
+    const u=users.find(x=>x.id===i.owner_id);
+    events.push({ts:new Date(i.created_at),icon:'&#9733;',iconC:'var(--teal)',
+      txt:`Investor target added: <strong>${i.institution}</strong>${i.contact_person?' &mdash; '+i.contact_person:''}${u?' by '+u.full_name:''}`});
+  });
+  minutes.forEach(m=>{
+    const u=users.find(x=>x.id===m.created_by);
+    events.push({ts:new Date(m.created_at),icon:'&#128221;',iconC:'var(--gold)',
+      txt:`Meeting minutes: <strong>${m.title}</strong>${m.meeting_date?' ('+m.meeting_date+')':''}${u?' by '+u.full_name:''}`});
+  });
+  docs.forEach(dc=>{
+    const u=users.find(x=>x.id===dc.uploaded_by);
+    events.push({ts:new Date(dc.created_at),icon:'&#128196;',iconC:'var(--ink3)',
+      txt:`Document uploaded: <strong>${dc.name}</strong> [${dc.category}]${u?' by '+u.full_name:''}`});
+  });
+  const sorted=events.filter(e=>e.ts&&!isNaN(e.ts.getTime())).sort((a,b)=>b.ts-a.ts).slice(0,80);
+  document.getElementById('v-activity').innerHTML=
+    '<div class="pgh"><div class="pgt">Activity</div><div class="pgs">All events across decisions, opportunities, introductions and meetings</div></div>'+
+    (!sorted.length?'<div class="empty"><div class="empi">&#128203;</div><div class="empt">No activity yet</div></div>':'')+
+    sorted.map(e=>'<div class="acti"><div class="actic" style="background:'+e.iconC+'22;color:'+e.iconC+';font-size:.85rem">'+e.icon+'</div><div class="actb"><div class="actt">'+e.txt+'</div><div class="acttm">'+e.ts.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})+'</div></div></div>').join('');
 }
 
 /* ─── OPPORTUNITIES ──────────────────────────────────────────────────────── */
@@ -1468,7 +1614,7 @@ window.voteAmend=async(pid,vote)=>{
         upd.options=prop.new_value.split('\n').map(l=>{const t=l.replace(/^[A-Z]:\s*/,'').trim();return t;}).filter(Boolean);
       } else upd[prop.field]=prop.new_value;
       await sb.from('decisions').update(upd).eq('id',prop.decision_id);
-      const{data}=await sb.from('decisions').select('*').order('phase').order('created_at');decs=data||[];
+      const{data}=await sb.from('decisions').select('*').order('phase').order('created_at');decs=(data||[]).filter(x=>!x.title.startsWith("__seed_v"));
       toast('Amendment approved and applied!','ok');
     }
   } else toast(status==='rejected'?'Amendment rejected':'Vote recorded','ok');
@@ -1487,7 +1633,7 @@ window.submitDec=async()=>{
   const options=optsRaw.split('\n').map(o=>o.trim()).filter(Boolean);
   if(options.length<2){toast('Please provide at least 2 options','err');return;}
   await sb.from('decisions').insert({title,description:document.getElementById('ndesc').value.trim(),phase:parseInt(document.getElementById('nphase').value),priority:document.getElementById('nprio').value,context:ctx,options,required_verifiers:[],status:'open',created_by:me.id});
-  const{data}=await sb.from('decisions').select('*').order('phase').order('created_at');decs=data||[];
+  const{data}=await sb.from('decisions').select('*').order('phase').order('created_at');decs=(data||[]).filter(x=>!x.title.startsWith("__seed_v"));
   window.closeAdd();renderDecs();updBadge();toast('Decision added','ok');
   ['ntitle','ndesc','nctx','nopts'].forEach(id=>document.getElementById(id).value='');
 };
@@ -1655,6 +1801,8 @@ function updBadge(){
   if(el){el.textContent=open||'';el.style.display=open?'':'none';}
   const oEl=document.getElementById('oppbadge');
   if(oEl){const active=opps.filter(o=>!['passed','on_hold'].includes(o.stage)).length;oEl.textContent=active||'';oEl.style.display=active?'':'none';}
+  const iEl=document.getElementById('introbadge');
+  if(iEl){const reg=intros.filter(i=>i.reg_status==='registered'||i.reg_status==='meeting_booked').length;iEl.textContent=reg||'';iEl.style.display=reg?'':'none';}
 }
 function fmtD(iso){try{return new Date(iso).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}catch{return iso||'';}}
 function fmtM(n){if(!n)return'';if(n>=1e6)return'$'+(Math.round(n/1e5)/10)+'m';if(n>=1e3)return'$'+Math.round(n/1e3)+'k';return'$'+Math.round(n);}
@@ -1676,23 +1824,48 @@ window.updPool=()=>{
   document.getElementById('pblo').textContent='Origination '+o+'%';document.getElementById('pble').textContent='Execution '+e+'%';document.getElementById('pblh').textContent='House '+h+'%';
   document.getElementById('mo').textContent=o+'%';document.getElementById('me').textContent=e+'%';document.getElementById('mh').textContent=h+'%';
 };
+window.syncDealInput=()=>{
+  const v=+document.getElementById('s-deal').value;
+  document.getElementById('s-deal-num').value=v;
+};
+window.syncDealSlider=()=>{
+  const v=Math.min(2000,Math.max(1,+document.getElementById('s-deal-num').value||50));
+  // Extend slider max if needed
+  const sl=document.getElementById('s-deal');
+  if(v>+sl.max)sl.max=v;
+  sl.value=v;
+};
+window.toggleZAR=()=>{
+  zarMode=!zarMode;
+  const btn=document.getElementById('zar-toggle');
+  if(btn){btn.textContent=zarMode?'ZAR':'USD';btn.style.background=zarMode?'var(--teal)':'var(--paper)';btn.style.color=zarMode?'white':'var(--ink3)';btn.style.borderColor=zarMode?'var(--teal)':'var(--paper3)';}
+  const lbl=document.getElementById('calc-currency-lbl');
+  if(lbl)lbl.textContent=zarMode?'Income breakdown — ZAR':'Income breakdown — USD';
+  updCalc();
+};
 window.updCalc=()=>{
-  const deal=+document.getElementById('s-deal').value*1e6,fee=+document.getElementById('s-fee').value/100;
+  const dealM=+(document.getElementById('s-deal-num')?.value||document.getElementById('s-deal').value)||50;
+  const deal=dealM*1e6,fee=+document.getElementById('s-fee').value/100;
   const strip=+document.getElementById('s-strip').value/10000,tenor=+document.getElementById('s-tenor').value;
   const oc=+document.getElementById('s-oc').value/100,ec=+document.getElementById('s-ec').value/100,hc=Math.max(0,1-oc-ec);
-  document.getElementById('sv-deal').textContent='$'+document.getElementById('s-deal').value+'m';
+  const zarRate=+(document.getElementById('zar-rate')?.value)||18.5;
+  const fx=zarMode?zarRate:1;
+  const fmt=zarMode?fmtR:fmtM;
+  // Sync slider display
+  const sl=document.getElementById('s-deal');if(sl){if(dealM>+sl.max)sl.max=dealM;sl.value=dealM;}
   document.getElementById('sv-fee').textContent=(+document.getElementById('s-fee').value).toFixed(2)+'%';
   document.getElementById('sv-strip').textContent=document.getElementById('s-strip').value+'bp';
   document.getElementById('sv-tenor').textContent=document.getElementById('s-tenor').value+'yr';
   document.getElementById('sv-oc').textContent=Math.round(oc*100)+'%';document.getElementById('sv-ec').textContent=Math.round(ec*100)+'%';
   const fi=deal*fee,syr=deal*strip,stot=syr*tenor,tot=fi+stot;
-  document.getElementById('cfee').textContent=fmtM(fi);document.getElementById('csyr').textContent=fmtM(syr);
-  document.getElementById('cstot').textContent=fmtM(stot);document.getElementById('ctot').textContent=fmtM(tot);
-  document.getElementById('coe').textContent=fmtM(tot*oc);document.getElementById('cee').textContent=fmtM(tot*ec);document.getElementById('che').textContent=fmtM(tot*hc);
+  document.getElementById('cfee').textContent=fmt(fi*fx);document.getElementById('csyr').textContent=fmt(syr*fx);
+  document.getElementById('cstot').textContent=fmt(stot*fx);document.getElementById('ctot').textContent=fmt(tot*fx);
+  document.getElementById('coe').textContent=fmt(tot*oc*fx);document.getElementById('cee').textContent=fmt(tot*ec*fx);document.getElementById('che').textContent=fmt(tot*hc*fx);
   const n=document.getElementById('cnote');
-  if(strip===0){n.textContent='No strip selected — fee-only model.';n.className='cg';}
-  else if(stot>fi){n.textContent='Strip income ('+fmtM(stot)+') exceeds the upfront fee ('+fmtM(fi)+') across the asset life — the equity value argument for Option D.';n.className='ck';}
-  else{n.textContent='Upfront fee ('+fmtM(fi)+') currently exceeds strip income ('+fmtM(stot)+').';n.className='cg';}
+  const dealStr='$'+dealM+'m deal'+(zarMode?' @ R/$ '+zarRate.toFixed(2):'');
+  if(strip===0){n.textContent='No strip — fee-only model. '+dealStr;n.className='cg';}
+  else if(stot>fi){n.textContent='Strip income ('+fmt(stot*fx)+') exceeds upfront fee ('+fmt(fi*fx)+') over the asset life. '+dealStr+' — this is the Option D equity value argument.';n.className='ck';}
+  else{n.textContent='Upfront fee ('+fmt(fi*fx)+') exceeds strip income ('+fmt(stot*fx)+'). '+dealStr;n.className='cg';}
 };
 
 /* ─── IROKO SLIDERS ──────────────────────────────────────────────────────── */
@@ -1756,6 +1929,130 @@ window.updRM=()=>{
   document.getElementById('rmprog').style.width=pct+'%';
   document.getElementById('rmlbl').textContent=done.length+' of '+all.length+' items complete';
 };
+
+/* ─── INVESTOR TARGETS ───────────────────────────────────────────────────── */
+const ITYPE={sa_bank:'SA Bank',pension:'Pension fund',asset_manager:'Asset manager',insurance:'Insurance',dfi:'DFI',family_office:'Family office',sovereign:'Sovereign',hedge_fund:'Hedge fund',other:'Other'};
+const ISTATUS={target:'Target',registered:'Registered',meeting_booked:'Mtg booked',meeting_held:'Mtg held',nda_signed:'NDA signed',term_sheet:'Term sheet',not_pursuing:'Not pursuing'};
+const ISTATUS_C={target:'var(--ink4)',registered:'var(--teal)',meeting_booked:'var(--amber)',meeting_held:'var(--amber)',nda_signed:'var(--green)',term_sheet:'var(--green)',not_pursuing:'var(--red)'};
+const STRENGTH_C=['','var(--red)','var(--amber)','var(--gold)','var(--teal)','var(--green)'];
+const STRENGTH_L=['','Cold','Known','Warm','Strong','Direct'];
+
+window.renderIntros=function(){
+  const el=document.getElementById('intro-list');if(!el)return;
+  let filtered=[...intros];
+  if(window.introF)filtered=filtered.filter(i=>i.investor_type===window.introF);
+  if(!filtered.length){el.innerHTML='<div class="empty"><div class="empi">&#9733;</div><div class="empt">No investor targets yet</div><div class="empd">Click + Add target to register your first investor with Iroko</div></div>';return;}
+  // Group by investor type
+  const groups={};
+  filtered.forEach(i=>{
+    const t=i.investor_type||'other';
+    if(!groups[t])groups[t]=[];
+    groups[t].push(i);
+  });
+  const typeOrder=['sa_bank','pension','asset_manager','insurance','dfi','family_office','sovereign','hedge_fund','other'];
+  el.innerHTML=typeOrder.filter(t=>groups[t]?.length).map(t=>{
+    const items=groups[t];
+    return`<div style="margin-bottom:1.75rem">
+      <div style="display:flex;align-items:center;gap:.65rem;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:2px solid var(--paper3)">
+        <div style="font-size:.9rem;font-weight:600;color:var(--ink)">${ITYPE[t]||t}</div>
+        <span style="margin-left:auto;font-size:.72rem;color:var(--ink4)">${items.length} target${items.length>1?'s':''}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.65rem">
+        ${items.map(i=>{
+          const owner=users.find(u=>u.id===i.owner_id);
+          const sc=ISTATUS_C[i.reg_status]||'var(--ink4)';
+          const stren=+i.relationship_strength||0;
+          const stars='&#9733;'.repeat(stren)+'&#9734;'.repeat(5-stren);
+          return`<div class="rcard" style="position:relative">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem;margin-bottom:.5rem">
+              <div style="flex:1;min-width:0">
+                <div style="font-size:.88rem;font-weight:600;color:var(--ink);line-height:1.3">${i.institution}</div>
+                ${i.contact_person?`<div style="font-size:.78rem;color:var(--ink2);margin-top:.1rem">${i.contact_person}${i.contact_title?' &mdash; '+i.contact_title:''}</div>`:''}
+                ${i.country&&i.country!=='South Africa'?`<div style="font-size:.72rem;color:var(--ink4)">${i.country}</div>`:''}
+              </div>
+              <div style="text-align:right;flex-shrink:0">
+                <div style="font-size:.75rem;color:${STRENGTH_C[stren]||'var(--ink4)'};font-weight:600">${stren?STRENGTH_L[stren]:'—'}</div>
+                <div style="font-size:.72rem;color:${STRENGTH_C[stren]||'var(--paper3)'};letter-spacing:1px">${stars}</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.5rem">
+              <span style="font-size:.68rem;font-weight:700;padding:.15rem .5rem;border-radius:99px;background:${sc}22;color:${sc}">${ISTATUS[i.reg_status]||i.reg_status}</span>
+              ${i.investment_mandate?`<span style="font-size:.68rem;color:var(--ink4);padding:.15rem .5rem;border:1px solid var(--paper3);border-radius:99px">${i.investment_mandate.substring(0,30)}${i.investment_mandate.length>30?'…':''}</span>`:''}
+              ${i.estimated_ticket?`<span style="font-size:.68rem;color:var(--teal);padding:.15rem .5rem;border:1px solid var(--teall);border-radius:99px">$${i.estimated_ticket}m</span>`:''}
+            </div>
+            ${i.next_action?`<div style="font-size:.75rem;color:var(--ink2);background:var(--paper2);padding:.4rem .6rem;border-radius:var(--rs);margin-bottom:.5rem">&#8594; ${i.next_action}${i.next_action_date?' <span style=\\"color:var(--ink4)\\">by '+i.next_action_date+'</span>':''}</div>`:''}
+            <div style="display:flex;align-items:center;gap:.5rem">
+              ${owner?`<span style="font-size:.7rem;color:var(--ink4)">${owner.full_name.split(' ')[0]}</span>`:''}
+              <div style="margin-left:auto;display:flex;gap:.35rem">
+                ${i.contact_email?`<a href="mailto:${i.contact_email}" class="btns" style="font-size:.7rem;padding:.25rem .5rem;text-decoration:none">&#9993;</a>`:''}
+                <button class="btns" style="font-size:.7rem;padding:.25rem .5rem" onclick="openIntroModal('${i.id}')">&#9998;</button>
+                <select class="fsel" style="padding:.25rem .45rem;font-size:.7rem;width:auto;max-width:120px" onchange="updIntroStatus('${i.id}',this.value)">
+                  ${Object.entries(ISTATUS).map(([k,v])=>`<option value="${k}"${i.reg_status===k?' selected':''}>${v}</option>`).join('')}
+                </select>
+              </div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+};
+
+let _introStrength=3;
+window.pickStrength=val=>{
+  _introStrength=val;
+  document.getElementById('it-strength').value=val;
+  document.querySelectorAll('.strength-btn').forEach(b=>{
+    const bv=+b.dataset.val;
+    b.style.background=bv<=val?STRENGTH_C[val]+'33':'var(--paper)';
+    b.style.borderColor=bv<=val?STRENGTH_C[val]:'var(--paper3)';
+    b.style.color=bv<=val?STRENGTH_C[val]:'var(--ink3)';
+    b.style.fontWeight=bv===val?'700':'400';
+  });
+};
+
+window.openIntroModal=async(id)=>{
+  const{data}=await sb.from('profiles').select('*');users=data||[];
+  document.getElementById('it-owner').innerHTML='<option value="">— Unassigned —</option>'+users.map(u=>`<option value="${u.id}">${u.full_name}</option>`).join('');
+  const i=id?intros.find(x=>x.id===id):null;
+  document.getElementById('intro-mt').textContent=i?'Edit investor target':'Add investor target';
+  document.getElementById('it-id').value=i?i.id:'';
+  document.getElementById('it-submit-btn').textContent=i?'Save changes':'Add target';
+  _introStrength=i?+i.relationship_strength||3:3;
+  const s=(el,v)=>{const e=document.getElementById(el);if(e&&v!=null)e.value=v;};
+  if(i){
+    s('it-inst',i.institution);s('it-contact',i.contact_person);s('it-title',i.contact_title);
+    s('it-email',i.contact_email);s('it-type',i.investor_type);s('it-country',i.country||'South Africa');
+    s('it-owner',i.owner_id);s('it-status',i.reg_status);s('it-ticket',i.estimated_ticket);
+    s('it-regdate',i.registration_date);s('it-mandate',i.investment_mandate);
+    s('it-na',i.next_action);s('it-nadate',i.next_action_date);s('it-notes',i.notes);
+  } else {
+    ['it-inst','it-contact','it-title','it-email','it-mandate','it-na','it-nadate','it-notes','it-ticket','it-regdate'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+    s('it-type','sa_bank');s('it-status','target');s('it-country','South Africa');s('it-owner','');
+  }
+  // Render strength picker
+  setTimeout(()=>pickStrength(_introStrength),50);
+  document.getElementById('intromodal').classList.add('open');
+};
+window.closeIntroModal=()=>document.getElementById('intromodal').classList.remove('open');
+window.submitIntro=async()=>{
+  const inst=document.getElementById('it-inst').value.trim();
+  if(!inst){toast('Institution name is required','err');return;}
+  const id=document.getElementById('it-id').value;
+  const g=el=>document.getElementById(el)?.value||null;
+  const gn=el=>{const v=parseFloat(document.getElementById(el)?.value);return isNaN(v)?null:v;};
+  const row={institution:inst,contact_person:g('it-contact'),contact_title:g('it-title'),contact_email:g('it-email'),investor_type:g('it-type')||'other',country:g('it-country')||'South Africa',relationship_strength:+g('it-strength')||3,owner_id:g('it-owner')||null,reg_status:g('it-status')||'target',estimated_ticket:gn('it-ticket'),registration_date:g('it-regdate'),investment_mandate:g('it-mandate'),next_action:g('it-na'),next_action_date:g('it-nadate'),notes:g('it-notes'),created_by:me.id};
+  if(id)await sb.from('investor_targets').update(row).eq('id',id);
+  else await sb.from('investor_targets').insert(row);
+  const{data}=await sb.from('investor_targets').select('*').order('created_at',{ascending:false});intros=data||[];
+  window.closeIntroModal();renderIntros();updBadge();toast(id?'Target updated':'Target added','ok');
+};
+window.updIntroStatus=async(id,status)=>{
+  await sb.from('investor_targets').update({reg_status:status}).eq('id',id);
+  const idx=intros.findIndex(i=>i.id===id);if(idx>-1)intros[idx].reg_status=status;
+  renderIntros();updBadge();toast('Status updated','ok');
+};
+
 
 init();
 </script>
