@@ -974,14 +974,22 @@ const SEEDS=[
 
 /* ─── INIT ───────────────────────────────────────────────────────────────── */
 async function init(){
-  const{data:{session}}=await sb.auth.getSession();
-  if(session){me=session.user;await loadP();await loadAll();showApp();}
-  else showAuth();
-  document.getElementById('ld').classList.add('out');
+  try{
+    const{data:{session}}=await sb.auth.getSession();
+    if(session){me=session.user;await loadP();await loadAll();showApp();}
+    else showAuth();
+  }catch(err){
+    console.error('Init error:',err);
+    showAuth();
+    document.getElementById('aerr').textContent='Load error: '+err.message+'. Please refresh.';
+    document.getElementById('aerr').style.display='block';
+  }finally{
+    document.getElementById('ld').classList.add('out');
+  }
 }
 async function loadP(){const{data}=await sb.from('profiles').select('*').eq('id',me.id).single();myP=data;}
 async function loadAll(){
-  const[d,u,c,v,a,op,dc,mm,pr]=await Promise.all([
+  const[d,u,c,v,a,op,dc,mm,pr,intr]=await Promise.all([
     sb.from('decisions').select('*').order('phase').order('created_at'),
     sb.from('profiles').select('*'),
     sb.from('comments').select('*').order('created_at'),
@@ -994,7 +1002,7 @@ async function loadAll(){
     sb.from('investor_targets').select('*').order('created_at',{ascending:false}),
   ]);
   decs=d.data?.filter(x=>!x.title.startsWith('__seed_v'))||[];users=u.data||[];coms=c.data||[];vers=v.data||[];atts=a.data||[];
-  opps=op.data||[];docs=dc.data||[];minutes=mm.data||[];proposals=pr.data||[];intros=intr.data||[];
+  opps=op.data||[];docs=dc.data||[];minutes=mm.data||[];proposals=pr.data||[];intros=intr?.data||[];
   // Seed check: use a marker decision in the DB (title='__seed_v'+SV) rather than
   // localStorage so it works correctly across all browsers/devices/partners.
   const seedMarker=decs.find(d=>d.title==='__seed_v'+SV);
