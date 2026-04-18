@@ -16,12 +16,13 @@
   --green:#3a6b4a;--greenl:#d8eadd;
   --amber:#7a5c2a;--amberl:#f5e8d0;
   --blue:#2a4d7a;--bluel:#dde8f5;
+  --purple:#5a3a7a;--purplel:#ece5f5;
   --slg:0 12px 40px rgba(26,24,20,.14);
   --sl:0 1px 3px rgba(26,24,20,.08);
   --r:10px;--rs:6px;
   --serif:"DM Serif Display",Georgia,serif;
   --sans:"DM Sans",system-ui,sans-serif;
-  --nw:230px;--th:56px;
+  --nw:240px;--th:56px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:15px}
@@ -34,7 +35,7 @@ body{font-family:var(--sans);background:var(--paper);color:var(--ink);min-height
 .ld-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:ldp 1.2s ease-in-out infinite}
 .ld-dot:nth-child(2){animation-delay:.2s}.ld-dot:nth-child(3){animation-delay:.4s}
 @keyframes ldp{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
-#auth{min-height:100vh;display:none;align-items:center;justify-content:center;padding:2rem;background:var(--ink);background-image:radial-gradient(ellipse at 20% 50%,rgba(184,151,106,.15) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(45,107,107,.12) 0%,transparent 50%)}
+#auth{min-height:100vh;display:none;align-items:center;justify-content:center;padding:2rem;background:var(--ink);background-image:radial-gradient(ellipse at 20% 50%,rgba(184,151,106,.15) 0%,transparent 60%)}
 #auth.show{display:flex}
 .acard{width:100%;max-width:400px;background:var(--paper);border-radius:16px;padding:2.5rem;box-shadow:var(--slg)}
 .alogo{font-family:var(--serif);font-size:1.8rem;color:var(--ink);margin-bottom:.2rem}
@@ -48,6 +49,7 @@ body{font-family:var(--sans);background:var(--paper);color:var(--ink);min-height
 .fi::placeholder{color:var(--ink4)}
 textarea.fi{resize:vertical;min-height:72px}
 .fsel{width:100%;padding:.65rem .9rem;border:1px solid var(--paper3);border-radius:var(--rs);font-family:var(--sans);font-size:.88rem;color:var(--ink);background:var(--paper);cursor:pointer}
+.fsel:focus{outline:none;border-color:var(--gold)}
 .btnp{width:100%;padding:.75rem;background:var(--ink);color:var(--paper);border:none;border-radius:var(--rs);font-family:var(--sans);font-size:.9rem;font-weight:600;cursor:pointer;transition:background .2s}
 .btnp:hover{background:var(--ink2)}
 .btnp:disabled{opacity:.5;cursor:not-allowed}
@@ -81,7 +83,7 @@ textarea.fi{resize:vertical;min-height:72px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.875rem;margin-bottom:1.75rem}
 .stat{background:var(--paper);border:1px solid var(--paper3);border-radius:var(--r);padding:.875rem 1rem}
 .slb{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--ink4);margin-bottom:.25rem}
-.sv{font-family:var(--serif);font-size:1.8rem;color:var(--ink);line-height:1}
+.svv{font-family:var(--serif);font-size:1.8rem;color:var(--ink);line-height:1}
 .ss{font-size:.72rem;color:var(--ink3);margin-top:.15rem}
 .psec{background:var(--paper);border:1px solid var(--paper3);border-radius:var(--r);padding:1.25rem;margin-bottom:1.75rem}
 .phd{display:flex;justify-content:space-between;align-items:center;margin-bottom:.875rem}
@@ -121,9 +123,8 @@ textarea.fi{resize:vertical;min-height:72px}
 .dbody.open{display:block}
 .slbl2{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink4);margin:1rem 0 .5rem}
 .ibox{background:var(--paper2);border-radius:var(--rs);padding:.875rem;font-size:.82rem;color:var(--ink2);line-height:1.65}
-.ibox strong{color:var(--ink);font-weight:600}
 .ogrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.5rem;margin-top:.5rem}
-.opt{border:1px solid var(--paper3);border-radius:var(--rs);padding:.75rem;cursor:pointer;transition:all .15s}
+.opt{border:1px solid var(--paper3);border-radius:var(--rs);padding:.75rem;cursor:pointer;transition:all .15s;position:relative}
 .opt:hover{border-color:var(--gold);background:var(--goldl)}
 .opt.sel{border-color:var(--gold);background:var(--goldl)}
 .olet{font-size:.7rem;font-weight:700;color:var(--ink4);margin-bottom:.2rem}
@@ -144,6 +145,7 @@ textarea.fi{resize:vertical;min-height:72px}
 .btns{padding:.5rem .9rem;background:transparent;color:var(--ink3);border:1px solid var(--paper3);border-radius:var(--rs);font-family:var(--sans);font-size:.8rem;cursor:pointer;transition:all .15s}
 .btns:hover{border-color:var(--ink3);color:var(--ink)}
 .btnd{padding:.5rem .9rem;background:transparent;color:var(--red);border:1px solid var(--redl);border-radius:var(--rs);font-family:var(--sans);font-size:.8rem;cursor:pointer}
+.btng{padding:.5rem .9rem;background:transparent;color:var(--green);border:1px solid var(--greenl);border-radius:var(--rs);font-family:var(--sans);font-size:.8rem;cursor:pointer}
 .cmt{display:flex;gap:.55rem;margin-bottom:.7rem}
 .cav{width:27px;height:27px;border-radius:50%;background:var(--goldl);color:var(--goldd);font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
 .cbub{flex:1}
@@ -160,9 +162,9 @@ textarea.fi{resize:vertical;min-height:72px}
 .attchip:hover{border-color:var(--teal);color:var(--teal)}
 .btnatt{display:flex;align-items:center;gap:.3rem;padding:.3rem .6rem;border:1px dashed var(--paper3);border-radius:var(--rs);font-size:.75rem;color:var(--ink4);background:transparent;cursor:pointer}
 .btnatt:hover{border-color:var(--gold);color:var(--goldd)}
-.mov{display:none;position:fixed;inset:0;background:rgba(26,24,20,.55);z-index:500;align-items:center;justify-content:center;padding:1.5rem}
+.mov{display:none;position:fixed;inset:0;background:rgba(26,24,20,.55);z-index:500;align-items:flex-start;justify-content:center;padding:1.5rem;overflow-y:auto}
 .mov.open{display:flex}
-.modal{background:var(--paper);border-radius:var(--r);padding:1.75rem;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:var(--slg)}
+.modal{background:var(--paper);border-radius:var(--r);padding:1.75rem;width:100%;max-width:600px;box-shadow:var(--slg);margin:auto}
 .mtitle{font-family:var(--serif);font-size:1.35rem;margin-bottom:.2rem;color:var(--ink)}
 .msub{font-size:.8rem;color:var(--ink3);margin-bottom:1.5rem}
 .macts{display:flex;gap:.75rem;margin-top:1.5rem}
@@ -181,11 +183,9 @@ textarea.fi{resize:vertical;min-height:72px}
 .poolbar{display:flex;height:34px;border-radius:var(--rs);overflow:hidden;margin:1rem 0}
 .pseg{display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:600;transition:flex .4s;white-space:nowrap;overflow:hidden}
 .pseg span{padding:0 6px;overflow:hidden;text-overflow:ellipsis}
-.pso{background:var(--bluel);color:var(--blue)}
-.pse{background:var(--greenl);color:var(--green)}
-.psh{background:var(--amberl);color:var(--amber)}
+.pso{background:var(--bluel);color:var(--blue)}.pse{background:var(--greenl);color:var(--green)}.psh{background:var(--amberl);color:var(--amber)}
 .slrow{display:flex;align-items:center;gap:.875rem;margin-bottom:.6rem}
-.sllbl{font-size:.78rem;color:var(--ink2);width:120px;flex-shrink:0}
+.sllbl{font-size:.78rem;color:var(--ink2);width:130px;flex-shrink:0}
 .slrow input[type=range]{flex:1;accent-color:var(--gold)}
 .slval{font-size:.82rem;font-weight:500;color:var(--ink);width:65px;text-align:right;flex-shrink:0}
 .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:.75rem;margin:.75rem 0}
@@ -208,10 +208,7 @@ textarea.fi{resize:vertical;min-height:72px}
 .tlh{font-size:.84rem;font-weight:600;color:var(--ink);margin-bottom:.2rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
 .tlb{font-size:.78rem;color:var(--ink2);line-height:1.55}
 .pill{display:inline-flex;font-size:.68rem;font-weight:600;padding:.2rem .6rem;border-radius:99px;white-space:nowrap}
-.pg{background:var(--greenl);color:var(--green)}
-.pa{background:var(--amberl);color:var(--amber)}
-.pr{background:var(--redl);color:var(--red)}
-.pn{background:var(--paper3);color:var(--ink3)}
+.pg{background:var(--greenl);color:var(--green)}.pa{background:var(--amberl);color:var(--amber)}.pr{background:var(--redl);color:var(--red)}.pn{background:var(--paper3);color:var(--ink3)}.pb{background:var(--bluel);color:var(--blue)}.pp{background:var(--purplel);color:var(--purple)}
 .cwt{width:100%;border-collapse:collapse;font-size:.8rem;margin:.75rem 0}
 .cwt th{padding:.55rem .75rem;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);border-bottom:1px solid var(--paper3);background:var(--paper2);text-align:left}
 .cwt td{padding:.65rem .75rem;border-bottom:1px solid var(--paper3);color:var(--ink2);vertical-align:top;line-height:1.4}
@@ -234,8 +231,7 @@ textarea.fi{resize:vertical;min-height:72px}
 .bltxt strong{color:var(--ink);font-weight:600}
 .crow{display:flex;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid var(--paper3);font-size:.8rem}
 .crow:last-child{border-bottom:none}
-.cn{color:var(--ink2)}
-.ca{font-weight:500;color:var(--ink);white-space:nowrap}
+.cn{color:var(--ink2)}.ca{font-weight:500;color:var(--ink);white-space:nowrap}
 .ctot{display:flex;justify-content:space-between;padding:.65rem 0;font-size:.9rem;font-weight:600;color:var(--ink);border-top:2px solid var(--paper3);margin-top:.35rem}
 .rmck{display:flex;align-items:flex-start;gap:.65rem;padding:.5rem 0;border-bottom:1px solid var(--paper3)}
 .rmck:last-child{border-bottom:none}
@@ -256,12 +252,101 @@ textarea.fi{resize:vertical;min-height:72px}
 .empd{font-size:.8rem}
 .toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--ink);color:var(--paper);padding:.7rem 1rem;border-radius:var(--rs);font-size:.82rem;font-weight:500;z-index:9999;transform:translateY(80px);opacity:0;transition:all .3s;pointer-events:none;max-width:300px}
 .toast.show{transform:translateY(0);opacity:1}
-.toast.ok{background:var(--green)}
-.toast.err{background:var(--red)}
+.toast.ok{background:var(--green)}.toast.err{background:var(--red)}
 .divider{height:1px;background:var(--paper3);margin:1.25rem 0}
 .phsec{margin-bottom:2rem}
 .phhd{display:flex;align-items:center;gap:.65rem;margin-bottom:.875rem}
 .phh2{font-family:var(--serif);font-size:1.2rem;color:var(--ink)}
+/* EDIT PROPOSAL STYLES */
+.prop-card{border:1px solid var(--amberl);border-radius:var(--rs);padding:.875rem;margin-bottom:.6rem;background:white}
+.prop-card.approved{border-color:var(--greenl);background:var(--greenl)}
+.prop-card.rejected{border-color:var(--paper3);opacity:.6}
+.prop-field{font-size:.68rem;font-weight:700;text-transform:uppercase;color:var(--amber);letter-spacing:.06em;margin-bottom:.3rem}
+.prop-field.approved{color:var(--green)}
+.prop-change{font-size:.78rem;line-height:1.5}
+.prop-old{color:var(--ink4);text-decoration:line-through;margin-bottom:.2rem}
+.prop-new{color:var(--ink);font-weight:500}
+.vote-row{display:flex;gap:.4rem;margin-top:.6rem;flex-wrap:wrap;align-items:center}
+.vote-chip{font-size:.7rem;padding:.15rem .5rem;border-radius:99px;font-weight:600}
+.vote-a{background:var(--greenl);color:var(--green)}
+.vote-r{background:var(--redl);color:var(--red)}
+/* OPPORTUNITIES */
+.opp-card{background:var(--paper);border:1px solid var(--paper3);border-radius:var(--r);padding:1rem 1.1rem;margin-bottom:.75rem;cursor:pointer;transition:all .2s}
+.opp-card:hover{box-shadow:var(--sl);border-color:var(--paper3)}
+.opp-head{display:flex;align-items:flex-start;gap:.875rem}
+.opp-meta{flex:1;min-width:0}
+.opp-title{font-weight:600;font-size:.9rem;color:var(--ink);margin-bottom:.2rem}
+.opp-client{font-size:.78rem;color:var(--ink3)}
+.opp-tags{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.4rem}
+.opp-right{display:flex;flex-direction:column;align-items:flex-end;gap:.35rem;flex-shrink:0}
+.opp-val{font-family:var(--serif);font-size:1.1rem;color:var(--ink);line-height:1}
+.opp-vl{font-size:.68rem;color:var(--ink4)}
+.opp-body{border-top:1px solid var(--paper3);margin-top:.875rem;padding-top:.875rem;display:none}
+.opp-body.open{display:block}
+.opp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.5rem;margin:.5rem 0}
+.opp-field{background:var(--paper2);border-radius:var(--rs);padding:.6rem .75rem}
+.opp-fl{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);margin-bottom:.15rem}
+.opp-fv{font-size:.82rem;color:var(--ink);font-weight:500}
+/* LIKELIHOOD DOTS */
+.lh-high{color:var(--green);font-weight:700}
+.lh-medium{color:var(--amber);font-weight:700}
+.lh-low{color:var(--red);font-weight:700}
+.lh-uncertain{color:var(--ink4);font-weight:700}
+/* STAGE BADGES */
+.stage-idea{background:var(--paper3);color:var(--ink3)}
+.stage-qualifying{background:var(--bluel);color:var(--blue)}
+.stage-developing{background:var(--amberl);color:var(--amber)}
+.stage-ready{background:var(--purplel);color:var(--purple)}
+.stage-on_hold{background:var(--paper3);color:var(--ink4)}
+.stage-passed{background:var(--redl);color:var(--red)}
+/* PIPELINE KANBAN */
+.kanban{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem;margin-bottom:1.5rem}
+.kanban-col{background:var(--paper2);border-radius:var(--r);padding:.75rem}
+.kc-head{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3);margin-bottom:.5rem;display:flex;justify-content:space-between}
+.kc-count{background:var(--paper3);border-radius:99px;padding:.1rem .45rem;font-weight:700;color:var(--ink4)}
+.kc-item{background:var(--paper);border:1px solid var(--paper3);border-radius:var(--rs);padding:.5rem .65rem;margin-bottom:.4rem;font-size:.78rem;cursor:pointer;transition:all .15s}
+.kc-item:hover{border-color:var(--gold);background:var(--goldl)}
+/* DOCUMENTS */
+.doc-cat{margin-bottom:1.5rem}
+.doc-cat-head{display:flex;align-items:center;gap:.65rem;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--paper3)}
+.doc-cat-icon{width:28px;height:28px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+.doc-cat-title{font-size:.9rem;font-weight:600;color:var(--ink)}
+.doc-cat-count{font-size:.72rem;color:var(--ink4);margin-left:auto}
+.doc-row{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;border-bottom:1px solid var(--paper3)}
+.doc-row:last-child{border-bottom:none}
+.doc-icon{font-size:1.1rem;flex-shrink:0}
+.doc-info{flex:1;min-width:0}
+.doc-name{font-size:.84rem;font-weight:500;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.doc-sub{font-size:.72rem;color:var(--ink4);margin-top:.1rem}
+.doc-right{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.doc-status{font-size:.65rem;font-weight:700;padding:.15rem .45rem;border-radius:99px}
+.ds-current{background:var(--greenl);color:var(--green)}
+.ds-draft{background:var(--bluel);color:var(--blue)}
+.ds-superseded{background:var(--paper3);color:var(--ink4)}
+.ds-archived{background:var(--paper3);color:var(--ink4)}
+.doc-dl{padding:.25rem .55rem;border:1px solid var(--paper3);border-radius:var(--rs);font-size:.72rem;color:var(--ink3);cursor:pointer;text-decoration:none;transition:all .15s}
+.doc-dl:hover{border-color:var(--teal);color:var(--teal)}
+/* MEETING MINUTES */
+.mm-card{background:var(--paper);border:1px solid var(--paper3);border-radius:var(--r);margin-bottom:.75rem;overflow:hidden}
+.mm-head{display:flex;align-items:flex-start;gap:.875rem;padding:1rem 1.1rem;cursor:pointer}
+.mm-head:hover{background:var(--paper2)}
+.mm-date{font-family:var(--serif);font-size:1.1rem;color:var(--goldd);text-align:center;min-width:40px;flex-shrink:0}
+.mm-day{font-size:.65rem;color:var(--ink4);text-align:center;margin-top:-.15rem;text-transform:uppercase;letter-spacing:.05em}
+.mm-info{flex:1;min-width:0}
+.mm-title{font-weight:600;font-size:.9rem;color:var(--ink);margin-bottom:.15rem}
+.mm-who{font-size:.75rem;color:var(--ink3)}
+.mm-body{display:none;padding:0 1.1rem 1.1rem;border-top:1px solid var(--paper3)}
+.mm-body.open{display:block}
+.ai-row{display:flex;align-items:flex-start;gap:.6rem;padding:.4rem 0;border-bottom:1px solid var(--paper3)}
+.ai-row:last-child{border-bottom:none}
+.ai-chk{margin-top:2px;flex-shrink:0;accent-color:var(--green)}
+.ai-text{font-size:.8rem;flex:1}
+.ai-text.done{text-decoration:line-through;color:var(--ink4)}
+.ai-owner{font-size:.7rem;color:var(--ink4);margin-top:.1rem}
+.ai-due{font-size:.68rem;padding:.1rem .4rem;border-radius:99px;margin-left:auto;flex-shrink:0}
+.due-ok{background:var(--greenl);color:var(--green)}
+.due-soon{background:var(--amberl);color:var(--amber)}
+.due-late{background:var(--redl);color:var(--red)}
 @media(max-width:780px){
   .sbar{transform:translateX(-100%)}
   .sbar.open{transform:translateX(0);box-shadow:var(--slg)}
@@ -275,6 +360,7 @@ textarea.fi{resize:vertical;min-height:72px}
   .mgrid{grid-template-columns:repeat(2,1fr)}
   .pnav{grid-template-columns:repeat(2,1fr)}
   .modal{padding:1.25rem}
+  .kanban{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
@@ -287,9 +373,9 @@ textarea.fi{resize:vertical;min-height:72px}
     <div class="atag">Go-To-Market App</div>
     <div class="aerr" id="aerr"></div>
     <div class="fg"><label class="fl">Email</label><input class="fi" type="email" id="lem" placeholder="you@example.com"></div>
-    <div class="fg"><label class="fl">Password</label><input class="fi" type="password" id="lpw" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div class="fg"><label class="fl">Password</label><input class="fi" type="password" id="lpw" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <button class="btnp" onclick="doLogin()" id="lbtn">Sign in</button>
-    <div class="anote">Access by invitation only. Contact Aphile for an account.</div>
+    <div class="anote">Access by invitation only.</div>
   </div>
 </div>
 
@@ -300,7 +386,7 @@ textarea.fi{resize:vertical;min-height:72px}
       <div class="nlogo">Alpha<span>Gen</span></div>
     </div>
     <div class="nr">
-      <div class="nuser">Signed in as <strong id="nname">&mdash;</strong></div>
+      <div class="nuser">Signed in as <strong id="nname">&#8212;</strong></div>
       <button class="btnso" onclick="doSignout()">Sign out</button>
     </div>
   </nav>
@@ -314,10 +400,14 @@ textarea.fi{resize:vertical;min-height:72px}
     </div>
     <div class="sdiv"></div>
     <div class="ssec">
-      <div class="slbl">Phases</div>
-      <button class="si" onclick="goV('decisions',this);window.phF=1;renderDecs()"><span class="ic" style="color:var(--goldd)">&#9312;</span>Before you agree</button>
-      <button class="si" onclick="goV('decisions',this);window.phF=2;renderDecs()"><span class="ic" style="color:var(--teal)">&#9313;</span>Before Iroko</button>
-      <button class="si" onclick="goV('decisions',this);window.phF=3;renderDecs()"><span class="ic" style="color:var(--red)">&#9314;</span>At the table</button>
+      <div class="slbl">Pipeline</div>
+      <button class="si" onclick="goV('opportunities',this)"><span class="ic">&#9670;</span>Opportunities<span class="sbadge" id="oppbadge" style="display:none;background:var(--bluel);color:var(--blue)"></span></button>
+    </div>
+    <div class="sdiv"></div>
+    <div class="ssec">
+      <div class="slbl">Knowledge</div>
+      <button class="si" onclick="goV('documents',this)"><span class="ic">&#128196;</span>Documents</button>
+      <button class="si" onclick="goV('minutes',this)"><span class="ic">&#128221;</span>Meeting minutes</button>
     </div>
     <div class="sdiv"></div>
     <div class="ssec">
@@ -336,19 +426,55 @@ textarea.fi{resize:vertical;min-height:72px}
         <button class="btnadd" onclick="openAdd()">+ Add decision</button>
       </div>
       <div class="fbar">
-        <button class="fbtn on" onclick="window.stF=null;renderDecs();document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">All</button>
-        <button class="fbtn" onclick="window.stF='open';renderDecs();document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Open</button>
-        <button class="fbtn" onclick="window.stF='in_progress';renderDecs();document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">In progress</button>
-        <button class="fbtn" onclick="window.stF='decided';renderDecs();document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Decided</button>
+        <button class="fbtn on" onclick="window.stF=null;renderDecs();document.querySelectorAll('#v-decisions .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">All</button>
+        <button class="fbtn" onclick="window.stF='open';renderDecs();document.querySelectorAll('#v-decisions .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Open</button>
+        <button class="fbtn" onclick="window.stF='in_progress';renderDecs();document.querySelectorAll('#v-decisions .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">In progress</button>
+        <button class="fbtn" onclick="window.stF='decided';renderDecs();document.querySelectorAll('#v-decisions .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Decided</button>
         <input class="fsrch" type="text" placeholder="Search..." oninput="window.srF=this.value;renderDecs()">
       </div>
       <div id="dec-list"></div>
     </div>
     <div class="view" id="v-progress"></div>
     <div class="view" id="v-activity"></div>
+    <div class="view" id="v-opportunities">
+      <div class="pgh" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+        <div><div class="pgt">Opportunities</div><div class="pgs">Pipeline of deals, introductions and revenue possibilities across all four pillars</div></div>
+        <button class="btnadd" onclick="openOppModal()">+ Add opportunity</button>
+      </div>
+      <div id="opp-kanban"></div>
+      <div class="fbar" style="margin-top:.75rem">
+        <button class="fbtn on" onclick="window.oppF=null;renderOpps();document.querySelectorAll('#v-opportunities .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">All</button>
+        <button class="fbtn" onclick="window.oppF=1;renderOpps();document.querySelectorAll('#v-opportunities .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Pillar 1 &mdash; Iroko</button>
+        <button class="fbtn" onclick="window.oppF=2;renderOpps();document.querySelectorAll('#v-opportunities .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Pillar 2 &mdash; Alpha</button>
+        <button class="fbtn" onclick="window.oppF=3;renderOpps();document.querySelectorAll('#v-opportunities .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Pillar 3 &mdash; Advisory</button>
+        <button class="fbtn" onclick="window.oppF=4;renderOpps();document.querySelectorAll('#v-opportunities .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Pillar 4 &mdash; Risk</button>
+      </div>
+      <div id="opp-list"></div>
+    </div>
+    <div class="view" id="v-documents">
+      <div class="pgh" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+        <div><div class="pgt">Documents</div><div class="pgs">Structured repository for all company, legal and commercial documents</div></div>
+        <button class="btnadd" onclick="openDocModal()">+ Upload document</button>
+      </div>
+      <div id="doc-repo"></div>
+    </div>
+    <div class="view" id="v-minutes">
+      <div class="pgh" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+        <div><div class="pgt">Meeting minutes</div><div class="pgs">Structured record of every founders, Iroko and investor meeting</div></div>
+        <button class="btnadd" onclick="openMMModal()">+ Add minutes</button>
+      </div>
+      <div class="fbar">
+        <button class="fbtn on" onclick="window.mmF=null;renderMinutes();document.querySelectorAll('#v-minutes .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">All</button>
+        <button class="fbtn" onclick="window.mmF='founders';renderMinutes();document.querySelectorAll('#v-minutes .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Founders</button>
+        <button class="fbtn" onclick="window.mmF='iroko';renderMinutes();document.querySelectorAll('#v-minutes .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Iroko</button>
+        <button class="fbtn" onclick="window.mmF='investor';renderMinutes();document.querySelectorAll('#v-minutes .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Investor</button>
+        <button class="fbtn" onclick="window.mmF='legal';renderMinutes();document.querySelectorAll('#v-minutes .fbtn').forEach(b=>b.classList.remove('on'));this.classList.add('on')">Legal</button>
+      </div>
+      <div id="mm-list"></div>
+    </div>
 
     <div class="view" id="v-commission">
-      <div class="pgh"><div class="pgt">Commission model</div><div class="pgs">Every rand of gross revenue split across three pools &mdash; all sliders are live</div></div>
+      <div class="pgh"><div class="pgt">Commission model</div><div class="pgs">Every rand of gross revenue split across three pools &#8212; all sliders are live</div></div>
       <div class="ctabs">
         <button class="ctab on" onclick="cTab('pool',this)">Pool framework</button>
         <button class="ctab" onclick="cTab('calc',this)">Deal calculator</button>
@@ -356,31 +482,17 @@ textarea.fi{resize:vertical;min-height:72px}
         <button class="ctab" onclick="cTab('people',this)">Partner vs employee</button>
       </div>
       <div class="cv on" id="ct-pool">
-        <div class="slbl2">Adjust pool split &mdash; must sum to 100%</div>
+        <div class="slbl2">Adjust pool split &#8212; must sum to 100%</div>
         <div class="slrow"><span class="sllbl">Origination %</span><input type="range" min="10" max="70" value="40" step="1" id="s-orig" oninput="updPool()"><span class="slval" id="sv-orig">40%</span></div>
         <div class="slrow"><span class="sllbl">Execution %</span><input type="range" min="10" max="70" value="40" step="1" id="s-exec" oninput="updPool()"><span class="slval" id="sv-exec">40%</span></div>
         <div class="slrow"><span class="sllbl">House %</span><input type="range" min="5" max="40" value="20" step="1" id="s-house" oninput="updPool()"><span class="slval" id="sv-house">20%</span></div>
         <div id="pwarn" class="cw" style="display:none">Pools must sum to 100%. Current total: <strong id="ptot">100</strong>%</div>
-        <div class="poolbar">
-          <div class="pseg pso" id="pbo" style="flex:40"><span id="pblo">Origination 40%</span></div>
-          <div class="pseg pse" id="pbe" style="flex:40"><span id="pble">Execution 40%</span></div>
-          <div class="pseg psh" id="pbh" style="flex:20"><span id="pblh">House 20%</span></div>
-        </div>
+        <div class="poolbar"><div class="pseg pso" id="pbo" style="flex:40"><span id="pblo">Origination 40%</span></div><div class="pseg pse" id="pbe" style="flex:40"><span id="pble">Execution 40%</span></div><div class="pseg psh" id="pbh" style="flex:20"><span id="pblh">House 20%</span></div></div>
         <div class="mgrid">
-          <div class="metric"><div class="mval" id="mo">40%</div><div class="mlbl">Origination pool &mdash; to partner who sourced</div></div>
-          <div class="metric"><div class="mval" id="me">40%</div><div class="mlbl">Execution pool &mdash; to partner who closed</div></div>
-          <div class="metric"><div class="mval" id="mh">20%</div><div class="mlbl">House retention &mdash; builds balance sheet</div></div>
+          <div class="metric"><div class="mval" id="mo">40%</div><div class="mlbl">Origination pool &#8212; partner who sourced</div></div>
+          <div class="metric"><div class="mval" id="me">40%</div><div class="mlbl">Execution pool &#8212; partner who closed</div></div>
+          <div class="metric"><div class="mval" id="mh">20%</div><div class="mlbl">House retention &#8212; builds balance sheet</div></div>
         </div>
-        <div class="slbl2">Per service line</div>
-        <table class="cwt">
-          <thead><tr><th>Service line</th><th>Origination earner</th><th>Execution earner</th></tr></thead>
-          <tbody>
-            <tr><td>Asset origination &amp; structuring</td><td style="color:var(--ink3);font-size:.78rem">Partner who sourced asset/borrower or introduced the investor</td><td style="color:var(--ink3);font-size:.78rem">Partner who structured and placed the product</td></tr>
-            <tr><td>Portable alpha / intermediary</td><td style="color:var(--ink3);font-size:.78rem">Partner who sourced the bank structure or alpha opportunity</td><td style="color:var(--ink3);font-size:.78rem">Partner who packaged and delivered differentiated returns</td></tr>
-            <tr><td>Corporate finance advisory</td><td style="color:var(--ink3);font-size:.78rem">Partner who brought in the corporate client or mandate</td><td style="color:var(--ink3);font-size:.78rem">Partner who led the advisory work to completion</td></tr>
-            <tr><td>Corporate risk management</td><td style="color:var(--ink3);font-size:.78rem">Partner who opened the treasury relationship</td><td style="color:var(--ink3);font-size:.78rem">Partner who designed and delivered the risk solution</td></tr>
-          </tbody>
-        </table>
       </div>
       <div class="cv" id="ct-calc">
         <div class="slbl2">Deal parameters</div>
@@ -397,7 +509,6 @@ textarea.fi{resize:vertical;min-height:72px}
           <div class="metric"><div class="mval" id="cstot">$750k</div><div class="mlbl">Total strip</div></div>
           <div class="metric"><div class="mval" id="ctot">$1.0m</div><div class="mlbl">Combined total</div></div>
         </div>
-        <div class="slbl2">Partner distribution</div>
         <div class="mgrid">
           <div class="metric"><div class="mval" id="coe">$400k</div><div class="mlbl">Origination partner</div></div>
           <div class="metric"><div class="mval" id="cee">$400k</div><div class="mlbl">Execution partner</div></div>
@@ -407,14 +518,12 @@ textarea.fi{resize:vertical;min-height:72px}
       </div>
       <div class="cv" id="ct-rules">
         <div class="rgrid">
-          <div class="rcard"><div class="rtitle">Same partner earns both pools</div><div class="rbody">If one partner both originated and executed, they earn both pools combined. House retention still applies. No forced split.</div></div>
-          <div class="rcard"><div class="rtitle">Joint origination</div><div class="rbody">Two partners who jointly introduced a client split the origination pool equally. Must be agreed and logged before Iroko is notified. Register date is the record.</div></div>
-          <div class="rcard"><div class="rtitle">Introduction register governs</div><div class="rbody">Date of first logged introduction determines origination ownership. Disputes resolved by register date only &mdash; not by recollection. Maintained by P1, accessible to all.</div></div>
-          <div class="rcard"><div class="rtitle">Strip income is house income first</div><div class="rbody">All margin strip flows into the company. Personal distribution only via dividend on a majority-agreed schedule &mdash; not treated as commission.</div></div>
-          <div class="rcard"><div class="rtitle">New person involvement</div><div class="rbody">Their share comes from the relevant pool &mdash; it does not increase the pool size. Must be pre-agreed in writing per deal before work begins.</div></div>
-          <div class="rcard"><div class="rtitle">Annual review</div><div class="rbody">Pool percentages reviewed annually by unanimous vote. Changes require 6 months notice and apply only to deals originated after the change date.</div></div>
-          <div class="rcard"><div class="rtitle">Shotgun clause</div><div class="rbody">Any partner can name a price at which they will buy all other shares OR sell all their own. Receiving partners have 30 days to elect. Forces a fair price &mdash; initiator does not know if they will be buyer or seller.</div></div>
-          <div class="rcard"><div class="rtitle">Forced exit grounds</div><div class="rbody">Criminal conviction, material breach, insolvency, misrepresentation at founding. Performance grounds require formal warning, 90-day remediation and 2/3 vote &mdash; not unilateral action.</div></div>
+          <div class="rcard"><div class="rtitle">Same partner earns both pools</div><div class="rbody">If one partner originated and executed, they earn both pools. House retention still applies.</div></div>
+          <div class="rcard"><div class="rtitle">Introduction register governs</div><div class="rbody">Date of first logged introduction determines origination ownership. Register date only &#8212; not recollection.</div></div>
+          <div class="rcard"><div class="rtitle">Strip income is house income first</div><div class="rbody">All margin strip flows into the company. Personal distribution only via dividend on a majority-agreed schedule.</div></div>
+          <div class="rcard"><div class="rtitle">Annual review</div><div class="rbody">Pool percentages reviewed annually by unanimous vote. Changes require 6 months notice and apply to deals originated after the change date.</div></div>
+          <div class="rcard"><div class="rtitle">Shotgun clause</div><div class="rbody">Any partner can name a price at which they will buy all other shares OR sell all their own. Receiving partners have 30 days to elect.</div></div>
+          <div class="rcard"><div class="rtitle">Forced exit grounds</div><div class="rbody">Criminal conviction, material breach, insolvency, misrepresentation at founding. Performance grounds require formal warning, 90-day remediation and 2/3 vote.</div></div>
         </div>
       </div>
       <div class="cv" id="ct-people">
@@ -426,15 +535,6 @@ textarea.fi{resize:vertical;min-height:72px}
           <div class="rcard" style="cursor:pointer" onclick="showDT('d',this)"><div class="rtitle">They bring capital or regulatory access</div><div class="rbody">Funding, an FSP licence, or regulatory standing.</div></div>
         </div>
         <div id="dtres" style="display:none" class="cg"></div>
-        <div class="divider"></div>
-        <div class="slbl2">The four tests before any equity offer</div>
-        <div class="rgrid">
-          <div class="rcard"><div class="rtitle">Replacement test</div><div class="rbody">Could you hire someone on a salary to do what this person does? If yes, hire them. Partners are for people whose value lies in who they are and who they know.</div></div>
-          <div class="rcard"><div class="rtitle">Multiplier test</div><div class="rbody">Does this person multiply revenue potential &mdash; new service line, new market, new client segment &mdash; or just add capacity? Multipliers earn equity. Capacity additions earn salaries.</div></div>
-          <div class="rcard"><div class="rtitle">Alignment test</div><div class="rbody">Are they willing to commit fully &mdash; no day job, no competing obligations &mdash; and take the same personal financial risk? Full commitment is a prerequisite for equity.</div></div>
-          <div class="rcard"><div class="rtitle">Unanimous vote test</div><div class="rbody">All three founding partners must agree. One strong objection is a signal to wait, even if the other two are enthusiastic.</div></div>
-        </div>
-        <div class="cw">The most common early mistake is giving equity to people who should have been employees or commission introducers. Equity is permanent and dilutive. Be conservative &mdash; it is always easier to give more equity later.</div>
       </div>
     </div>
 
@@ -443,38 +543,25 @@ textarea.fi{resize:vertical;min-height:72px}
       <div class="ctabs">
         <button class="ctab on" onclick="iTab('adv',this)">Advance structure</button>
         <button class="ctab" onclick="iTab('claw',this)">Clawback schedule</button>
-        <button class="ctab" onclick="iTab('strip',this)">Strip recoupment</button>
         <button class="ctab" onclick="iTab('calc',this)">Live calculator</button>
         <button class="ctab" onclick="iTab('prot',this)">Protections</button>
       </div>
       <div class="cv on" id="it-adv">
-        <div class="ck">Maximum total Iroko exposure: <strong>R300,000</strong> across all tranches &mdash; manageable for a firm with $4bn in executed transactions.</div>
+        <div class="ck">Maximum total Iroko exposure: <strong>R300,000</strong> across all tranches.</div>
         <div class="tl" style="margin-top:1rem">
-          <div class="tli"><div class="tld go"></div><div class="tlh">Tranche 1 &mdash; On signing<span class="pill pg">R75,000</span></div><div class="tlb">Paid on execution of the signed introducer agreement. Covers immediate operating costs &mdash; legal fees, compliance setup, first month expenses. <strong>Iroko risk at this point: R75k.</strong></div></div>
-          <div class="tli"><div class="tld go"></div><div class="tlh">Tranche 2 &mdash; On 3 formal introductions<span class="pill pg">R75,000</span></div><div class="tlb">Paid when AlphaGen delivers 3 formally documented investor introductions &mdash; written notification to Iroko with institution name, contact and confirmed meeting date. <strong>Iroko cumulative risk: R150k.</strong></div></div>
-          <div class="tli"><div class="tld warn"></div><div class="tlh">Tranche 3 &mdash; On first NDA or term sheet<span class="pill pa">R75,000</span></div><div class="tlb">Paid when at least one introduced investor has signed an NDA or entered term sheet negotiations. Confirms genuine investor engagement. <strong>Iroko cumulative risk: R225k.</strong></div></div>
-          <div class="tli"><div class="tld hold"></div><div class="tlh">Tranche 4 &mdash; Monthly sustaining (optional)<span class="pill pn">R25,000/month</span></div><div class="tlb">Only if first close has not occurred by month 4. Capped at 3 months (R75k total). Triggers a formal review at month 6. <strong>Maximum additional Iroko risk: R75k.</strong></div></div>
+          <div class="tli"><div class="tld go"></div><div class="tlh">Tranche 1 &#8212; On signing<span class="pill pg">R75,000</span></div><div class="tlb">Paid on execution of the signed introducer agreement. <strong>Iroko risk: R75k.</strong></div></div>
+          <div class="tli"><div class="tld go"></div><div class="tlh">Tranche 2 &#8212; On 3 formal introductions<span class="pill pg">R75,000</span></div><div class="tlb">Written notification to Iroko with institution name, contact and confirmed meeting date. <strong>Iroko cumulative risk: R150k.</strong></div></div>
+          <div class="tli"><div class="tld warn"></div><div class="tlh">Tranche 3 &#8212; On first NDA or term sheet<span class="pill pa">R75,000</span></div><div class="tlb">At least one introduced investor has signed an NDA or entered term sheet negotiations. <strong>Iroko cumulative risk: R225k.</strong></div></div>
+          <div class="tli"><div class="tld hold"></div><div class="tlh">Tranche 4 &#8212; Monthly sustaining (optional)<span class="pill pn">R25,000/month</span></div><div class="tlb">Only if first close has not occurred by month 4. Capped at 3 months. <strong>Maximum additional Iroko risk: R75k.</strong></div></div>
         </div>
       </div>
       <div class="cv" id="it-claw">
-        <div class="cg">The advance is recouped from the first fee &mdash; Iroko nets it off. AlphaGen never writes a cheque back. The premium is linked to close timing: faster close, lower cost.</div>
-        <table class="cwt">
-          <thead><tr><th>First close timing</th><th>Recoupment rate</th><th>Premium</th><th>Logic</th></tr></thead>
-          <tbody>
-            <tr><td>Within 3 months</td><td>100%</td><td><span class="pill pg">None</span></td><td style="color:var(--ink3);font-size:.78rem">Fast delivery &mdash; straight recoupment, no cost</td></tr>
-            <tr><td>Months 3&ndash;6</td><td>108%</td><td><span class="pill pa">8%</span></td><td style="color:var(--ink3);font-size:.78rem">Modest cost of Iroko's capital and patience</td></tr>
-            <tr><td>Months 6&ndash;9</td><td>115%</td><td><span class="pill pa">15%</span></td><td style="color:var(--ink3);font-size:.78rem">Iroko carried the risk longer</td></tr>
-            <tr><td>Beyond 9 months</td><td>120%</td><td><span class="pill pr">20%</span></td><td style="color:var(--ink3);font-size:.78rem">Maximum &mdash; fee rate also steps down to 0.4%</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="cv" id="it-strip">
-        <div class="cg">Under Option D (hybrid), the advance recoupment is split: 50% from the upfront fee on close, 50% from the first 12 months of strip income deducted at source by Iroko.</div>
-        <div class="rgrid" style="margin-top:.875rem">
-          <div class="rcard"><div class="rtitle">Fee component &mdash; 50% of advance</div><div class="rbody">Recouped from the upfront fee on first close using the timing-based premium schedule. The lower upfront fee under Option D reflects this &mdash; AlphaGen accepts a smaller immediate payment in exchange for the strip.</div></div>
-          <div class="rcard"><div class="rtitle">Strip component &mdash; 50% of advance</div><div class="rbody">Remaining 50% recouped from the first 12 months of strip income, deducted at source before passing payments to AlphaGen. No timing premium &mdash; Iroko earns margin during this period anyway.</div></div>
-        </div>
-        <div class="ck">On a $50m deal at 30bp: AlphaGen earns $150k/year in strip. The first ~$15k (50% of R300k at current rates) is withheld in year one. By month 13 the advance is fully recouped and AlphaGen receives 100% of strip payments for the remaining asset life.</div>
+        <table class="cwt"><thead><tr><th>First close timing</th><th>Recoupment rate</th><th>Premium</th></tr></thead><tbody>
+          <tr><td>Within 3 months</td><td>100%</td><td><span class="pill pg">None</span></td></tr>
+          <tr><td>Months 3&#8211;6</td><td>108%</td><td><span class="pill pa">8%</span></td></tr>
+          <tr><td>Months 6&#8211;9</td><td>115%</td><td><span class="pill pa">15%</span></td></tr>
+          <tr><td>Beyond 9 months</td><td>120%</td><td><span class="pill pr">20%</span></td></tr>
+        </tbody></table>
       </div>
       <div class="cv" id="it-calc">
         <div class="slbl2">Advance clawback calculator</div>
@@ -503,10 +590,10 @@ textarea.fi{resize:vertical;min-height:72px}
       </div>
       <div class="cv" id="it-prot">
         <div class="rgrid">
-          <div class="rcard"><div class="rtitle">Iroko's protection</div><div class="rbody">Advance repayable by the company &mdash; not personally by partners. If no deals close within 18 months (longstop date), advance converts to recoverable company debt. No personal liability unless fraud is committed.</div></div>
-          <div class="rcard"><div class="rtitle">AlphaGen's protection</div><div class="rbody">Advance not repayable if failure to close was caused by Iroko &mdash; withdrawing a transaction, changing deal terms materially, or failing to progress an introduced investor in good faith within 60 days. Force majeure carve-out for market events.</div></div>
-          <div class="rcard"><div class="rtitle">Pipeline transfer clause</div><div class="rbody">If partnership dissolves while deals are in progress, cooperation required for 30&ndash;60 day handover. Originating partner retains right to tail fee &mdash; 50% if deal closes within 12 months of exit, 25% in months 12&ndash;24.</div></div>
-          <div class="rcard"><div class="rtitle">Named pipeline protection</div><div class="rbody">Any SA investor formally registered with Iroko at signing is exclusively AlphaGen's for the tail period. Iroko's own team cannot approach them directly. This is non-negotiable.</div></div>
+          <div class="rcard"><div class="rtitle">Iroko&#39;s protection</div><div class="rbody">Advance repayable by company &#8212; not personally by partners. Longstop date 18 months. No personal liability unless fraud.</div></div>
+          <div class="rcard"><div class="rtitle">AlphaGen&#39;s protection</div><div class="rbody">Not repayable if failure caused by Iroko withdrawing a transaction or failing to progress an introduced investor in good faith within 60 days.</div></div>
+          <div class="rcard"><div class="rtitle">Pipeline transfer clause</div><div class="rbody">If partnership dissolves, cooperation required for 30&#8211;60 day handover. Originating partner retains tail fee &#8212; 50% within 12 months of exit, 25% in months 12&#8211;24.</div></div>
+          <div class="rcard"><div class="rtitle">Named pipeline protection</div><div class="rbody">Any SA investor formally registered at signing is exclusively AlphaGen&#39;s for the tail period. Iroko cannot approach them directly. Non-negotiable.</div></div>
         </div>
       </div>
     </div>
@@ -515,180 +602,310 @@ textarea.fi{resize:vertical;min-height:72px}
       <div class="pgh"><div class="pgt">Business pillars</div><div class="pgs">Operational requirements and go-live conditions per service line</div></div>
       <div class="pnav">
         <div class="pni on" id="pn1" onclick="showP('1')"><div class="pnn">Pillar 1</div><div class="pnname">Asset origination &amp; structuring</div><div style="margin-top:.35rem"><span class="pill pg">Start now</span></div></div>
-        <div class="pni" id="pn2" onclick="showP('2')"><div class="pnn">Pillar 2</div><div class="pnname">Portable alpha / intermediary</div><div style="margin-top:.35rem"><span class="pill pa">Month 6&ndash;12</span></div></div>
-        <div class="pni" id="pn3" onclick="showP('3')"><div class="pnn">Pillar 3</div><div class="pnname">Corporate finance advisory</div><div style="margin-top:.35rem"><span class="pill pa">Month 3&ndash;6</span></div></div>
-        <div class="pni" id="pn4" onclick="showP('4')"><div class="pnn">Pillar 4</div><div class="pnname">Corporate risk management</div><div style="margin-top:.35rem"><span class="pill pr">Month 12&ndash;18</span></div></div>
+        <div class="pni" id="pn2" onclick="showP('2')"><div class="pnn">Pillar 2</div><div class="pnname">Portable alpha / intermediary</div><div style="margin-top:.35rem"><span class="pill pa">Month 6&#8211;12</span></div></div>
+        <div class="pni" id="pn3" onclick="showP('3')"><div class="pnn">Pillar 3</div><div class="pnname">Corporate finance advisory</div><div style="margin-top:.35rem"><span class="pill pa">Month 3&#8211;6</span></div></div>
+        <div class="pni" id="pn4" onclick="showP('4')"><div class="pnn">Pillar 4</div><div class="pnname">Corporate risk management</div><div style="margin-top:.35rem"><span class="pill pr">Month 12&#8211;18</span></div></div>
       </div>
       <div class="pview on" id="pv1">
-        <div class="ck">Pillar 1 funds everything else. Go-live cost is fully recoverable from a single deal. Start immediately.</div>
+        <div class="ck">Pillar 1 funds everything else. Start immediately.</div>
         <div class="slbl2">Hard blockers</div>
         <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>Signed Iroko introducer agreement.</strong> No legal basis to earn a fee, no pipeline protection, no documented strip entitlement.</div></div>
-        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>FAIS compliance.</strong> Legal opinion (1&ndash;2 weeks) or appointed rep arrangement (2&ndash;4 weeks). No investor product conversations before this is resolved.</div></div>
-        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>Registered (Pty) Ltd and business bank account.</strong> CIPC: 5&ndash;10 days. Bank account: 2&ndash;3 weeks.</div></div>
-        <div class="blrow"><div class="bld bsoft"></div><div class="bltxt"><strong>Introduction register live from day one.</strong> Every contact logged with date, written notification to Iroko before the meeting. Google Sheet is sufficient.</div></div>
-        <div class="blrow"><div class="bld bsoft"></div><div class="bltxt"><strong>Basic FICA/KYC process.</strong> Identity verification and source of funds check per introduced investor.</div></div>
-        <div class="blrow"><div class="bld bnice"></div><div class="bltxt"><strong>Professional email domain and credentials deck.</strong> Do not introduce Iroko to Nedbank from a Gmail address.</div></div>
+        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>FAIS compliance.</strong> Legal opinion (1&#8211;2 weeks) or appointed rep arrangement (2&#8211;4 weeks).</div></div>
+        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>Registered (Pty) Ltd and business bank account.</strong> CIPC: 5&#8211;10 days. Bank account: 2&#8211;3 weeks.</div></div>
         <div class="slbl2">Go-live cost estimate</div>
-        <div class="crow"><span class="cn">CIPC company registration</span><span class="ca">R2,000</span></div>
-        <div class="crow"><span class="cn">Shareholders' agreement</span><span class="ca">R15,000&ndash;30,000</span></div>
-        <div class="crow"><span class="cn">Iroko agreement legal review</span><span class="ca">R10,000&ndash;20,000</span></div>
-        <div class="crow"><span class="cn">FAIS legal opinion</span><span class="ca">R5,000&ndash;15,000</span></div>
-        <div class="crow"><span class="cn">Appointed rep arrangement</span><span class="ca">R10,000&ndash;20,000</span></div>
-        <div class="crow"><span class="cn">Fractional compliance officer (3 months)</span><span class="ca">R24,000&ndash;45,000</span></div>
-        <div class="crow"><span class="cn">PI insurance (year 1)</span><span class="ca">R20,000&ndash;40,000</span></div>
-        <div class="crow"><span class="cn">Domain, email, branding, credentials</span><span class="ca">R3,000&ndash;8,000</span></div>
-        <div class="ctot"><span>Total to go live &mdash; Pillar 1</span><span>R89,000&ndash;178,000</span></div>
+        <div class="crow"><span class="cn">CIPC + shareholders&#39; agreement + Iroko legal</span><span class="ca">R27,000&#8211;52,000</span></div>
+        <div class="crow"><span class="cn">FAIS legal opinion + appointed rep</span><span class="ca">R15,000&#8211;35,000</span></div>
+        <div class="crow"><span class="cn">PI insurance + compliance (year 1)</span><span class="ca">R44,000&#8211;85,000</span></div>
+        <div class="crow"><span class="cn">Domain, email, branding</span><span class="ca">R3,000&#8211;8,000</span></div>
+        <div class="ctot"><span>Total &#8212; Pillar 1</span><span>R89,000&#8211;180,000</span></div>
       </div>
       <div class="pview" id="pv2">
-        <div class="cw">Requires Pillar 1 revenue to fund. Do not attempt setup until at least one closed deal and a visible forward pipeline.</div>
+        <div class="cw">Requires Pillar 1 revenue. Do not attempt setup until at least one closed deal.</div>
         <div class="slbl2">Hard blockers</div>
-        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>Category II FSP licence.</strong> Required for discretionary intermediary strategies. Takes 9&ndash;15 months. Named key individual with relevant qualifications must be on the licence.</div></div>
-        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>ISDA Master Agreement with at least one bank.</strong> Required for TRS, repo and derivative-based portable alpha structures. Banks require 6&ndash;12 months operating history before signing.</div></div>
-        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>Custody or prime brokerage arrangement.</strong> Assets need a custody home. Requires operating history and regulatory standing.</div></div>
-        <div class="blrow"><div class="bld bsoft"></div><div class="bltxt"><strong>Bank structuring desk relationships.</strong> P2's banking relationships are the foundation &mdash; build these from month one even if you cannot execute yet.</div></div>
-        <div class="slbl2">Go-live cost estimate</div>
-        <div class="crow"><span class="cn">Category II FSP licence application</span><span class="ca">R50,000&ndash;100,000</span></div>
-        <div class="crow"><span class="cn">ISDA negotiation (legal)</span><span class="ca">R30,000&ndash;60,000</span></div>
-        <div class="crow"><span class="cn">Market data subscription (annual)</span><span class="ca">R180,000&ndash;600,000</span></div>
-        <div class="crow"><span class="cn">Key individual hire / qualification</span><span class="ca">R200,000&ndash;500,000/yr</span></div>
-        <div class="ctot"><span>Total setup &mdash; Pillar 2</span><span>R480,000&ndash;1,300,000</span></div>
+        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>Category II FSP licence.</strong> 9&#8211;15 months. Named key individual with relevant qualifications required.</div></div>
+        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>ISDA Master Agreement.</strong> Banks require 6&#8211;12 months operating history before signing.</div></div>
+        <div class="ctot" style="margin-top:1rem"><span>Total setup &#8212; Pillar 2</span><span>R480,000&#8211;1,300,000</span></div>
       </div>
       <div class="pview" id="pv3">
-        <div class="ck">Uses the same relationships as Pillar 1 at near-zero incremental cost. Can be activated from month 3.</div>
-        <div class="slbl2">Hard blockers</div>
-        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>Legal opinion on advisory licensing scope.</strong> Pure strategic advisory may not require an FSP licence. Get this confirmed before engaging any client.</div></div>
-        <div class="blrow"><div class="bld bsoft"></div><div class="bltxt"><strong>Engagement letter and fee agreement template.</strong> Mandate must be documented before work starts. Scope, fees, exclusivity and confidentiality.</div></div>
-        <div class="blrow"><div class="bld bsoft"></div><div class="bltxt"><strong>Target client identification.</strong> SA mid-market corporates with African expansion plans and companies raising USD/EUR debt for African projects are the natural targets.</div></div>
-        <div class="slbl2">Go-live cost estimate</div>
-        <div class="crow"><span class="cn">Legal opinion on advisory scope</span><span class="ca">R5,000&ndash;10,000</span></div>
-        <div class="crow"><span class="cn">Engagement letter templates</span><span class="ca">R8,000&ndash;15,000</span></div>
-        <div class="crow"><span class="cn">Credentials deck and pitch materials</span><span class="ca">R5,000&ndash;15,000</span></div>
-        <div class="crow"><span class="cn">Freelance modelling support (first 3 mandates)</span><span class="ca">R30,000&ndash;80,000</span></div>
-        <div class="ctot"><span>Total setup &mdash; Pillar 3</span><span>R48,000&ndash;120,000</span></div>
+        <div class="ck">Uses same relationships as Pillar 1 at near-zero incremental cost. Activate from month 3.</div>
+        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>Legal opinion on advisory licensing scope.</strong> Pure strategic advisory may not require an FSP licence.</div></div>
+        <div class="ctot" style="margin-top:1rem"><span>Total setup &#8212; Pillar 3</span><span>R48,000&#8211;120,000</span></div>
       </div>
       <div class="pview" id="pv4">
-        <div class="cw">Most capital-intensive pillar. Start the Hedgebook commercial conversation now &mdash; do not wait until month 12.</div>
-        <div class="slbl2">Hard blockers</div>
-        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>Hedgebook partnership or integration agreement.</strong> Nail down commercial terms &mdash; reseller, referral or white-label &mdash; before building any client proposition around their platform.</div></div>
-        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>Category I FSP &mdash; financial instruments advisory.</strong> Advising on FX, rates and commodity risk is regulated advisory. Key individual must be qualified in financial markets risk management.</div></div>
-        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>Treasury client relationships.</strong> Risk management advisory is sold to corporate treasurers &mdash; a different buyer than Pillars 1&ndash;3. This market must be built from scratch unless a founding partner has existing treasury relationships.</div></div>
-        <div class="slbl2">Go-live cost estimate</div>
-        <div class="crow"><span class="cn">Hedgebook partnership (commercial negotiation)</span><span class="ca">TBD</span></div>
-        <div class="crow"><span class="cn">FSP licence extension (financial instruments)</span><span class="ca">R30,000&ndash;60,000</span></div>
-        <div class="crow"><span class="cn">Risk specialist hire (year 1)</span><span class="ca">R600,000&ndash;1,200,000</span></div>
-        <div class="crow"><span class="cn">FX / rates data (annual)</span><span class="ca">R60,000&ndash;180,000</span></div>
-        <div class="ctot"><span>Total setup &mdash; Pillar 4</span><span>R710,000&ndash;1,480,000</span></div>
+        <div class="cw">Most capital-intensive. Start Hedgebook commercial conversation now.</div>
+        <div class="blrow"><div class="bld bhard"></div><div class="bltxt"><strong>Hedgebook partnership agreement.</strong> Nail down commercial terms before building any client proposition around their platform.</div></div>
+        <div class="ctot" style="margin-top:1rem"><span>Total setup &#8212; Pillar 4</span><span>R710,000&#8211;1,480,000</span></div>
       </div>
     </div>
 
     <div class="view" id="v-roadmap">
       <div class="pgh"><div class="pgt">18-month roadmap</div><div class="pgs">Sequenced milestones from today to full four-pillar operation</div></div>
       <div class="tl">
-        <div class="tli"><div class="tld go"></div><div class="tlh">Weeks 1&ndash;2 &mdash; Foundation sprint<span class="pill pg">Now</span></div><div class="tlb">Register company (CIPC). Open business bank account. Brief attorney on shareholders' agreement and Iroko agreement. Commission FAIS legal opinion. Identify appointed rep sponsor. Set up introduction register and professional email domain.</div></div>
-        <div class="tli"><div class="tld go"></div><div class="tlh">Weeks 3&ndash;4 &mdash; Iroko negotiation<span class="pill pg">Now</span></div><div class="tlb">Approach Iroko with one-page proposal and named investor pipeline. Negotiate introducer agreement including advance structure, fee/strip model and protective clauses. Sign agreement. Draw Tranche 1 on signing.</div></div>
-        <div class="tli"><div class="tld go"></div><div class="tlh">Month 1&ndash;2 &mdash; Pillar 1 live<span class="pill pg">Pillar 1</span></div><div class="tlb">First investor meetings under appointed rep cover. Formal introductions logged and notified to Iroko in writing. FSP licence application submitted. Shareholders' agreement signed. PI insurance bound. Draw Tranche 2 on 3rd formal introduction.</div></div>
-        <div class="tli"><div class="tld go"></div><div class="tlh">Month 3 &mdash; First NDA / term sheet<span class="pill pg">Milestone</span></div><div class="tlb">At least one introduced investor in formal due diligence or term sheet stage with Iroko. Draw Tranche 3. Begin Pillar 3 setup. Initiate Hedgebook commercial conversation.</div></div>
-        <div class="tli"><div class="tld warn"></div><div class="tlh">Month 4&ndash;6 &mdash; Pillar 3 active + first close<span class="pill pa">Pillar 3</span></div><div class="tlb">First Pillar 3 mandate engaged. First Iroko deal close targeted &mdash; fee and strip income begins. Clawback of advance from first fee. Begin identifying Category II key individual for Pillar 2. Website live.</div></div>
-        <div class="tli"><div class="tld warn"></div><div class="tlh">Month 6&ndash;9 &mdash; Pillar 2 infrastructure<span class="pill pa">Pillar 2 prep</span></div><div class="tlb">ISDA negotiation initiated with at least one bank. Category II key individual identified and licence application submitted. Bank structuring desk relationships formalised. Strip income accumulating in company accounts.</div></div>
-        <div class="tli"><div class="tld warn"></div><div class="tlh">Month 9&ndash;12 &mdash; Pillar 2 soft launch<span class="pill pa">Pillar 2</span></div><div class="tlb">First portable alpha structure sourced and packaged for a client. Category II licence received or imminent. First ISDA signed. Consider first analyst hire if deal flow justifies it.</div></div>
-        <div class="tli"><div class="tld hold"></div><div class="tlh">Month 12&ndash;18 &mdash; Pillar 4 build<span class="pill pr">Pillar 4</span></div><div class="tlb">Hedgebook partnership formalised. Risk management specialist hired. First treasury client onboarded. FSP licence extended. AlphaGen operating across all four pillars. Review equity and commission framework against actual contributions.</div></div>
+        <div class="tli"><div class="tld go"></div><div class="tlh">Weeks 1&#8211;2 &#8212; Foundation sprint<span class="pill pg">Now</span></div><div class="tlb">CIPC registration. Bank account. Brief attorney on shareholders&#39; agreement and Iroko agreement. FAIS legal opinion. Appointed rep sponsor. Introduction register. Email domain.</div></div>
+        <div class="tli"><div class="tld go"></div><div class="tlh">Weeks 3&#8211;4 &#8212; Iroko negotiation<span class="pill pg">Now</span></div><div class="tlb">Approach Iroko with one-page proposal and named investor pipeline. Negotiate and sign introducer agreement. Draw Tranche 1 on signing.</div></div>
+        <div class="tli"><div class="tld go"></div><div class="tlh">Month 1&#8211;2 &#8212; Pillar 1 live<span class="pill pg">Pillar 1</span></div><div class="tlb">First investor meetings. Formal introductions logged and notified to Iroko. FSP application submitted. Shareholders&#39; agreement signed. PI insurance bound. Draw Tranche 2.</div></div>
+        <div class="tli"><div class="tld go"></div><div class="tlh">Month 3 &#8212; First NDA / term sheet<span class="pill pg">Milestone</span></div><div class="tlb">At least one introduced investor in formal due diligence. Draw Tranche 3. Begin Pillar 3 setup. Initiate Hedgebook conversation.</div></div>
+        <div class="tli"><div class="tld warn"></div><div class="tlh">Month 4&#8211;6 &#8212; Pillar 3 active + first close<span class="pill pa">Pillar 3</span></div><div class="tlb">First Pillar 3 mandate. First Iroko deal close &#8212; fee and strip begins. Advance clawback from first fee.</div></div>
+        <div class="tli"><div class="tld warn"></div><div class="tlh">Month 6&#8211;12 &#8212; Pillar 2 infrastructure<span class="pill pa">Pillar 2 prep</span></div><div class="tlb">ISDA negotiation. Category II KI identified. Bank relationships formalised. Strip income accumulating.</div></div>
+        <div class="tli"><div class="tld hold"></div><div class="tlh">Month 12&#8211;18 &#8212; Pillar 4 build<span class="pill pr">Pillar 4</span></div><div class="tlb">Hedgebook partnership. Risk specialist hired. First treasury client. AlphaGen operating across all four pillars. Review equity and commission framework.</div></div>
       </div>
       <div class="divider"></div>
       <div class="slbl2">Pillar 1 go-live checklist</div>
       <div id="rmlist">
-        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Company registered with CIPC</div><div class="rmn">5&ndash;10 business days online &mdash; start immediately</div></div></div>
-        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Business bank account open</div><div class="rmn">Allow 2&ndash;3 weeks &mdash; apply in parallel with CIPC</div></div></div>
-        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Shareholders' agreement signed by all three partners</div><div class="rmn">Must include: vesting, deadlock, shotgun clause, commission framework, strip governance, forced exit provisions</div></div></div>
-        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">FAIS legal opinion received</div><div class="rmn">Confirms whether pure introducer or appointed rep is required for your model</div></div></div>
-        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Appointed representative arrangement in place</div><div class="rmn">Regulatory cover before your own licence is issued</div></div></div>
-        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">FSP licence application submitted</div><div class="rmn">Starts the 6&ndash;12 month clock &mdash; do not delay</div></div></div>
+        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Company registered with CIPC</div><div class="rmn">5&#8211;10 business days</div></div></div>
+        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Business bank account open</div><div class="rmn">Allow 2&#8211;3 weeks, apply in parallel</div></div></div>
+        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Shareholders&#39; agreement signed by all three partners</div><div class="rmn">Vesting, deadlock, shotgun clause, commission framework, strip governance, forced exit</div></div></div>
+        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">FAIS legal opinion received</div><div class="rmn">Confirms whether pure introducer or appointed rep is required</div></div></div>
+        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Appointed representative arrangement in place</div><div class="rmn">Regulatory cover before own licence is issued</div></div></div>
+        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">FSP licence application submitted</div><div class="rmn">Starts the 6&#8211;12 month clock &#8212; do not delay</div></div></div>
         <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">PI insurance bound</div><div class="rmn">Required before first institutional client meeting</div></div></div>
         <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Iroko introducer agreement signed</div><div class="rmn">Including advance structure, fee/strip model, tail clause, pipeline protection, strip documentation clause</div></div></div>
-        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Introduction register live and shared</div><div class="rmn">Google Sheet minimum &mdash; every contact logged with date before the meeting</div></div></div>
-        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Professional email domain and credentials deck ready</div><div class="rmn">Before the first investor meeting</div></div></div>
-        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Named investor pipeline &mdash; 6+ targets documented</div><div class="rmn">Institution, contact, owner partner, warmth rating, likely deal size, next action</div></div></div>
-        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">FICA/KYC process agreed and documented</div><div class="rmn">Identity verification and source of funds checklist per investor</div></div></div>
+        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Introduction register live and shared</div><div class="rmn">Google Sheet minimum &#8212; every contact logged with date before the meeting</div></div></div>
+        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Professional email domain and credentials deck ready</div></div></div>
+        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">Named investor pipeline &#8212; 6+ targets documented</div><div class="rmn">Institution, contact, owner partner, warmth rating, likely deal size, next action</div></div></div>
+        <div class="rmck"><input type="checkbox" class="rmchk" onchange="updRM()"><div><div class="rmt">FICA/KYC process agreed and documented</div></div></div>
       </div>
       <div class="pbar" style="margin-top:1rem"><div class="pf pf-gn" id="rmprog" style="width:0%"></div></div>
       <div style="font-size:.78rem;color:var(--ink3);margin-top:.35rem" id="rmlbl">0 of 12 items complete</div>
     </div>
-
   </main>
 </div>
 
+<!-- ADD DECISION MODAL -->
 <div class="mov" id="addmodal">
   <div class="modal">
     <div class="mtitle">Add decision item</div>
     <div class="msub">Minimum: title, context and at least two options</div>
     <div class="fg"><label class="fl">Title *</label><input class="fi" id="ntitle" placeholder="Short, clear decision title"></div>
     <div class="fg"><label class="fl">Description</label><input class="fi" id="ndesc" placeholder="One-line description"></div>
-    <div class="fg"><label class="fl">Phase *</label><select class="fsel" id="nphase"><option value="1">Phase 1 &mdash; Before you agree</option><option value="2">Phase 2 &mdash; Before Iroko</option><option value="3">Phase 3 &mdash; At the Iroko table</option></select></div>
+    <div class="fg"><label class="fl">Phase *</label><select class="fsel" id="nphase"><option value="1">Phase 1 &#8212; Before you agree</option><option value="2">Phase 2 &#8212; Before Iroko</option><option value="3">Phase 3 &#8212; At the Iroko table</option></select></div>
     <div class="fg"><label class="fl">Priority *</label><select class="fsel" id="nprio"><option value="must">Must decide first</option><option value="should">Should decide before moving on</option><option value="can">Can be decided in parallel</option></select></div>
     <div class="fg"><label class="fl">Context / background *</label><textarea class="fi" id="nctx" placeholder="What does the team need to know?"></textarea></div>
-    <div class="fg"><label class="fl">Options &mdash; one per line *</label><textarea class="fi" id="nopts" placeholder="Option A&#10;Option B&#10;Option C"></textarea></div>
-    <div class="fg"><label class="fl">Who needs to verify</label><div id="vcbs" style="display:flex;flex-direction:column;gap:.4rem;margin-top:.25rem"></div></div>
-    <div class="macts">
-      <button class="btnp" onclick="submitDec()" style="flex:1">Add decision</button>
-      <button class="btns" onclick="closeAdd()">Cancel</button>
-    </div>
+    <div class="fg"><label class="fl">Options &#8212; one per line *</label><textarea class="fi" id="nopts" placeholder="Option A&#10;Option B&#10;Option C"></textarea></div>
+    <div class="macts"><button class="btnp" onclick="submitDec()" style="flex:1">Add decision</button><button class="btns" onclick="closeAdd()">Cancel</button></div>
   </div>
 </div>
+
+<!-- EDIT DECISION MODAL -->
+<div class="mov" id="editmodal">
+  <div class="modal">
+    <div class="mtitle">Propose amendment</div>
+    <div class="msub">Your change will be submitted as a proposal for the other partners to vote on. A 2/3 majority approves it.</div>
+    <div class="fg"><label class="fl">Field being changed</label><select class="fsel" id="ep-field" onchange="updEpPreview()">
+      <option value="title">Title</option>
+      <option value="description">Description</option>
+      <option value="context">Context / background</option>
+      <option value="options">Options (full replacement)</option>
+      <option value="priority">Priority</option>
+    </select></div>
+    <div class="fg"><label class="fl">Current value</label><div class="ibox" id="ep-old" style="font-size:.8rem;color:var(--ink3)"></div></div>
+    <div class="fg"><label class="fl">Your proposed change *</label><textarea class="fi" id="ep-new" placeholder="Enter the new value..." oninput="updEpPreview()"></textarea></div>
+    <div class="fg"><label class="fl">Reason for amendment</label><input class="fi" id="ep-reason" placeholder="Why does this need changing?"></div>
+    <input type="hidden" id="ep-dec-id">
+    <div class="macts"><button class="btnp" onclick="submitProposal()" style="flex:1">Submit for vote</button><button class="btns" onclick="closeEditModal()">Cancel</button></div>
+  </div>
+</div>
+
+<!-- OPPORTUNITY MODAL -->
+<div class="mov" id="oppmodal">
+  <div class="modal" style="max-width:700px">
+    <div class="mtitle" id="omt">Add opportunity</div>
+    <div class="msub">Log a potential deal, introduction or revenue idea</div>
+    <input type="hidden" id="o-id">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.875rem">
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Title / opportunity name *</label><input class="fi" id="o-title" placeholder="e.g. Nedbank Structured Credit desk intro"></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Description *</label><textarea class="fi" id="o-desc" placeholder="What is this opportunity? What deal could emerge?"></textarea></div>
+      <div class="fg"><label class="fl">Pillar *</label><select class="fsel" id="o-pillar">
+        <option value="1">Pillar 1 &#8212; Asset origination &amp; structuring (Iroko)</option>
+        <option value="2">Pillar 2 &#8212; Portable alpha / intermediary</option>
+        <option value="3">Pillar 3 &#8212; Corporate finance advisory</option>
+        <option value="4">Pillar 4 &#8212; Corporate risk management</option>
+      </select></div>
+      <div class="fg"><label class="fl">Stage *</label><select class="fsel" id="o-stage">
+        <option value="idea">Idea &#8212; not yet approached</option>
+        <option value="qualifying">Qualifying &#8212; initial conversation had</option>
+        <option value="developing">Developing &#8212; proposal / NDA stage</option>
+        <option value="ready">Ready &#8212; term sheet or mandate signed</option>
+        <option value="on_hold">On hold</option>
+        <option value="passed">Passed &#8212; not pursuing</option>
+      </select></div>
+      <div class="fg"><label class="fl">Likelihood</label><select class="fsel" id="o-lh">
+        <option value="high">High &#8212; strong signal, clear path</option>
+        <option value="medium">Medium &#8212; genuine interest, some uncertainty</option>
+        <option value="low">Low &#8212; early or uncertain</option>
+        <option value="uncertain">Uncertain &#8212; cannot assess yet</option>
+      </select></div>
+      <div class="fg"><label class="fl">Owner partner</label><select class="fsel" id="o-owner"></select></div>
+      <div class="fg"><label class="fl">Client / institution name</label><input class="fi" id="o-client" placeholder="e.g. Nedbank, Absa, FirstRand"></div>
+      <div class="fg"><label class="fl">Client type</label><select class="fsel" id="o-ctype">
+        <option value="">&#8212; Select &#8212;</option>
+        <option value="sa_bank">SA bank</option>
+        <option value="non_bank_inst">Non-bank institutional investor</option>
+        <option value="corporate">Corporate / treasury</option>
+        <option value="sovereign">Sovereign / development finance</option>
+        <option value="development_fi">Development finance institution</option>
+        <option value="other">Other</option>
+      </select></div>
+      <div class="fg"><label class="fl">Deal type</label><input class="fi" id="o-dtype" placeholder="e.g. term loan, TRS, advisory retainer"></div>
+      <div class="fg"><label class="fl">Source</label><select class="fsel" id="o-source">
+        <option value="">&#8212; Select &#8212;</option>
+        <option value="p1_network">P1 network</option>
+        <option value="p2_network">P2 network</option>
+        <option value="p3_network">P3 network</option>
+        <option value="inbound">Inbound</option>
+        <option value="referral">Referral</option>
+        <option value="conference">Conference / event</option>
+        <option value="other">Other</option>
+      </select></div>
+      <div class="fg"><label class="fl">Est. deal size (USD million)</label><input class="fi" type="number" id="o-size" placeholder="e.g. 50" min="0"></div>
+      <div class="fg"><label class="fl">Est. upfront fee (%)</label><input class="fi" type="number" id="o-fee" placeholder="e.g. 0.5" step="0.05" min="0"></div>
+      <div class="fg"><label class="fl">Est. strip (bp/yr)</label><input class="fi" type="number" id="o-strip" placeholder="e.g. 30" min="0"></div>
+      <div class="fg"><label class="fl">Est. months to close</label><input class="fi" type="number" id="o-months" placeholder="e.g. 6" min="0"></div>
+      <div class="fg"><label class="fl">Date first introduced</label><input class="fi" type="date" id="o-idate"></div>
+      <div class="fg"><label class="fl">Next action due date</label><input class="fi" type="date" id="o-nadate"></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Next action</label><input class="fi" id="o-na" placeholder="e.g. Follow up with John re term sheet, send Iroko teaser"></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Blockers / risks</label><textarea class="fi" id="o-blockers" placeholder="What could prevent this from closing?"></textarea></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Notes</label><textarea class="fi" id="o-notes" placeholder="Any additional context..."></textarea></div>
+      <div class="fg"><label class="fl">Iroko relevant?</label><select class="fsel" id="o-iroko"><option value="true">Yes &#8212; Iroko / Marula product</option><option value="false">No &#8212; other structure</option></select></div>
+      <div class="fg"><label class="fl">FAIS required?</label><select class="fsel" id="o-fais"><option value="true">Yes</option><option value="false">No / not yet assessed</option></select></div>
+    </div>
+    <div class="macts"><button class="btnp" onclick="submitOpp()" style="flex:1" id="o-submit-btn">Add opportunity</button><button class="btns" onclick="closeOppModal()">Cancel</button></div>
+  </div>
+</div>
+
+<!-- DOCUMENT MODAL -->
+<div class="mov" id="docmodal">
+  <div class="modal">
+    <div class="mtitle" id="dmt">Upload document</div>
+    <div class="msub">Documents are organised by category automatically</div>
+    <input type="hidden" id="d-id">
+    <div class="fg"><label class="fl">Document name *</label><input class="fi" id="d-name" placeholder="e.g. Shareholders Agreement v2.0"></div>
+    <div class="fg"><label class="fl">Category *</label><select class="fsel" id="d-cat" onchange="updDocSubcats()">
+      <option value="legal">Legal &#8212; agreements, constitutions, resolutions</option>
+      <option value="compliance">Compliance &#8212; FAIS, FSP, regulatory</option>
+      <option value="iroko">Iroko &#8212; agreements, fee letters, correspondence</option>
+      <option value="financial">Financial &#8212; forecasts, management accounts, models</option>
+      <option value="commercial">Commercial &#8212; proposals, pitch decks, credentials</option>
+      <option value="hr">HR &amp; partners &#8212; roles, equity, vesting</option>
+      <option value="operations">Operations &#8212; processes, registers, policies</option>
+      <option value="research">Research &#8212; market, sector, competitor</option>
+      <option value="templates">Templates &#8212; engagement letters, NDAs, standard forms</option>
+      <option value="other">Other</option>
+    </select></div>
+    <div class="fg"><label class="fl">Subcategory / type</label><select class="fsel" id="d-subcat"></select></div>
+    <div class="fg"><label class="fl">Related pillar</label><select class="fsel" id="d-pillar">
+      <option value="">Not pillar-specific</option>
+      <option value="1">Pillar 1 &#8212; Asset origination</option>
+      <option value="2">Pillar 2 &#8212; Portable alpha</option>
+      <option value="3">Pillar 3 &#8212; Corporate finance advisory</option>
+      <option value="4">Pillar 4 &#8212; Corporate risk management</option>
+    </select></div>
+    <div class="fg"><label class="fl">Status</label><select class="fsel" id="d-status">
+      <option value="current">Current</option>
+      <option value="draft">Draft</option>
+      <option value="superseded">Superseded</option>
+      <option value="archived">Archived</option>
+    </select></div>
+    <div class="fg"><label class="fl">Version</label><input class="fi" id="d-ver" value="1.0" placeholder="e.g. 1.0, 2.1"></div>
+    <div class="fg"><label class="fl">Description</label><textarea class="fi" id="d-desc" placeholder="Brief description of what this document covers..."></textarea></div>
+    <div class="fg"><label class="fl">File *</label><input class="fi" type="file" id="d-file" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv"></div>
+    <div id="d-uploading" style="display:none" class="cg">Uploading...</div>
+    <div class="macts"><button class="btnp" onclick="submitDoc()" style="flex:1" id="d-submit-btn">Upload document</button><button class="btns" onclick="closeDocModal()">Cancel</button></div>
+  </div>
+</div>
+
+<!-- MEETING MINUTES MODAL -->
+<div class="mov" id="mmmodal">
+  <div class="modal" style="max-width:680px">
+    <div class="mtitle" id="mmt">Add meeting minutes</div>
+    <div class="msub">Record the outcomes, not just the discussion</div>
+    <input type="hidden" id="mm-id">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.875rem">
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Meeting title *</label><input class="fi" id="mm-title" placeholder="e.g. Founders strategic review &#8212; Iroko approach"></div>
+      <div class="fg"><label class="fl">Date *</label><input class="fi" type="date" id="mm-date"></div>
+      <div class="fg"><label class="fl">Meeting type *</label><select class="fsel" id="mm-type">
+        <option value="founders">Founders &#8212; internal only</option>
+        <option value="iroko">Iroko &#8212; with Iroko team</option>
+        <option value="investor">Investor &#8212; with SA investor</option>
+        <option value="advisory">Advisory &#8212; with advisor or mentor</option>
+        <option value="legal">Legal &#8212; with attorney or compliance</option>
+        <option value="other">Other</option>
+      </select></div>
+      <div class="fg"><label class="fl">Location / platform</label><input class="fi" id="mm-loc" placeholder="e.g. Teams, Sandton office, Iroko London"></div>
+      <div class="fg"><label class="fl">Duration (minutes)</label><input class="fi" type="number" id="mm-dur" placeholder="e.g. 60"></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Attendees (partners)</label><div id="mm-att-cbs" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.25rem"></div></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">External attendees</label><input class="fi" id="mm-ext" placeholder="e.g. Francois Ekam-Dick (Iroko), John Smith (Nedbank)"></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Agenda / topics covered</label><textarea class="fi" id="mm-agenda" placeholder="What was on the agenda?"></textarea></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Summary *</label><textarea class="fi" id="mm-summary" placeholder="Key discussion points and outcomes..."></textarea></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Decisions made</label><textarea class="fi" id="mm-decisions" placeholder="Any decisions agreed in this meeting..."></textarea></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Action items &#8212; one per line (format: @owner: task by YYYY-MM-DD)</label><textarea class="fi" id="mm-actions" placeholder="@Aphile: Draft Iroko one-pager by 2025-05-01&#10;@All: Review shareholders agreement draft by 2025-05-05"></textarea></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Follow-ups / next steps</label><textarea class="fi" id="mm-followup" placeholder="What happens next?"></textarea></div>
+      <div class="fg" style="grid-column:1/-1"><label class="fl">Attach minutes document (optional)</label><input class="fi" type="file" id="mm-file" accept=".pdf,.doc,.docx"></div>
+    </div>
+    <div class="macts"><button class="btnp" onclick="submitMM()" style="flex:1" id="mm-submit-btn">Save minutes</button><button class="btns" onclick="closeMMModal()">Cancel</button></div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
+
+
 <script type="module">
 import{createClient}from'https://esm.sh/@supabase/supabase-js@2';
 const SU='https://ewdloawwudqkdrstqfet.supabase.co';
 const SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV3ZGxvYXd3dWRxa2Ryc3RxZmV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxODc5NDYsImV4cCI6MjA5MTc2Mzk0Nn0.xMOdn6c9sQwrUoEpBk9MZUFHFSV0CLFTUrlyzkgRqUM';
 const sb=createClient(SU,SK);
-const SV='6';
-let me=null,myP=null,decs=[],users=[],coms=[],vers=[],atts=[];
-window.stF=null;window.phF=null;window.srF='';
+const SV='8';
+let me=null,myP=null,decs=[],users=[],coms=[],vers=[],atts=[],opps=[],docs=[],minutes=[],proposals=[];
+window.stF=null;window.phF=null;window.srF='';window.oppF=null;window.mmF=null;
 
+/* ─── SEEDS ──────────────────────────────────────────────────────────────── */
 const SEEDS=[
-  {phase:1,priority:'must',title:'Equity split and vesting',description:'How ownership is divided and what each partner must earn fully',context:'Equal thirds is defensible if all three partners contribute equally. A 3-month cliff then monthly vest over 24 months means a partner who leaves in month 4 owns only a small fraction. Without vesting, an early departure means a non-contributing partner holds full equity indefinitely. Consider weighting only if one partner is contributing capital or carrying materially more risk.',options:['Equal thirds, no weighting — works if contributions are genuinely equal','Weighted by contribution — reflect unequal capital, risk or relationship value','Equal now, formal review at 12 months based on actual contribution','Equal thirds + performance kicker for partner originating each closed deal'],required_verifiers:[]},
+  {phase:1,priority:'must',title:'Equity split and vesting',description:'How ownership is divided and what each partner must earn fully',context:'Equal thirds is defensible if all three partners contribute equally. A 3-month cliff then monthly vest over 24 months means a partner who leaves in month 4 owns only a small fraction. Without vesting, a non-contributing early departing partner holds full equity indefinitely. Consider weighting only if one partner is contributing capital or carrying materially more risk.',options:['Equal thirds, no weighting — works if contributions are genuinely equal','Weighted by contribution — reflect unequal capital, risk or relationship value','Equal now, formal review at 12 months based on actual contribution','Equal thirds + performance kicker for partner originating each closed deal'],required_verifiers:[]},
   {phase:1,priority:'must',title:'Decision-making rule',description:'How the three of you resolve disagreements and make binding decisions',context:'With three equal partners, a 2-of-3 majority vote breaks every deadlock. Distinguish operational decisions (partners act within their role without a vote) from strategic decisions (require majority). Strategic decisions: signing any Iroko or investor agreement, taking on debt, admitting a new partner, changing fee terms, dissolving the company.',options:['2/3 majority on all decisions — any two partners can move forward, no single veto','Tiered: operational decisions per role, strategic decisions require 2/3','Unanimous required only for dissolution, new partners and equity changes'],required_verifiers:[]},
   {phase:1,priority:'must',title:'Personal financial runway',description:'How each partner sustains themselves during the build phase',context:'All three partners have quit their jobs. The most common cause of early partnership breakdown is unequal financial sacrifice creating resentment. Each partner must honestly state their personal runway in months. Agree a minimum draw policy if Iroko provides working capital, and a clear side-income policy.',options:['Full sweat equity — each partner self-funds, no shared draw','Shared minimum draw from Iroko advance split equally three ways','Shared minimum draw weighted by individual financial need','Partners self-fund but side income permitted with full disclosure'],required_verifiers:[]},
   {phase:1,priority:'must',title:'Roles and accountability',description:'Who owns what — specifically enough to hold each other accountable',context:'P1 owns the Iroko relationship. P2 owns SA bank investor relationships. P3 owns non-bank investor relationships. Who is MD? Who manages compliance? Who keeps the introduction register? Who does the books? Role ambiguity leads to duplication or dangerous gaps.',options:['P1 as MD: Iroko relationship, negotiation, introduction register. P2: SA bank outreach. P3: non-bank outreach. Shared: compliance and legal.','Rotating MD by quarter with formal handover process','Equal co-MD structure with domain-specific authority and defined escalation path'],required_verifiers:[]},
   {phase:1,priority:'should',title:'Conflict of interest policy',description:'What happens when a partner is individually approached about a relevant opportunity',context:'In SA institutional finance, individuals get calls directly. A clear first-refusal rule is needed before this happens. Define "relevant" narrowly — African credit, structured finance, deals Iroko could structure. Too broad and partners cannot do anything independently.',options:['Full first refusal — any African credit opportunity offered to partnership first','Narrow first refusal — only applies to Iroko-type deals. Other advisory work is unrestricted.','Disclose and decide case by case within 48 hours — partnership decides by majority'],required_verifiers:[]},
-  {phase:1,priority:'should',title:'Exit and dissolution terms',description:'What a fair exit looks like — agreed before anyone wants one',context:'Voluntary exit: does the departing partner retain vested shares or sell back? At what valuation formula? Notice period: 60-90 days standard. Tail fees and strips belong to the company — departing partner receives value via share buyout only. Involuntary removal: criminal conviction, material breach, insolvency, or misrepresentation at founding. Performance removal requires formal warning, 90-day remediation and 2/3 vote.',options:['Vested shares retained on exit, unvested lapse. 60-day notice. Tail fees and strips belong to company — value received via buyout only.','All shares offered back to remaining partners at formula valuation on exit.','Vested shares retained. 90-day notice. Tail fees split 50/50 between departing and remaining. Strips remain with company always.'],required_verifiers:[]},
-  {phase:1,priority:'should',title:'Strip income governance',description:'How margin strip income is owned, recorded and distributed internally',context:'For the strip to create equity value it must be earned by the company as a contractual right, appear on the income statement as recurring revenue, and be distributed only as dividends or salary. If any partner earns the strip personally it dies with their involvement and creates no balance sheet value. The shareholders agreement must explicitly state that all strip income belongs to the company regardless of who originated the introduction.',options:['All strip income at company level, distributed as dividends quarterly after operating costs','All strip income at company level, reinvested for 24 months to build reserves then distributed','Strip income: 60% company reserves, 40% distributed weighted by origination contribution','Strip income fully retained at company level — partners draw salary only. Maximises equity value.'],required_verifiers:[]},
-  {phase:1,priority:'should',title:'Shotgun clause and forced exit mechanism',description:'The self-correcting mechanism that resolves irreconcilable breakdown',context:'The shotgun clause: any partner can name a price per share at which they will buy all other partners shares OR sell all their own. Receiving partners have 30 days to elect. Because the initiating partner does not know if they will be buyer or seller, they are incentivised to name a fair price. This is the single most important clause for a three-partner equal-equity structure. Must be in the shareholders agreement before any external relationships are signed.',options:['Full shotgun clause: any partner can trigger, 30-day election window, independent valuation if price is disputed','Shotgun clause plus mediation prerequisite: mandatory 30-day mediation before shotgun can be triggered','Shotgun clause with board observer protection: minority partner retains observer rights for 90 days after trigger'],required_verifiers:[]},
-  {phase:2,priority:'must',title:'FAIS compliance pathway',description:'How you operate legally from day one before your own licence is in place',context:'You cannot legally have substantive investor conversations about Iroko products without either your own FSP licence or an appointed representative arrangement. The FSP licence takes 6-12 months. The appointed representative route takes weeks. A compliance breach in a small market is reputationally fatal and potentially criminal.',options:['Pure introducer model — warm introductions only, no product explanation. Get legal opinion confirming this is sufficient.','Appointed representative under existing FSP licence — fastest path to legal operation, typically weeks','Apply for own FSP licence immediately, operate as pure introducer in the interim','Appointed representative immediately + own FSP licence application running in parallel (recommended)'],required_verifiers:[]},
-  {phase:2,priority:'must',title:'Revenue model to anchor on with Iroko',description:'Fee income vs margin strip vs hybrid — determines company equity value',context:'Fee income is transactional — stops when you stop originating, valued at 3-5x EBITDA. Margin strip income is recurring — continues for the life of the underlying asset regardless of ongoing activity, attracting 8-15x valuation. The hybrid model gives both: reduced upfront fee plus an ongoing strip that builds a balance sheet. On a $50m deal at 30bp over 5 years, recurring income exceeds the upfront fee and it compounds across your book. Option D is the strategic recommendation.',options:['Option A — Sweat equity, fee only: 1.25-1.5% on close, 24-month tail, SA exclusivity. Best short-term cash, no recurring book.','Option B — Modest advance, fee only: R25-35k/month recouped at 100%, 1.0% fee. Working capital support but no recurring income.','Option C — Retainer, fee only: R20k/month not recouped, 0.875% fee, 8 introductions in 6 months.','Option D — Hybrid (recommended): 0.5% fee + 25-35bp annual margin strip on deployed notional for asset tenor. Strip held at company level.'],required_verifiers:[]},
-  {phase:2,priority:'must',title:'Revenue structure — internal alignment before Iroko',description:'Whether all three partners agree on building for equity value vs short-term cash',context:'All three partners must agree on what kind of business they are building before sitting down with Iroko. A fee-only model generates income quickly but creates no durable asset. A margin strip model builds a recurring income book with standalone value attractive to a future acquirer. Option D means accepting a lower fee per deal in exchange for long-term equity value — this alignment must be unanimous.',options:['Fee-only business — maximise cash on each close, build no recurring book.','Hybrid from deal one — 0.5% fee plus 25-35bp strip on every introduced asset from the start. Recommended.','Fee-first then hybrid — negotiate Option A on first deal to demonstrate value, introduce hybrid on subsequent transactions.','Strip-only — forgo upfront fees entirely. Very hard to negotiate with Iroko and creates year-one cash flow risk.'],required_verifiers:[]},
-  {phase:2,priority:'must',title:'Working capital strategy',description:'How you fund operations between now and your first fee receipt',context:'Four options, not mutually exclusive. The strongest position is a milestone-based Iroko advance as primary source with personal savings as backstop. The advance is most credible if framed as tranches tied to delivery milestones. SEFA is worth pursuing once you have a signed Iroko agreement — the contract qualifies as the underlying asset.',options:['Pure sweat equity — each partner self-funds. Requires 6+ months personal runway.','Iroko milestone-based advance — Tranche 1 on signing, Tranche 2 on 3 introductions, Tranche 3 on first NDA','Friends and family bridge — simple loan agreement repayable from first fee','SEFA bridging finance — apply once Iroko agreement is signed','Combination: Iroko milestone advance as primary, personal savings as backstop (recommended)'],required_verifiers:[]},
-  {phase:2,priority:'must',title:'Named investor pipeline',description:'The SA investor targets you bring to the Iroko meeting',context:'Walking in without named targets reduces you from a credible placement agent to a general intermediary with good intentions. Minimum 6-8 named institutions with specific individual contacts, owner partner and honest warmth rating. SA bank credit desks (Nedbank, Absa, FirstRand, Standard Bank) are the most natural first targets — they have African credit mandates and Marula is structurally designed for them.',options:['Full pipeline table: institution, contact, seniority, owner partner, warmth, likely deal size, next action. Minimum 8 entries.','Top 5 highest-probability targets only — go deep on relationship and deal fit for each','Broad pipeline of 15+ targets to demonstrate market depth to Iroko'],required_verifiers:[]},
-  {phase:2,priority:'should',title:'Non-negotiable clauses in the Iroko agreement',description:'Your must-haves vs nice-to-haves when the agreement is drafted',context:'Non-negotiable: tail clause (24 months minimum), named pipeline protection (registered contacts exclusively yours for tail period), pipeline transfer clause (cooperation on handover if partnership dissolves), hard currency invoicing for USD/EUR deals. If Option D: strip documentation clause (strip formally documented per transaction in a fee letter with specific bps, notional and tenor). Nice-to-have: SA market exclusivity 12 months, deal origination fee 0.25-0.5% on borrower side.',options:['Hold firm on all four base non-negotiables plus strip documentation if pursuing Option D','Prioritise tail clause, pipeline protection and strip documentation. Hard currency and company ownership are second tier.','Accept 18-month tail if Iroko insists, but strip documentation is absolute minimum — undocumented strip is unenforceable.'],required_verifiers:[]},
-  {phase:3,priority:'must',title:'Who leads the Iroko meeting',description:'Agreed roles in the room so you present as one unified team',context:'The most dangerous thing in a first boutique meeting is contradicting each other on commercial terms. One person leads and frames (P1 — Iroko relationship owner), one presents the investor pipeline by institution type (P2 and P3 jointly), one handles commercial questions. If any question arises that is not pre-agreed: say "We will confirm and follow up by [specific date]" — never speculate.',options:['P1 leads and frames throughout. P2/P3 present their respective pipelines. P1 handles all commercial questions.','P1 opens and closes. P2 and P3 co-present, each leading the section on their own relationships.','Rotate lead by agenda item with pre-agreed handover signals.'],required_verifiers:[]},
-  {phase:3,priority:'must',title:'Walk-away conditions',description:'The terms below which you decline — agreed before you sit down',context:'Knowing your walk-away conditions gives you genuine negotiating power. Fee model floor: 0.6% minimum fee rate. Hybrid model floor: 0.5% fee + 20bp strip minimum, 18-month tail, strip documented in writing per transaction. In all models: no personal surety for advances under any circumstances. Walk away entirely if Iroko will not document the strip in a formal fee letter.',options:['Fee model floor: 0.6% fee, 12-month tail, no personal surety. Walk on any breach.','Hybrid model floor: 0.5% fee + 20bp strip, 18-month tail, strip documented per transaction, no personal surety.','Flexible: accept 0.6% fee OR 0.4% fee + 25bp strip — either works if strip is documented at company level.','Non-negotiable: walk away entirely if Iroko will not document the strip. Undocumented strip has no equity value.'],required_verifiers:[]},
-  {phase:3,priority:'should',title:'Response to Iroko due diligence on you',description:'What you will and will not disclose about your team, structure and finances',context:'Iroko will ask about regulatory status, experience, company structure and financial position. On regulatory status: be honest that FAIS compliance is in progress — do not imply you already have it. On experience: lead with specific named transactions each partner has been involved in. On finances: you are not obligated to disclose personal finances but if asking for an advance, expect questions about repayment capacity.',options:['Full transparency on all questions — regulatory status, experience, structure and finances.','Transparent on regulatory and experience. Decline to discuss personal finances unless required for advance negotiation.','Provide written one-pager on each partner covering role, experience and relevant transactions before the meeting.'],required_verifiers:[]},
-  {phase:3,priority:'should',title:'Timeline commitments you are willing to make',description:'What you will promise on delivery — and what you will not',context:'Iroko will ask when you expect your first close. Over-promising is the fastest way to damage the relationship. Commit to activity milestones you can control — meetings, NDAs, term sheets — rather than close dates. Credible activity commitments: first investor meetings within 30 days, first NDA within 90 days, first close within 6 months as aspiration not contractual commitment.',options:['Activity milestones only: 3 investor meetings in 30 days, 1 NDA in 90 days. No close date commitment.','8 formal introductions within 6 months with monthly activity reporting to Iroko.','Soft target of first close within 6 months stated as shared aspiration, not contractual commitment.'],required_verifiers:[]},
+  {phase:1,priority:'should',title:'Exit and dissolution terms',description:'What a fair exit looks like — agreed before anyone wants one',context:'Voluntary exit: does the departing partner retain vested shares or sell back? Notice period: 60–90 days standard. Tail fees and strips belong to the company. Involuntary removal: criminal conviction, material breach, insolvency, or misrepresentation at founding. Performance removal requires formal warning, 90-day remediation and 2/3 vote.',options:['Vested shares retained on exit, unvested lapse. 60-day notice. Tail fees and strips belong to company — value received via buyout only.','All shares offered back to remaining partners at formula valuation on exit.','Vested shares retained. 90-day notice. Tail fees split 50/50 between departing and remaining. Strips remain with company always.'],required_verifiers:[]},
+  {phase:1,priority:'should',title:'Strip income governance',description:'How margin strip income is owned, recorded and distributed internally',context:'For the strip to create equity value it must be earned by the company as a contractual right, appear on the income statement as recurring revenue, and be distributed only as dividends or salary. If any partner earns the strip personally it dies with their involvement and creates no balance sheet value.',options:['All strip income at company level, distributed as dividends quarterly after operating costs','All strip income at company level, reinvested for 24 months to build reserves then distributed','Strip income: 60% company reserves, 40% distributed weighted by origination contribution','Strip income fully retained at company level — partners draw salary only. Maximises equity value.'],required_verifiers:[]},
+  {phase:1,priority:'should',title:'Shotgun clause and forced exit mechanism',description:'The self-correcting mechanism that resolves irreconcilable breakdown',context:'The shotgun clause: any partner can name a price per share at which they will buy all other partners shares OR sell all their own. Receiving partners have 30 days to elect. Because the initiating partner does not know if they will be buyer or seller, they are incentivised to name a fair price.',options:['Full shotgun clause: any partner can trigger, 30-day election window, independent valuation if price is disputed','Shotgun clause plus mediation prerequisite: mandatory 30-day mediation before shotgun can be triggered','Shotgun clause with board observer protection: minority partner retains observer rights for 90 days after trigger'],required_verifiers:[]},
+  {phase:2,priority:'must',title:'FAIS compliance pathway',description:'How you operate legally from day one before your own licence is in place',context:'You cannot legally have substantive investor conversations about Iroko products without either your own FSP licence or an appointed representative arrangement. The FSP licence takes 6–12 months. The appointed representative route takes weeks. A compliance breach in a small market is reputationally fatal.',options:['Pure introducer model — warm introductions only, no product explanation. Get legal opinion confirming this is sufficient.','Appointed representative under existing FSP licence — fastest path to legal operation, typically weeks','Apply for own FSP licence immediately, operate as pure introducer in the interim','Appointed representative immediately + own FSP licence application running in parallel (recommended)'],required_verifiers:[]},
+  {phase:2,priority:'must',title:'Revenue model to anchor on with Iroko',description:'Fee income vs margin strip vs hybrid — determines company equity value',context:'Fee income is transactional — stops when you stop originating, valued at 3–5x EBITDA. Margin strip income is recurring — continues for the life of the underlying asset regardless of ongoing activity, attracting 8–15x valuation. The hybrid model gives both. On a $50m deal at 30bp over 5 years, recurring income exceeds the upfront fee.',options:['Option A — Sweat equity, fee only: 1.25–1.5% on close, 24-month tail, SA exclusivity. Best short-term cash, no recurring book.','Option B — Modest advance, fee only: R25–35k/month recouped at 100%, 1.0% fee. Working capital support but no recurring income.','Option C — Retainer, fee only: R20k/month not recouped, 0.875% fee, 8 introductions in 6 months.','Option D — Hybrid (recommended): 0.5% fee + 25–35bp annual margin strip on deployed notional for asset tenor. Strip held at company level.'],required_verifiers:[]},
+  {phase:2,priority:'must',title:'Revenue structure — internal alignment before Iroko',description:'Whether all three partners agree on building for equity value vs short-term cash',context:'All three partners must agree on what kind of business they are building before sitting down with Iroko. A fee-only model generates income quickly but creates no durable asset. Option D means accepting a lower fee per deal in exchange for long-term equity value — this alignment must be unanimous.',options:['Fee-only business — maximise cash on each close, build no recurring book.','Hybrid from deal one — 0.5% fee plus 25–35bp strip on every introduced asset from the start. Recommended.','Fee-first then hybrid — negotiate Option A on first deal to demonstrate value, introduce hybrid on subsequent transactions.'],required_verifiers:[]},
+  {phase:2,priority:'must',title:'Working capital strategy',description:'How you fund operations between now and your first fee receipt',context:'The strongest position is a milestone-based Iroko advance as primary source with personal savings as backstop. The advance is most credible if framed as tranches tied to delivery milestones. SEFA is worth pursuing once you have a signed Iroko agreement.',options:['Pure sweat equity — each partner self-funds. Requires 6+ months personal runway.','Iroko milestone-based advance — Tranche 1 on signing, Tranche 2 on 3 introductions, Tranche 3 on first NDA','Friends and family bridge — simple loan agreement repayable from first fee','Combination: Iroko milestone advance as primary, personal savings as backstop (recommended)'],required_verifiers:[]},
+  {phase:2,priority:'must',title:'Named investor pipeline',description:'The SA investor targets you bring to the Iroko meeting',context:'Walking in without named targets reduces you from a credible placement agent to a general intermediary with good intentions. Minimum 6–8 named institutions with specific individual contacts, owner partner and honest warmth rating. SA bank credit desks are the most natural first targets.',options:['Full pipeline table: institution, contact, seniority, owner partner, warmth, likely deal size, next action. Minimum 8 entries.','Top 5 highest-probability targets only — go deep on relationship and deal fit for each','Broad pipeline of 15+ targets to demonstrate market depth to Iroko'],required_verifiers:[]},
+  {phase:2,priority:'should',title:'Non-negotiable clauses in the Iroko agreement',description:'Your must-haves vs nice-to-haves when the agreement is drafted',context:'Non-negotiable: tail clause (24 months minimum), named pipeline protection, pipeline transfer clause, hard currency invoicing for USD/EUR deals. If Option D: strip documentation clause (strip formally documented per transaction in a fee letter with specific bps, notional and tenor).',options:['Hold firm on all four base non-negotiables plus strip documentation if pursuing Option D','Prioritise tail clause, pipeline protection and strip documentation. Hard currency is second tier.','Accept 18-month tail if Iroko insists, but strip documentation is absolute minimum — undocumented strip is unenforceable.'],required_verifiers:[]},
+  {phase:3,priority:'must',title:'Who leads the Iroko meeting',description:'Agreed roles in the room so you present as one unified team',context:'The most dangerous thing in a first boutique meeting is contradicting each other on commercial terms. One person leads and frames (P1), one presents the investor pipeline (P2 and P3 jointly), one handles commercial questions. If any question arises that is not pre-agreed: "We will confirm and follow up by [date]" — never speculate.',options:['P1 leads and frames throughout. P2/P3 present their respective pipelines. P1 handles all commercial questions.','P1 opens and closes. P2 and P3 co-present, each leading the section on their own relationships.','Rotate lead by agenda item with pre-agreed handover signals.'],required_verifiers:[]},
+  {phase:3,priority:'must',title:'Walk-away conditions',description:'The terms below which you decline — agreed before you sit down',context:'Fee model floor: 0.6% minimum fee rate. Hybrid model floor: 0.5% fee + 20bp strip minimum, 18-month tail, strip documented in writing per transaction. In all models: no personal surety for advances under any circumstances.',options:['Fee model floor: 0.6% fee, 12-month tail, no personal surety. Walk on any breach.','Hybrid model floor: 0.5% fee + 20bp strip, 18-month tail, strip documented per transaction, no personal surety.','Flexible: accept 0.6% fee OR 0.4% fee + 25bp strip — either works if strip is documented at company level.'],required_verifiers:[]},
+  {phase:3,priority:'should',title:'Response to Iroko due diligence on you',description:'What you will and will not disclose about your team, structure and finances',context:'On regulatory status: be honest that FAIS compliance is in progress — do not imply you already have it. On experience: lead with specific named transactions each partner has been involved in. On finances: you are not obligated to disclose personal finances but if asking for an advance, expect questions about repayment capacity.',options:['Full transparency on all questions — regulatory status, experience, structure and finances.','Transparent on regulatory and experience. Decline to discuss personal finances unless required for advance negotiation.','Provide written one-pager on each partner covering role, experience and relevant transactions before the meeting.'],required_verifiers:[]},
+  {phase:3,priority:'should',title:'Timeline commitments you are willing to make',description:'What you will promise on delivery — and what you will not',context:'Iroko will ask when you expect your first close. Over-promising is the fastest way to damage the relationship. Commit to activity milestones you can control — meetings, NDAs, term sheets — rather than close dates. Credible commitments: first investor meetings within 30 days, first NDA within 90 days.',options:['Activity milestones only: 3 investor meetings in 30 days, 1 NDA in 90 days. No close date commitment.','8 formal introductions within 6 months with monthly activity reporting to Iroko.','Soft target of first close within 6 months stated as shared aspiration, not contractual commitment.'],required_verifiers:[]},
 ];
 
+/* ─── INIT ───────────────────────────────────────────────────────────────── */
 async function init(){
   const{data:{session}}=await sb.auth.getSession();
   if(session){me=session.user;await loadP();await loadAll();showApp();}
   else showAuth();
   document.getElementById('ld').classList.add('out');
 }
-
-async function loadP(){
-  const{data}=await sb.from('profiles').select('*').eq('id',me.id).single();
-  myP=data;
-}
-
+async function loadP(){const{data}=await sb.from('profiles').select('*').eq('id',me.id).single();myP=data;}
 async function loadAll(){
-  const[d,u,c,v,a]=await Promise.all([
+  const[d,u,c,v,a,op,dc,mm,pr]=await Promise.all([
     sb.from('decisions').select('*').order('phase').order('created_at'),
     sb.from('profiles').select('*'),
     sb.from('comments').select('*').order('created_at'),
     sb.from('verifications').select('*'),
     sb.from('attachments').select('*'),
+    sb.from('opportunities').select('*').order('created_at',{ascending:false}),
+    sb.from('documents').select('*').order('created_at',{ascending:false}),
+    sb.from('meeting_minutes').select('*').order('meeting_date',{ascending:false}),
+    sb.from('proposals').select('*').order('created_at',{ascending:false}),
   ]);
   decs=d.data||[];users=u.data||[];coms=c.data||[];vers=v.data||[];atts=a.data||[];
+  opps=op.data||[];docs=dc.data||[];minutes=mm.data||[];proposals=pr.data||[];
   const sv=localStorage.getItem('ag_sv');
   if(!decs.length||sv!==SV){
     if(decs.length&&sv!==SV){
-      const touched=new Set([...coms.map(c=>c.decision_id),...vers.map(v=>v.decision_id)]);
+      const touched=new Set([...coms.map(x=>x.decision_id),...vers.map(x=>x.decision_id)]);
       const del=decs.filter(d=>!touched.has(d.id)).map(d=>d.id);
       if(del.length)await sb.from('decisions').delete().in('id',del);
     }
@@ -700,6 +917,7 @@ async function loadAll(){
   updBadge();
 }
 
+/* ─── AUTH ───────────────────────────────────────────────────────────────── */
 function showAuth(){document.getElementById('auth').classList.add('show');}
 function showApp(){
   document.getElementById('auth').classList.remove('show');
@@ -707,24 +925,18 @@ function showApp(){
   document.getElementById('nname').textContent=myP?.full_name||me.email;
   renderDash();
 }
-
 window.doLogin=async()=>{
-  const btn=document.getElementById('lbtn');
-  btn.disabled=true;btn.textContent='Signing in...';
-  const em=document.getElementById('lem').value.trim();
-  const pw=document.getElementById('lpw').value;
+  const btn=document.getElementById('lbtn');btn.disabled=true;btn.textContent='Signing in...';
+  const em=document.getElementById('lem').value.trim(),pw=document.getElementById('lpw').value;
   if(!em||!pw){authErr('Please enter your email and password.');btn.disabled=false;btn.textContent='Sign in';return;}
   const{data,error}=await sb.auth.signInWithPassword({email:em,password:pw});
   if(error){authErr('Invalid email or password.');btn.disabled=false;btn.textContent='Sign in';return;}
   me=data.user;await loadP();await loadAll();showApp();
 };
-window.doSignout=async()=>{
-  await sb.auth.signOut();me=null;myP=null;
-  document.getElementById('app').classList.remove('show');
-  showAuth();
-};
+window.doSignout=async()=>{await sb.auth.signOut();me=null;myP=null;document.getElementById('app').classList.remove('show');showAuth();};
 function authErr(m){const e=document.getElementById('aerr');e.textContent=m;e.style.display='block';}
 
+/* ─── NAVIGATION ─────────────────────────────────────────────────────────── */
 window.goV=(v,btn)=>{
   document.querySelectorAll('.si').forEach(i=>i.classList.remove('on'));
   if(btn)btn.classList.add('on');
@@ -735,28 +947,35 @@ window.goV=(v,btn)=>{
   else if(v==='decisions')renderDecs();
   else if(v==='progress')renderProg();
   else if(v==='activity')renderAct();
+  else if(v==='opportunities')renderOpps();
+  else if(v==='documents')renderDocs();
+  else if(v==='minutes')renderMinutes();
   else if(v==='commission'){updPool();updCalc();}
   else if(v==='iroko'){updCW();updIS();}
   if(window.innerWidth<=780)document.getElementById('sbar').classList.remove('open');
 };
 window.toggleSB=()=>document.getElementById('sbar').classList.toggle('open');
 
-/* DASHBOARD */
+/* ─── DASHBOARD ──────────────────────────────────────────────────────────── */
 function renderDash(){
   const total=decs.length,decided=decs.filter(d=>d.status==='decided').length;
   const open=decs.filter(d=>d.status==='open').length,prog=decs.filter(d=>d.status==='in_progress').length;
   const pct=total?Math.round(decided/total*100):0;
   const p1=decs.filter(d=>d.phase===1),p2=decs.filter(d=>d.phase===2),p3=decs.filter(d=>d.phase===3);
-  const pp=arr=>arr.length?Math.round(arr.filter(d=>d.status==='decided').length/arr.length*100):0;
+  const pp=a=>a.length?Math.round(a.filter(d=>d.status==='decided').length/a.length*100):0;
   const recent=[...coms].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at)).slice(0,5);
   const urgent=decs.filter(d=>d.priority==='must'&&d.status!=='decided').slice(0,4);
+  const activeOpps=opps.filter(o=>!['passed','on_hold'].includes(o.stage));
+  const pendingAmends=proposals.filter(p=>p.status==='open').length;
   document.getElementById('v-dashboard').innerHTML=`
-  <div class="pgh"><div class="pgt">Dashboard</div><div class="pgs">AlphaGen go-to-market &mdash; partnership decision tracker</div></div>
+  <div class="pgh"><div class="pgt">Dashboard</div><div class="pgs">AlphaGen go-to-market &mdash; partnership overview</div></div>
   <div class="stats">
-    <div class="stat"><div class="slb">Total items</div><div class="sv">${total}</div><div class="ss">across 3 phases</div></div>
-    <div class="stat"><div class="slb">Decided</div><div class="sv" style="color:var(--green)">${decided}</div><div class="ss">${pct}% complete</div></div>
+    <div class="stat"><div class="slb">Decisions</div><div class="sv">${total}</div><div class="ss">${pct}% resolved</div></div>
+    <div class="stat"><div class="slb">Decided</div><div class="sv" style="color:var(--green)">${decided}</div><div class="ss">all partners confirmed</div></div>
     <div class="stat"><div class="slb">Open</div><div class="sv" style="color:var(--red)">${open}</div><div class="ss">needs attention</div></div>
-    <div class="stat"><div class="slb">In progress</div><div class="sv" style="color:var(--amber)">${prog}</div><div class="ss">being discussed</div></div>
+    <div class="stat"><div class="slb">Opportunities</div><div class="sv" style="color:var(--blue)">${activeOpps.length}</div><div class="ss">active pipeline</div></div>
+    <div class="stat"><div class="slb">Documents</div><div class="sv">${docs.length}</div><div class="ss">in repository</div></div>
+    ${pendingAmends?`<div class="stat"><div class="slb">Amendments</div><div class="sv" style="color:var(--amber)">${pendingAmends}</div><div class="ss">pending vote</div></div>`:''}
   </div>
   <div class="psec">
     <div class="phd"><div class="ptitle">Overall go-to-market readiness</div><div class="ppct">${pct}%</div></div>
@@ -772,10 +991,23 @@ function renderDash(){
       <div style="font-family:var(--serif);font-size:1.05rem;margin-bottom:.875rem">Priority decisions needed</div>
       ${urgent.map(d=>`<div style="display:flex;align-items:flex-start;gap:.75rem;padding:.65rem 0;border-bottom:1px solid var(--paper3);cursor:pointer" onclick="goV('decisions',null);setTimeout(()=>openCard('${d.id}'),80)">
         <div class="dpr pm" style="flex-shrink:0">!</div>
-        <div><div style="font-size:.84rem;font-weight:600;color:var(--ink)">${d.title}</div><div style="font-size:.75rem;color:var(--ink3)">Phase ${d.phase}</div></div>
-        <span class="sb2 so" style="margin-left:auto;flex-shrink:0">Open</span>
+        <div style="flex:1"><div style="font-size:.84rem;font-weight:600;color:var(--ink)">${d.title}</div><div style="font-size:.75rem;color:var(--ink3)">Phase ${d.phase}</div></div>
+        <span class="sb2 so" style="flex-shrink:0">Open</span>
       </div>`).join('')}
       ${!urgent.length?'<div class="empty"><div class="empi">&#10003;</div><div class="empt">All must-decide items resolved</div></div>':''}
+    </div>
+    <div>
+      <div style="font-family:var(--serif);font-size:1.05rem;margin-bottom:.875rem">Active opportunities</div>
+      ${activeOpps.slice(0,5).map(o=>{
+        const lhT={high:'var(--green)',medium:'var(--amber)',low:'var(--red)',uncertain:'var(--ink4)'}[o.likelihood]||'var(--ink4)';
+        return`<div style="display:flex;align-items:flex-start;gap:.75rem;padding:.65rem 0;border-bottom:1px solid var(--paper3);cursor:pointer" onclick="goV('opportunities',null)">
+          <div style="width:8px;height:8px;border-radius:50%;background:${lhT};flex-shrink:0;margin-top:5px"></div>
+          <div style="flex:1;min-width:0"><div style="font-size:.84rem;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.title}</div>
+          <div style="font-size:.75rem;color:var(--ink3)">${pillarShort(o.pillar)} &bull; ${stageLabel(o.stage)}</div></div>
+          ${o.estimated_size?`<div style="font-size:.75rem;color:var(--ink3);flex-shrink:0">$${o.estimated_size}m</div>`:''}
+        </div>`;
+      }).join('')}
+      ${!activeOpps.length?'<div class="empty"><div class="empi">&#9670;</div><div class="empt">No opportunities yet</div><div class="empd">Add your first from the Opportunities menu</div></div>':''}
     </div>
     <div>
       <div style="font-family:var(--serif);font-size:1.05rem;margin-bottom:.875rem">Recent activity</div>
@@ -791,7 +1023,7 @@ function renderDash(){
   </div>`;
 }
 
-/* DECISIONS */
+/* ─── DECISIONS ──────────────────────────────────────────────────────────── */
 window.renderDecs=function(){
   const list=document.getElementById('dec-list');
   const phases=[1,2,3],pn=['Before you agree as a partnership','Before you approach Iroko','At the Iroko table'];
@@ -800,11 +1032,14 @@ window.renderDecs=function(){
   if(window.phF)filtered=filtered.filter(d=>d.phase===window.phF);
   if(window.stF)filtered=filtered.filter(d=>d.status===window.stF);
   if(window.srF)filtered=filtered.filter(d=>(d.title+d.description+d.context).toLowerCase().includes(window.srF.toLowerCase()));
-  list.innerHTML=phases.map((p,pi)=>{
+  const pendAmends=proposals.filter(p=>p.status==='open');
+  let html=pendAmends.length?`<div class="cw" style="margin-bottom:1rem"><strong>${pendAmends.length} amendment proposal${pendAmends.length>1?'s':''} pending vote.</strong> Scroll to the relevant decision to vote.</div>`:'';
+  html+=phases.map((p,pi)=>{
     const items=filtered.filter(d=>d.phase===p);
     if(!items.length)return'';
     return`<div class="phsec"><div class="phhd"><span class="ptag ${tc[pi]}">Phase ${p}</span><h2 class="phh2">${pn[pi]}</h2></div>${items.map(d=>rCard(d)).join('')}</div>`;
   }).join('');
+  list.innerHTML=html;
 };
 
 function rCard(d){
@@ -814,25 +1049,23 @@ function rCard(d){
   const pt={must:'!',should:'~',can:'?'}[d.priority]||'?';
   const dc=coms.filter(c=>c.decision_id===d.id);
   const da=atts.filter(a=>a.decision_id===d.id);
-  const dv=vers.filter(v=>v.decision_id===d.id);
   const myV=vers.find(v=>v.decision_id===d.id&&v.user_id===me?.id);
   const opts=Array.isArray(d.options)?d.options:[];
+  const decProps=proposals.filter(p=>p.decision_id===d.id&&p.status==='open');
+  const confirmedCount=vers.filter(v=>v.decision_id===d.id&&v.confirmed).length;
   return`<div class="card" id="dc-${d.id}">
-    <div class="dch" onclick="toggleCard('${d.id}')">
+    <div class="dch" onclick="tcDec('${d.id}')">
       <div class="dpr ${pc}">${pt}</div>
       <div class="dmeta">
-        <div class="dtitle">${d.title}</div>
+        <div class="dtitle">${d.title}${decProps.length?` <span style="font-size:.68rem;font-weight:700;padding:.1rem .45rem;background:var(--amberl);color:var(--amber);border-radius:99px;margin-left:.35rem">${decProps.length} pending</span>`:''}</div>
         <div class="ddesc">${d.description||''}</div>
         <div class="dtags">
           ${dc.length?`<span class="dtag">&#128172; ${dc.length}</span>`:''}
           ${da.length?`<span class="dtag">&#128206; ${da.length}</span>`:''}
-          ${dv.length?`<span class="dtag">&#10003; ${dv.filter(v=>v.confirmed).length}/${users.length}</span>`:''}
+          <span class="dtag">&#10003; ${confirmedCount}/${users.length}</span>
         </div>
       </div>
-      <div class="dright">
-        <span class="sb2 ${sc}">${st}</span>
-        <span class="dchev" id="chev-${d.id}">&#9658;</span>
-      </div>
+      <div class="dright"><span class="sb2 ${sc}">${st}</span><span class="dchev" id="chev-${d.id}">&#9658;</span></div>
     </div>
     <div class="dbody" id="body-${d.id}">
       <div class="slbl2">Background &amp; context</div>
@@ -854,8 +1087,10 @@ function rCard(d){
           </button>
           ${d.status!=='decided'?`<button class="btns" onclick="setSt('${d.id}','in_progress')">Mark in progress</button>`:''}
           ${d.status!=='decided'?`<button class="btnd" onclick="setSt('${d.id}','decided')">Mark decided</button>`:''}
+          <button class="btns" style="margin-left:auto;border-color:var(--amber);color:var(--amber)" onclick="openEditModal('${d.id}')">&#9998; Propose amendment</button>
         </div>
       </div>
+      ${decProps.length?`<div class="slbl2">Pending amendments</div>${decProps.map(p=>rAmend(p,d)).join('')}`:''}
       <div class="slbl2">Attachments</div>
       <div class="attrow" id="att-${d.id}">
         ${da.map(a=>`<a class="attchip" href="${a.url}" target="_blank">&#128206; ${a.name}</a>`).join('')}
@@ -878,7 +1113,39 @@ function rCard(d){
   </div>`;
 }
 
-/* PROGRESS */
+function rAmend(p,d){
+  const author=users.find(u=>u.id===p.proposed_by);
+  const myVote=(p.votes||[]).find(v=>v.user_id===me?.id);
+  const yesV=(p.votes||[]).filter(v=>v.vote==='yes').length;
+  const noV=(p.votes||[]).filter(v=>v.vote==='no').length;
+  const needed=Math.max(2,Math.ceil(users.length*2/3));
+  const fLabel={title:'Title',description:'Description',context:'Context / background',options:'Options',priority:'Priority'};
+  const curVal=p.field==='options'?Array.isArray(d.options)?d.options.map((o,i)=>String.fromCharCode(65+i)+': '+o).join('\n'):'—':d[p.field]||'—';
+  return`<div style="border:1px solid var(--amberl);border-radius:var(--rs);padding:.875rem;margin-bottom:.5rem;background:rgba(245,232,208,.25)">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem">
+      <div><div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--amber)">Amendment &mdash; ${fLabel[p.field]||p.field}</div>
+      <div style="font-size:.78rem;color:var(--ink3);margin-top:.1rem">Proposed by <strong>${author?.full_name||'partner'}</strong> &middot; ${fmtD(p.created_at)}</div></div>
+      <div style="display:flex;gap:.5rem;align-items:center">
+        <span style="font-size:.75rem;color:var(--green);font-weight:600">${yesV} &#10003;</span>
+        <span style="font-size:.75rem;color:var(--red);font-weight:600">${noV} &#10007;</span>
+        <span style="font-size:.72rem;color:var(--ink4)">need ${needed}</span>
+      </div>
+    </div>
+    ${p.reason?`<div style="font-size:.78rem;color:var(--ink3);font-style:italic;margin-bottom:.5rem">"${p.reason}"</div>`:''}
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.75rem">
+      <div><div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink4);margin-bottom:.2rem">Current</div>
+      <div style="font-size:.78rem;color:var(--ink3);background:var(--paper2);padding:.5rem .65rem;border-radius:var(--rs);white-space:pre-wrap">${curVal}</div></div>
+      <div><div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--amber);margin-bottom:.2rem">Proposed</div>
+      <div style="font-size:.78rem;color:var(--ink);background:var(--amberl);padding:.5rem .65rem;border-radius:var(--rs);white-space:pre-wrap">${p.new_value}</div></div>
+    </div>
+    <div class="arow">
+      ${!myVote?`<button class="btnc" style="background:var(--green)" onclick="voteAmend('${p.id}','yes')">&#10003; Approve</button>
+      <button class="btnd" onclick="voteAmend('${p.id}','no')">&#10007; Reject</button>`:`<span style="font-size:.78rem;color:var(--ink3)">You voted: <strong style="color:${myVote.vote==='yes'?'var(--green)':'var(--red)'}">${myVote.vote==='yes'?'Approve':'Reject'}</strong></span>`}
+    </div>
+  </div>`;
+}
+
+/* ─── PROGRESS ───────────────────────────────────────────────────────────── */
 function renderProg(){
   const phases=[1,2,3],pn=['Before you agree','Before you approach Iroko','At the Iroko table'];
   document.getElementById('v-progress').innerHTML=`
@@ -887,26 +1154,23 @@ function renderProg(){
     const items=decs.filter(d=>d.phase===p);
     const done=items.filter(d=>d.status==='decided').length;
     const pct=items.length?Math.round(done/items.length*100):0;
-    const fc=['pf-g','pf-t','pf-gn'][pi];
     return`<div class="pcrd">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem">
         <div style="font-family:var(--serif);font-size:1rem;color:var(--ink)">Phase ${p}: ${pn[pi]}</div>
         <div style="font-size:.82rem;color:var(--ink3)">${done} / ${items.length} decided</div>
       </div>
-      <div class="pbar" style="margin-bottom:.875rem"><div class="pf ${fc}" style="width:${pct}%"></div></div>
-      ${items.map(d=>{
-        return`<div style="display:flex;align-items:center;gap:.65rem;padding:.45rem 0;border-bottom:1px solid var(--paper3)">
-          <div class="dpr ${d.priority==='must'?'pm':d.priority==='should'?'ps':'pc'}" style="flex-shrink:0">${d.priority==='must'?'!':'~'}</div>
-          <div style="flex:1;font-size:.82rem;color:var(--ink2);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${d.title}</div>
-          <span class="sb2 ${d.status==='decided'?'sd':d.status==='in_progress'?'spp':'so'}" style="flex-shrink:0">${d.status==='decided'?'Decided':d.status==='in_progress'?'In progress':'Open'}</span>
-          <div style="display:flex;gap:3px;flex-shrink:0">${users.map(u=>{const cv=vers.find(vv=>vv.decision_id===d.id&&vv.user_id===u.id&&vv.confirmed);return`<div title="${u.full_name}" style="width:7px;height:7px;border-radius:50%;background:${cv?'var(--green)':'var(--paper3)'}"></div>`;}).join('')}</div>
-        </div>`;
-      }).join('')}
+      <div class="pbar" style="margin-bottom:.875rem"><div class="pf ${['pf-g','pf-t','pf-gn'][pi]}" style="width:${pct}%"></div></div>
+      ${items.map(d=>`<div style="display:flex;align-items:center;gap:.65rem;padding:.45rem 0;border-bottom:1px solid var(--paper3)">
+        <div class="dpr ${d.priority==='must'?'pm':d.priority==='should'?'ps':'pc'}" style="flex-shrink:0">${d.priority==='must'?'!':'~'}</div>
+        <div style="flex:1;font-size:.82rem;color:var(--ink2);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${d.title}</div>
+        <span class="sb2 ${d.status==='decided'?'sd':d.status==='in_progress'?'spp':'so'}" style="flex-shrink:0">${d.status==='decided'?'Decided':d.status==='in_progress'?'In progress':'Open'}</span>
+        <div style="display:flex;gap:3px;flex-shrink:0">${users.map(u=>{const cv=vers.find(vv=>vv.decision_id===d.id&&vv.user_id===u.id&&vv.confirmed);return`<div title="${u.full_name}" style="width:7px;height:7px;border-radius:50%;background:${cv?'var(--green)':'var(--paper3)'}"></div>`;}).join('')}</div>
+      </div>`).join('')}
     </div>`;
   }).join('')}`;
 }
 
-/* ACTIVITY */
+/* ─── ACTIVITY ───────────────────────────────────────────────────────────── */
 function renderAct(){
   const items=[...coms].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
   document.getElementById('v-activity').innerHTML=`
@@ -918,15 +1182,203 @@ function renderAct(){
   }).join('')}`;
 }
 
-/* CARD INTERACTIONS */
-window.toggleCard=id=>{
+/* ─── OPPORTUNITIES ──────────────────────────────────────────────────────── */
+window.renderOpps=function(){
+  const el=document.getElementById('opp-list');if(!el)return;
+  let filtered=[...opps];
+  if(window.oppF)filtered=filtered.filter(o=>parseInt(o.pillar)===window.oppF);
+  if(!filtered.length){el.innerHTML='<div class="empty"><div class="empi">&#9670;</div><div class="empt">No opportunities yet</div><div class="empd">Click + Add opportunity to log your first deal idea</div></div>';return;}
+  const STC={idea:'var(--ink4)',qualifying:'var(--teal)',developing:'var(--amber)',ready:'var(--green)',on_hold:'var(--ink4)',passed:'var(--red)'};
+  const STL={idea:'Idea',qualifying:'Qualifying',developing:'Developing',ready:'Ready',on_hold:'On hold',passed:'Passed'};
+  const LHC={high:'var(--green)',medium:'var(--amber)',low:'var(--red)',uncertain:'var(--ink4)'};
+  el.innerHTML=filtered.map(o=>{
+    const owner=users.find(u=>u.id===o.owner_id);
+    const stC=STC[o.stage]||'var(--ink4)';
+    const lhC=LHC[o.likelihood]||'var(--ink4)';
+    const fi=o.estimated_size&&o.estimated_fee_pct?o.estimated_size*1e6*o.estimated_fee_pct/100:0;
+    const si=o.estimated_size&&o.estimated_strip_bp&&o.estimated_tenor?o.estimated_size*1e6*o.estimated_strip_bp/10000*o.estimated_tenor:0;
+    const estInc=fi+si;
+    const sid='opp'+o.id.replace(/[^a-z0-9]/gi,'');
+    return`<div class="card" id="oc-${sid}">
+      <div class="dch" onclick="tcOpp('${sid}')">
+        <div style="width:8px;height:8px;border-radius:50%;background:${lhC};flex-shrink:0;margin-top:8px"></div>
+        <div class="dmeta">
+          <div class="dtitle">${o.title}</div>
+          <div class="ddesc">${o.client_name?o.client_name+' &bull; ':''} ${pillarShort(parseInt(o.pillar))} &bull; ${o.deal_type||'—'}</div>
+          <div class="dtags">
+            <span class="dtag" style="background:${stC}22;color:${stC}">${STL[o.stage]||o.stage}</span>
+            ${o.likelihood?`<span class="dtag" style="background:${lhC}22;color:${lhC}">${o.likelihood.charAt(0).toUpperCase()+o.likelihood.slice(1)} likelihood</span>`:''}
+            ${o.estimated_size?`<span class="dtag">$${o.estimated_size}m</span>`:''}
+            ${estInc>0?`<span class="dtag" style="color:var(--green)">~${fmtM(estInc)} est. income</span>`:''}
+          </div>
+        </div>
+        <div class="dright">
+          ${owner?`<div style="font-size:.72rem;color:var(--ink3)">${owner.full_name.split(' ')[0]}</div>`:''}
+          <span class="dchev" id="ochev-${sid}">&#9658;</span>
+        </div>
+      </div>
+      <div class="dbody" id="obody-${sid}">
+        ${o.description?`<div class="slbl2">Description</div><div class="ibox">${o.description}</div>`:''}
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.5rem;margin:.875rem 0">
+          ${o.client_name?`<div class="metric"><div class="mval" style="font-size:1rem">${o.client_name}</div><div class="mlbl">Client / institution</div></div>`:''}
+          ${o.client_type?`<div class="metric"><div class="mval" style="font-size:1rem">${ctypeL(o.client_type)}</div><div class="mlbl">Client type</div></div>`:''}
+          ${o.source?`<div class="metric"><div class="mval" style="font-size:1rem">${srcL(o.source)}</div><div class="mlbl">Source</div></div>`:''}
+          ${o.estimated_size?`<div class="metric"><div class="mval">$${o.estimated_size}m</div><div class="mlbl">Deal size</div></div>`:''}
+          ${o.estimated_fee_pct?`<div class="metric"><div class="mval">${o.estimated_fee_pct}%</div><div class="mlbl">Upfront fee</div></div>`:''}
+          ${o.estimated_strip_bp?`<div class="metric"><div class="mval">${o.estimated_strip_bp}bp</div><div class="mlbl">Strip p.a.</div></div>`:''}
+          ${o.estimated_tenor?`<div class="metric"><div class="mval">${o.estimated_tenor}yr</div><div class="mlbl">Tenor</div></div>`:''}
+          ${o.estimated_months_to_close?`<div class="metric"><div class="mval">${o.estimated_months_to_close}mo</div><div class="mlbl">Months to close</div></div>`:''}
+          ${o.iroko_relevant!==null&&o.iroko_relevant!==undefined?`<div class="metric"><div class="mval" style="font-size:1rem;color:${o.iroko_relevant?'var(--teal)':'var(--ink4)'}">${o.iroko_relevant?'Yes':'No'}</div><div class="mlbl">Iroko / Marula</div></div>`:''}
+          ${fi>0?`<div class="metric"><div class="mval" style="color:var(--green)">${fmtM(fi)}</div><div class="mlbl">Est. fee income</div></div>`:''}
+          ${si>0?`<div class="metric"><div class="mval" style="color:var(--teal)">${fmtM(si)}</div><div class="mlbl">Est. strip income</div></div>`:''}
+        </div>
+        ${o.next_action?`<div class="slbl2">Next action</div><div class="ibox"><strong style="color:var(--ink)">${o.next_action}</strong>${o.next_action_date?` <span style="color:var(--ink3);font-size:.75rem">by ${o.next_action_date}</span>`:''}</div>`:''}
+        ${o.blockers?`<div class="slbl2">Blockers / risks</div><div class="ibox" style="border-left:2px solid var(--amber)">${o.blockers}</div>`:''}
+        ${o.notes?`<div class="slbl2">Notes</div><div class="ibox">${o.notes}</div>`:''}
+        <div class="arow" style="margin-top:1rem">
+          <button class="btns" onclick="openOppModal('${o.id}')">&#9998; Edit</button>
+          <select class="fsel" style="padding:.4rem .65rem;font-size:.78rem;width:auto" onchange="updOppStage('${o.id}',this.value)">
+            ${['idea','qualifying','developing','ready','on_hold','passed'].map(s=>`<option value="${s}"${o.stage===s?' selected':''}>${STL[s]}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+};
+
+function pillarShort(p){return{1:'P1 Iroko',2:'P2 Alpha',3:'P3 Advisory',4:'P4 Risk'}[p]||'P'+p;}
+function stageLabel(s){return{idea:'Idea',qualifying:'Qualifying',developing:'Developing',ready:'Ready',on_hold:'On hold',passed:'Passed'}[s]||s;}
+function ctypeL(t){return{sa_bank:'SA bank',non_bank_inst:'Non-bank inst.',corporate:'Corporate',sovereign:'Sovereign',development_fi:'DFI',other:'Other'}[t]||t;}
+function srcL(s){return{p1_network:'P1 network',p2_network:'P2 network',p3_network:'P3 network',inbound:'Inbound',referral:'Referral',conference:'Event',other:'Other'}[s]||s;}
+
+/* ─── DOCUMENTS ──────────────────────────────────────────────────────────── */
+window.renderDocs=function(){
+  const el=document.getElementById('doc-repo');if(!el)return;
+  const cats=[
+    {id:'legal',label:'Legal',icon:'&#9878;',desc:'Agreements, constitutions, resolutions'},
+    {id:'compliance',label:'Compliance',icon:'&#9745;',desc:'FAIS, FSP, regulatory'},
+    {id:'iroko',label:'Iroko',icon:'&#9670;',desc:'Agreements, fee letters, correspondence'},
+    {id:'financial',label:'Financial',icon:'&#9654;',desc:'Forecasts, models, management accounts'},
+    {id:'commercial',label:'Commercial',icon:'&#9733;',desc:'Proposals, pitch decks, credentials'},
+    {id:'hr',label:'HR & Partners',icon:'&#9787;',desc:'Roles, equity, vesting'},
+    {id:'operations',label:'Operations',icon:'&#9881;',desc:'Processes, registers, policies'},
+    {id:'research',label:'Research',icon:'&#9998;',desc:'Market, sector, competitor'},
+    {id:'templates',label:'Templates',icon:'&#9776;',desc:'Engagement letters, NDAs, standard forms'},
+    {id:'other',label:'Other',icon:'&#128196;',desc:'Miscellaneous documents'},
+  ];
+  const stC={current:'var(--green)',draft:'var(--amber)',superseded:'var(--ink4)',archived:'var(--ink4)'};
+  const body=cats.map(cat=>{
+    const catDocs=docs.filter(d=>d.category===cat.id);
+    if(!catDocs.length)return'';
+    return`<div style="margin-bottom:1.75rem">
+      <div style="display:flex;align-items:center;gap:.65rem;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:2px solid var(--paper3)">
+        <span style="font-size:1rem">${cat.icon}</span>
+        <div><div style="font-size:.9rem;font-weight:600;color:var(--ink)">${cat.label}</div><div style="font-size:.72rem;color:var(--ink3)">${cat.desc}</div></div>
+        <span style="margin-left:auto;font-size:.72rem;color:var(--ink4)">${catDocs.length} doc${catDocs.length>1?'s':''}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.65rem">
+        ${catDocs.map(d=>{
+          const ext=((d.file_name||d.name||'').split('.').pop()||'DOC').toUpperCase().substring(0,4);
+          const sc=stC[d.status]||'var(--ink4)';
+          return`<div class="rcard">
+            <div style="display:flex;align-items:flex-start;gap:.65rem">
+              <div style="width:36px;height:36px;background:var(--paper3);border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:.63rem;font-weight:700;color:var(--ink3);flex-shrink:0">${ext}</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:.84rem;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:.15rem">${d.name}</div>
+                ${d.subcategory?`<div style="font-size:.72rem;color:var(--ink4)">${d.subcategory}</div>`:''}
+                ${d.description?`<div style="font-size:.75rem;color:var(--ink3);margin-top:.2rem;line-height:1.4">${d.description.substring(0,80)}${d.description.length>80?'&hellip;':''}</div>`:''}
+                <div style="display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.35rem;align-items:center">
+                  <span style="font-size:.68rem;font-weight:700;color:${sc}">${(d.status||'current').charAt(0).toUpperCase()+(d.status||'current').slice(1)}</span>
+                  ${d.version?`<span style="font-size:.68rem;color:var(--ink4)">v${d.version}</span>`:''}
+                  ${d.related_pillar?`<span style="font-size:.68rem;color:var(--teal)">P${d.related_pillar}</span>`:''}
+                  <span style="font-size:.68rem;color:var(--ink4)">${fmtD(d.created_at)}</span>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;gap:.35rem;margin-top:.65rem">
+              ${d.url?`<a class="attchip" href="${d.url}" target="_blank" style="flex:1;justify-content:center">&#128203; Open</a>`:'<div style="flex:1"></div>'}
+              <button class="btns" style="font-size:.72rem;padding:.3rem .55rem" onclick="openDocModal('${d.id}')">&#9998; Edit</button>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+  el.innerHTML=body||'<div class="empty"><div class="empi">&#128196;</div><div class="empt">No documents yet</div><div class="empd">Click + Upload document to add your first</div></div>';
+};
+
+/* ─── MEETING MINUTES ────────────────────────────────────────────────────── */
+window.renderMinutes=function(){
+  const el=document.getElementById('mm-list');if(!el)return;
+  let filtered=[...minutes];
+  if(window.mmF)filtered=filtered.filter(m=>m.meeting_type===window.mmF);
+  if(!filtered.length){el.innerHTML='<div class="empty"><div class="empi">&#128221;</div><div class="empt">No meeting minutes yet</div><div class="empd">Click + Add minutes to record your first meeting</div></div>';return;}
+  const TYC={founders:'var(--gold)',iroko:'var(--teal)',investor:'var(--blue)',advisory:'var(--green)',legal:'var(--amber)',other:'var(--ink3)'};
+  const TYL={founders:'Founders',iroko:'Iroko',investor:'Investor',advisory:'Advisory',legal:'Legal',other:'Other'};
+  el.innerHTML=filtered.map(m=>{
+    const tc=TYC[m.meeting_type]||'var(--ink3)';
+    const tl=TYL[m.meeting_type]||m.meeting_type;
+    const actions=m.action_items?m.action_items.split('\n').filter(Boolean):[];
+    const attIds=Array.isArray(m.attendees)?m.attendees:[];
+    const attNames=attIds.map(id=>{const u=users.find(x=>x.id===id);return u?.full_name?.split(' ')[0]||'';}).filter(Boolean);
+    return`<div class="card" id="mc-${m.id}">
+      <div class="dch" onclick="tcMin('${m.id}')">
+        <div style="width:4px;align-self:stretch;border-radius:2px;background:${tc};flex-shrink:0;margin-right:.25rem"></div>
+        <div class="dmeta">
+          <div class="dtitle">${m.title}</div>
+          <div class="ddesc">${m.meeting_date||''} &bull; ${tl}${m.location?' &bull; '+m.location:''}</div>
+          <div class="dtags">
+            <span class="dtag" style="background:${tc}22;color:${tc}">${tl}</span>
+            ${m.duration_minutes?`<span class="dtag">${m.duration_minutes} min</span>`:''}
+            ${attNames.length?`<span class="dtag">${attNames.join(', ')}</span>`:''}
+            ${actions.length?`<span class="dtag">&#9635; ${actions.length} action${actions.length>1?'s':''}</span>`:''}
+          </div>
+        </div>
+        <div class="dright"><span class="dchev" id="chev-${m.id}">&#9658;</span></div>
+      </div>
+      <div class="dbody" id="body-${m.id}">
+        ${m.agenda?`<div class="slbl2">Agenda</div><div class="ibox">${m.agenda}</div>`:''}
+        ${m.summary?`<div class="slbl2">Summary</div><div class="ibox">${m.summary}</div>`:''}
+        ${m.decisions_made?`<div class="slbl2">Decisions made in this meeting</div><div class="ibox" style="border-left:2px solid var(--green)">${m.decisions_made}</div>`:''}
+        ${actions.length?`<div class="slbl2">Action items</div><div style="background:var(--paper2);border-radius:var(--rs);padding:.875rem">${actions.map(a=>{
+          const owner=a.match(/@(\w+)/)?.[1]||null;
+          const date=a.match(/\d{4}-\d{2}-\d{2}/)?.[0]||null;
+          const task=a.replace(/@\w+:/,'').replace(/by \d{4}-\d{2}-\d{2}/,'').trim();
+          return`<div style="display:flex;align-items:flex-start;gap:.5rem;padding:.35rem 0;border-bottom:1px solid var(--paper3)">
+            <span style="font-size:.8rem;margin-top:1px">&#9744;</span>
+            <div style="flex:1;font-size:.78rem;color:var(--ink2)">${task}</div>
+            ${owner?`<span style="font-size:.68rem;font-weight:600;color:var(--teal);flex-shrink:0">@${owner}</span>`:''}
+            ${date?`<span style="font-size:.68rem;color:var(--ink4);flex-shrink:0">${date}</span>`:''}
+          </div>`;
+        }).join('')}</div>`:''}
+        ${m.follow_ups?`<div class="slbl2">Follow-ups / next steps</div><div class="ibox">${m.follow_ups}</div>`:''}
+        ${m.external_attendees?`<div class="slbl2">External attendees</div><div style="font-size:.8rem;color:var(--ink2);padding:.5rem 0">${m.external_attendees}</div>`:''}
+        ${m.document_url?`<div class="arow" style="margin-top:.875rem"><a class="attchip" href="${m.document_url}" target="_blank" style="padding:.4rem .875rem">&#128196; Open minutes document</a></div>`:''}
+        <div class="arow" style="margin-top:1rem"><button class="btns" onclick="openMMModal('${m.id}')">&#9998; Edit</button></div>
+      </div>
+    </div>`;
+  }).join('');
+};
+
+/* ─── TOGGLE HELPERS (three separate functions, no conflicts) ────────────── */
+window.tcDec=id=>{
   const b=document.getElementById('body-'+id),c=document.getElementById('chev-'+id);
-  if(!b)return;b.classList.toggle('open');c.classList.toggle('open');
+  if(b){b.classList.toggle('open');if(c)c.classList.toggle('open');}
+};
+window.tcOpp=sid=>{
+  const b=document.getElementById('obody-'+sid),c=document.getElementById('ochev-'+sid);
+  if(b){b.classList.toggle('open');if(c)c.classList.toggle('open');}
+};
+window.tcMin=id=>{
+  const b=document.getElementById('body-'+id),c=document.getElementById('chev-'+id);
+  if(b){b.classList.toggle('open');if(c)c.classList.toggle('open');}
 };
 window.openCard=id=>{
   const b=document.getElementById('body-'+id),c=document.getElementById('chev-'+id);
-  if(b){b.classList.add('open');c.classList.add('open');b.scrollIntoView({behavior:'smooth',block:'center'});}
+  if(b){b.classList.add('open');if(c)c.classList.add('open');b.scrollIntoView({behavior:'smooth',block:'center'});}
 };
+
+/* ─── DECISION INTERACTIONS ──────────────────────────────────────────────── */
 window.selOpt=async(did,idx)=>{
   await sb.from('verifications').upsert({decision_id:did,user_id:me.id,chosen_option:idx,confirmed:false},{onConflict:'decision_id,user_id'});
   const{data}=await sb.from('verifications').select('*');vers=data||[];refreshCard(did);
@@ -936,9 +1388,9 @@ window.confirmDec=async did=>{
   if(!ev){toast('Select an option first','err');return;}
   await sb.from('verifications').upsert({decision_id:did,user_id:me.id,chosen_option:ev.chosen_option,confirmed:true},{onConflict:'decision_id,user_id'});
   const{data}=await sb.from('verifications').select('*');vers=data||[];
-  const confirmed=vers.filter(v=>v.decision_id===did&&v.confirmed);
-  if(users.length>0&&confirmed.length>=users.length){await setSt(did,'decided');toast('All partners confirmed — decision verified!','ok');}
-  else{toast('Your confirmation recorded','ok');refreshCard(did);}
+  if(users.length>0&&vers.filter(v=>v.decision_id===did&&v.confirmed).length>=users.length){
+    await setSt(did,'decided');toast('All partners confirmed!','ok');
+  } else{toast('Your confirmation recorded','ok');refreshCard(did);}
   updBadge();
 };
 window.setSt=async(did,status)=>{
@@ -955,10 +1407,9 @@ window.postCmt=async did=>{
 };
 window.upFile=async(did,inp)=>{
   const f=inp.files[0];if(!f)return;
-  const path=`${did}/${Date.now()}-${f.name}`;
-  const{error}=await sb.storage.from('attachments').upload(path,f);
+  const{error}=await sb.storage.from('attachments').upload(`${did}/${Date.now()}-${f.name}`,f);
   if(error){toast('Upload failed','err');return;}
-  const{data:{publicUrl}}=sb.storage.from('attachments').getPublicUrl(path);
+  const{data:{publicUrl}}=sb.storage.from('attachments').getPublicUrl(`${did}/${Date.now()}-${f.name}`);
   await sb.from('attachments').insert({decision_id:did,name:f.name,url:publicUrl,uploaded_by:me.id});
   const{data}=await sb.from('attachments').select('*');atts=data||[];
   toast('File attached','ok');refreshCard(did);
@@ -968,15 +1419,65 @@ function refreshCard(id){
   const card=document.getElementById('dc-'+id);if(!card)return;
   const wasOpen=document.getElementById('body-'+id)?.classList.contains('open');
   card.outerHTML=rCard(d);
-  if(wasOpen){const b=document.getElementById('body-'+id),c=document.getElementById('chev-'+id);if(b){b.classList.add('open');c.classList.add('open');}}
+  if(wasOpen)openCard(id);
 }
 
-/* ADD MODAL */
-window.openAdd=async()=>{
-  const{data}=await sb.from('profiles').select('*');users=data||[];
-  document.getElementById('vcbs').innerHTML=users.map(u=>`<label style="display:flex;align-items:center;gap:.5rem;font-size:.82rem;cursor:pointer"><input type="checkbox" value="${u.id}"> ${u.full_name}</label>`).join('');
-  document.getElementById('addmodal').classList.add('open');
+/* ─── AMENDMENTS ─────────────────────────────────────────────────────────── */
+window.openEditModal=id=>{
+  const d=decs.find(x=>x.id===id);if(!d)return;
+  document.getElementById('ep-dec-id').value=id;
+  document.getElementById('ep-field').value='context';
+  document.getElementById('ep-new').value='';
+  document.getElementById('ep-reason').value='';
+  updEpPreview();
+  document.getElementById('editmodal').classList.add('open');
 };
+window.closeEditModal=()=>document.getElementById('editmodal').classList.remove('open');
+window.updEpPreview=()=>{
+  const id=document.getElementById('ep-dec-id').value;
+  const f=document.getElementById('ep-field').value;
+  const d=decs.find(x=>x.id===id);if(!d)return;
+  const val=f==='options'?Array.isArray(d.options)?d.options.map((o,i)=>String.fromCharCode(65+i)+': '+o).join('\n'):'—':d[f]||'—';
+  document.getElementById('ep-old').textContent=val;
+};
+window.submitProposal=async()=>{
+  const did=document.getElementById('ep-dec-id').value;
+  const field=document.getElementById('ep-field').value;
+  const newVal=document.getElementById('ep-new').value.trim();
+  const reason=document.getElementById('ep-reason').value.trim();
+  if(!newVal){toast('Please enter the proposed change','err');return;}
+  await sb.from('proposals').insert({decision_id:did,field,new_value:newVal,reason,proposed_by:me.id,status:'open',votes:[]});
+  const{data}=await sb.from('proposals').select('*').order('created_at',{ascending:false});proposals=data||[];
+  window.closeEditModal();renderDecs();toast('Amendment submitted for vote','ok');
+};
+window.voteAmend=async(pid,vote)=>{
+  const prop=proposals.find(p=>p.id===pid);if(!prop)return;
+  const votes=[...(prop.votes||[]).filter(v=>v.user_id!==me.id),{user_id:me.id,vote}];
+  const yesV=votes.filter(v=>v.vote==='yes').length;
+  const needed=Math.max(2,Math.ceil(users.length*2/3));
+  const noV=votes.filter(v=>v.vote==='no').length;
+  let status='open';
+  if(yesV>=needed)status='approved';
+  else if(noV>users.length-needed)status='rejected';
+  await sb.from('proposals').update({votes,status}).eq('id',pid);
+  if(status==='approved'){
+    const d=decs.find(x=>x.id===prop.decision_id);
+    if(d){
+      let upd={};
+      if(prop.field==='options'){
+        upd.options=prop.new_value.split('\n').map(l=>{const t=l.replace(/^[A-Z]:\s*/,'').trim();return t;}).filter(Boolean);
+      } else upd[prop.field]=prop.new_value;
+      await sb.from('decisions').update(upd).eq('id',prop.decision_id);
+      const{data}=await sb.from('decisions').select('*').order('phase').order('created_at');decs=data||[];
+      toast('Amendment approved and applied!','ok');
+    }
+  } else toast(status==='rejected'?'Amendment rejected':'Vote recorded','ok');
+  const{data}=await sb.from('proposals').select('*').order('created_at',{ascending:false});proposals=data||[];
+  renderDecs();
+};
+
+/* ─── ADD DECISION MODAL ─────────────────────────────────────────────────── */
+window.openAdd=async()=>{document.getElementById('addmodal').classList.add('open');};
 window.closeAdd=()=>document.getElementById('addmodal').classList.remove('open');
 window.submitDec=async()=>{
   const title=document.getElementById('ntitle').value.trim();
@@ -985,120 +1486,244 @@ window.submitDec=async()=>{
   if(!title||!ctx||!optsRaw){toast('Please fill in all required fields','err');return;}
   const options=optsRaw.split('\n').map(o=>o.trim()).filter(Boolean);
   if(options.length<2){toast('Please provide at least 2 options','err');return;}
-  const phase=parseInt(document.getElementById('nphase').value);
-  const priority=document.getElementById('nprio').value;
-  const desc=document.getElementById('ndesc').value.trim();
-  const rv=[...document.querySelectorAll('#vcbs input:checked')].map(i=>i.value);
-  const{error}=await sb.from('decisions').insert({title,description:desc,phase,priority,context:ctx,options,required_verifiers:rv,status:'open',created_by:me.id});
-  if(error){toast('Error: '+error.message,'err');return;}
+  await sb.from('decisions').insert({title,description:document.getElementById('ndesc').value.trim(),phase:parseInt(document.getElementById('nphase').value),priority:document.getElementById('nprio').value,context:ctx,options,required_verifiers:[],status:'open',created_by:me.id});
   const{data}=await sb.from('decisions').select('*').order('phase').order('created_at');decs=data||[];
   window.closeAdd();renderDecs();updBadge();toast('Decision added','ok');
   ['ntitle','ndesc','nctx','nopts'].forEach(id=>document.getElementById(id).value='');
 };
 
+/* ─── OPPORTUNITY MODAL ──────────────────────────────────────────────────── */
+window.openOppModal=async(id)=>{
+  const{data}=await sb.from('profiles').select('*');users=data||[];
+  document.getElementById('o-owner').innerHTML='<option value="">— Unassigned —</option>'+users.map(u=>`<option value="${u.id}">${u.full_name}</option>`).join('');
+  const o=id?opps.find(x=>x.id===id):null;
+  document.getElementById('omt').textContent=o?'Edit opportunity':'Add opportunity';
+  document.getElementById('o-id').value=o?o.id:'';
+  document.getElementById('o-submit-btn').textContent=o?'Save changes':'Add opportunity';
+  const s=(el,val)=>{const e=document.getElementById(el);if(e&&val!=null)e.value=val;};
+  if(o){
+    s('o-title',o.title);s('o-desc',o.description);s('o-pillar',o.pillar);s('o-stage',o.stage);
+    s('o-lh',o.likelihood);s('o-owner',o.owner_id);s('o-client',o.client_name);s('o-ctype',o.client_type);
+    s('o-dtype',o.deal_type);s('o-source',o.source);s('o-size',o.estimated_size);s('o-fee',o.estimated_fee_pct);
+    s('o-strip',o.estimated_strip_bp);s('o-months',o.estimated_months_to_close);
+    s('o-idate',o.intro_date);s('o-nadate',o.next_action_date);s('o-na',o.next_action);
+    s('o-blockers',o.blockers);s('o-notes',o.notes);
+    s('o-iroko',o.iroko_relevant?'true':'false');s('o-fais',o.fais_required?'true':'false');
+  } else {
+    ['o-title','o-desc','o-client','o-dtype','o-na','o-blockers','o-notes','o-idate','o-nadate','o-size','o-fee','o-strip','o-months'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+    s('o-stage','idea');s('o-lh','medium');s('o-iroko','true');s('o-fais','false');s('o-pillar','1');
+  }
+  document.getElementById('oppmodal').classList.add('open');
+};
+window.closeOppModal=()=>document.getElementById('oppmodal').classList.remove('open');
+window.submitOpp=async()=>{
+  const title=document.getElementById('o-title').value.trim();
+  const desc=document.getElementById('o-desc').value.trim();
+  if(!title||!desc){toast('Title and description are required','err');return;}
+  const id=document.getElementById('o-id').value;
+  const g=el=>document.getElementById(el)?.value||null;
+  const gn=el=>{const v=parseFloat(document.getElementById(el)?.value);return isNaN(v)?null:v;};
+  const row={title,description:desc,pillar:parseInt(g('o-pillar'))||1,stage:g('o-stage')||'idea',likelihood:g('o-lh')||'medium',owner_id:g('o-owner')||null,client_name:g('o-client'),client_type:g('o-ctype'),deal_type:g('o-dtype'),source:g('o-source'),estimated_size:gn('o-size'),estimated_fee_pct:gn('o-fee'),estimated_strip_bp:gn('o-strip'),estimated_months_to_close:gn('o-months')?Math.round(gn('o-months')):null,intro_date:g('o-idate'),next_action_date:g('o-nadate'),next_action:g('o-na'),blockers:g('o-blockers'),notes:g('o-notes'),iroko_relevant:g('o-iroko')==='true',fais_required:g('o-fais')==='true',created_by:me.id};
+  if(id)await sb.from('opportunities').update(row).eq('id',id);
+  else await sb.from('opportunities').insert(row);
+  const{data}=await sb.from('opportunities').select('*').order('created_at',{ascending:false});opps=data||[];
+  window.closeOppModal();renderOpps();updBadge();toast(id?'Opportunity updated':'Opportunity added','ok');
+};
+window.updOppStage=async(id,stage)=>{
+  await sb.from('opportunities').update({stage}).eq('id',id);
+  const idx=opps.findIndex(o=>o.id===id);if(idx>-1)opps[idx].stage=stage;
+  renderOpps();toast('Stage updated','ok');
+};
+
+/* ─── DOCUMENT MODAL ─────────────────────────────────────────────────────── */
+const SUBCATS={
+  legal:['Shareholders agreement','Memorandum of incorporation','Board resolution','Partnership agreement','Employment contract','Other legal'],
+  compliance:['FAIS legal opinion','FSP licence application','Appointed rep agreement','Compliance policy','FICA/KYC process','Regulatory correspondence','Other compliance'],
+  iroko:['Introducer agreement','Fee letter','Strip documentation','Term sheet','Correspondence','Other Iroko'],
+  financial:['Financial model','Cash flow forecast','Management accounts','Budget','Cap table','Other financial'],
+  commercial:['Pitch deck','Credentials deck','Proposal','One-pager','NDA','Other commercial'],
+  hr:['Roles & responsibilities','Equity vesting schedule','Commission framework','Employment record','Other HR'],
+  operations:['Introduction register','Process document','Policy','Meeting register','Other ops'],
+  research:['Market analysis','Sector report','Competitor analysis','Deal memo','Other research'],
+  templates:['Engagement letter template','NDA template','Fee letter template','Introducer agreement template','Other template'],
+  other:['Other'],
+};
+window.updDocSubcats=()=>{
+  const cat=document.getElementById('d-cat')?.value;
+  const opts=SUBCATS[cat]||['Other'];
+  document.getElementById('d-subcat').innerHTML=opts.map(o=>`<option value="${o}">${o}</option>`).join('');
+};
+window.openDocModal=async(id)=>{
+  const d=id?docs.find(x=>x.id===id):null;
+  document.getElementById('dmt').textContent=d?'Edit document':'Upload document';
+  document.getElementById('d-id').value=d?d.id:'';
+  document.getElementById('d-submit-btn').textContent=d?'Save changes':'Upload document';
+  if(d){
+    const s=(el,v)=>{const e=document.getElementById(el);if(e&&v!=null)e.value=v;};
+    s('d-name',d.name);s('d-cat',d.category);s('d-status',d.status||'current');s('d-ver',d.version||'1.0');s('d-desc',d.description);s('d-pillar',d.related_pillar||'');
+    window.updDocSubcats();s('d-subcat',d.subcategory||'');
+  } else {
+    ['d-name','d-ver','d-desc'].forEach(id=>{const e=document.getElementById(id);if(e)e.value=id==='d-ver'?'1.0':'';});
+    document.getElementById('d-cat').value='legal';document.getElementById('d-status').value='current';
+    document.getElementById('d-pillar').value='';window.updDocSubcats();
+  }
+  const fi=document.getElementById('d-file');if(fi)fi.value='';
+  document.getElementById('docmodal').classList.add('open');
+};
+window.closeDocModal=()=>document.getElementById('docmodal').classList.remove('open');
+window.submitDoc=async()=>{
+  const name=document.getElementById('d-name').value.trim();
+  const cat=document.getElementById('d-cat').value;
+  const id=document.getElementById('d-id').value;
+  if(!name||!cat){toast('Name and category are required','err');return;}
+  const g=el=>document.getElementById(el)?.value||null;
+  const fileInput=document.getElementById('d-file');
+  const file=fileInput?.files?.[0];
+  let url=null,fileName=null;
+  if(file){
+    document.getElementById('d-uploading').style.display='block';
+    document.getElementById('d-submit-btn').disabled=true;
+    const path=`${cat}/${Date.now()}-${file.name}`;
+    const{error}=await sb.storage.from('documents').upload(path,file);
+    document.getElementById('d-uploading').style.display='none';
+    document.getElementById('d-submit-btn').disabled=false;
+    if(error){toast('Upload failed: '+error.message,'err');return;}
+    url=sb.storage.from('documents').getPublicUrl(path).data.publicUrl;
+    fileName=file.name;
+  }
+  if(!id&&!url){toast('Please select a file to upload','err');return;}
+  const row={name,category:cat,subcategory:g('d-subcat'),related_pillar:g('d-pillar')||null,status:g('d-status')||'current',version:g('d-ver')||'1.0',description:g('d-desc'),uploaded_by:me.id};
+  if(url){row.url=url;row.file_name=fileName;}
+  if(id)await sb.from('documents').update(row).eq('id',id);
+  else await sb.from('documents').insert(row);
+  const{data}=await sb.from('documents').select('*').order('created_at',{ascending:false});docs=data||[];
+  window.closeDocModal();renderDocs();toast(id?'Document updated':'Document uploaded','ok');
+};
+
+/* ─── MEETING MINUTES MODAL ──────────────────────────────────────────────── */
+window.openMMModal=async(id)=>{
+  const{data}=await sb.from('profiles').select('*');users=data||[];
+  const m=id?minutes.find(x=>x.id===id):null;
+  document.getElementById('mmt').textContent=m?'Edit meeting minutes':'Add meeting minutes';
+  document.getElementById('mm-id').value=m?m.id:'';
+  document.getElementById('mm-submit-btn').textContent=m?'Save changes':'Save minutes';
+  const attCbs=document.getElementById('mm-att-cbs');
+  attCbs.innerHTML=users.map(u=>`<label style="display:flex;align-items:center;gap:.4rem;font-size:.82rem;cursor:pointer;padding:.25rem .55rem;border:1px solid var(--paper3);border-radius:99px;background:var(--paper)"><input type="checkbox" value="${u.id}" ${m&&Array.isArray(m.attendees)&&m.attendees.includes(u.id)?'checked':''}> ${u.full_name.split(' ')[0]}</label>`).join('');
+  const s=(el,v)=>{const e=document.getElementById(el);if(e&&v!=null)e.value=v;};
+  if(m){
+    s('mm-title',m.title);s('mm-date',m.meeting_date);s('mm-type',m.meeting_type);s('mm-loc',m.location);
+    s('mm-dur',m.duration_minutes);s('mm-ext',m.external_attendees);s('mm-agenda',m.agenda);
+    s('mm-summary',m.summary);s('mm-decisions',m.decisions_made);s('mm-actions',m.action_items);s('mm-followup',m.follow_ups);
+  } else {
+    ['mm-title','mm-loc','mm-ext','mm-agenda','mm-summary','mm-decisions','mm-actions','mm-followup'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+    document.getElementById('mm-date').value=new Date().toISOString().slice(0,10);
+    document.getElementById('mm-dur').value='';
+    document.getElementById('mm-type').value='founders';
+  }
+  const fi=document.getElementById('mm-file');if(fi)fi.value='';
+  document.getElementById('mmmodal').classList.add('open');
+};
+window.closeMMModal=()=>document.getElementById('mmmodal').classList.remove('open');
+window.submitMM=async()=>{
+  const title=document.getElementById('mm-title').value.trim();
+  const summary=document.getElementById('mm-summary').value.trim();
+  if(!title||!summary){toast('Title and summary are required','err');return;}
+  const id=document.getElementById('mm-id').value;
+  const g=el=>document.getElementById(el)?.value||null;
+  const attendees=[...document.querySelectorAll('#mm-att-cbs input:checked')].map(i=>i.value);
+  const file=document.getElementById('mm-file')?.files?.[0];
+  let docUrl=null;
+  if(file){
+    document.getElementById('mm-submit-btn').disabled=true;
+    const path=`minutes/${Date.now()}-${file.name}`;
+    const{error,data}=await sb.storage.from('documents').upload(path,file);
+    document.getElementById('mm-submit-btn').disabled=false;
+    if(!error)docUrl=sb.storage.from('documents').getPublicUrl(path).data.publicUrl;
+  }
+  const row={title,meeting_date:g('mm-date'),meeting_type:g('mm-type')||'founders',location:g('mm-loc'),duration_minutes:parseInt(g('mm-dur'))||null,attendees,external_attendees:g('mm-ext'),agenda:g('mm-agenda'),summary,decisions_made:g('mm-decisions'),action_items:g('mm-actions'),follow_ups:g('mm-followup'),created_by:me.id};
+  if(docUrl)row.document_url=docUrl;
+  if(id)await sb.from('meeting_minutes').update(row).eq('id',id);
+  else await sb.from('meeting_minutes').insert(row);
+  const{data}=await sb.from('meeting_minutes').select('*').order('meeting_date',{ascending:false});minutes=data||[];
+  window.closeMMModal();renderMinutes();toast(id?'Minutes updated':'Minutes saved','ok');
+};
+
+/* ─── UTILITIES ──────────────────────────────────────────────────────────── */
 function updBadge(){
   const open=decs.filter(d=>d.status==='open').length;
   const el=document.getElementById('obadge');
   if(el){el.textContent=open||'';el.style.display=open?'':'none';}
+  const oEl=document.getElementById('oppbadge');
+  if(oEl){const active=opps.filter(o=>!['passed','on_hold'].includes(o.stage)).length;oEl.textContent=active||'';oEl.style.display=active?'':'none';}
 }
-function fmtD(iso){return new Date(iso).toLocaleDateString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});}
+function fmtD(iso){try{return new Date(iso).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}catch{return iso||'';}}
+function fmtM(n){if(!n)return'';if(n>=1e6)return'$'+(Math.round(n/1e5)/10)+'m';if(n>=1e3)return'$'+Math.round(n/1e3)+'k';return'$'+Math.round(n);}
+function fmtR(n){if(!n)return'';if(n>=1e6)return'R'+(Math.round(n/1e5)/10)+'m';if(n>=1e3)return'R'+Math.round(n/1e3)+'k';return'R'+Math.round(n);}
 function toast(msg,type=''){
   const el=document.getElementById('toast');
   el.textContent=msg;el.className='toast show'+(type?' '+type:'');
   setTimeout(()=>el.classList.remove('show'),3000);
 }
 
-/* COMMISSION SLIDERS */
+/* ─── COMMISSION SLIDERS ─────────────────────────────────────────────────── */
 window.updPool=()=>{
-  const o=parseInt(document.getElementById('s-orig').value);
-  const e=parseInt(document.getElementById('s-exec').value);
-  const h=parseInt(document.getElementById('s-house').value);
+  const o=+document.getElementById('s-orig').value,e=+document.getElementById('s-exec').value,h=+document.getElementById('s-house').value;
   const sum=o+e+h;
-  document.getElementById('sv-orig').textContent=o+'%';
-  document.getElementById('sv-exec').textContent=e+'%';
-  document.getElementById('sv-house').textContent=h+'%';
+  document.getElementById('sv-orig').textContent=o+'%';document.getElementById('sv-exec').textContent=e+'%';document.getElementById('sv-house').textContent=h+'%';
   document.getElementById('pwarn').style.display=sum!==100?'block':'none';
-  document.getElementById('ptot').textContent=sum;
-  document.getElementById('pbo').style.flex=o;
-  document.getElementById('pbe').style.flex=e;
-  document.getElementById('pbh').style.flex=h;
-  document.getElementById('pblo').textContent='Origination '+o+'%';
-  document.getElementById('pble').textContent='Execution '+e+'%';
-  document.getElementById('pblh').textContent='House '+h+'%';
-  document.getElementById('mo').textContent=o+'%';
-  document.getElementById('me').textContent=e+'%';
-  document.getElementById('mh').textContent=h+'%';
+  if(document.getElementById('ptot'))document.getElementById('ptot').textContent=sum;
+  document.getElementById('pbo').style.flex=o;document.getElementById('pbe').style.flex=e;document.getElementById('pbh').style.flex=h;
+  document.getElementById('pblo').textContent='Origination '+o+'%';document.getElementById('pble').textContent='Execution '+e+'%';document.getElementById('pblh').textContent='House '+h+'%';
+  document.getElementById('mo').textContent=o+'%';document.getElementById('me').textContent=e+'%';document.getElementById('mh').textContent=h+'%';
 };
-
 window.updCalc=()=>{
-  const deal=parseInt(document.getElementById('s-deal').value)*1e6;
-  const fee=parseFloat(document.getElementById('s-fee').value)/100;
-  const strip=parseInt(document.getElementById('s-strip').value)/10000;
-  const tenor=parseInt(document.getElementById('s-tenor').value);
-  const oc=parseInt(document.getElementById('s-oc').value)/100;
-  const ec=parseInt(document.getElementById('s-ec').value)/100;
-  const hc=Math.max(0,1-oc-ec);
+  const deal=+document.getElementById('s-deal').value*1e6,fee=+document.getElementById('s-fee').value/100;
+  const strip=+document.getElementById('s-strip').value/10000,tenor=+document.getElementById('s-tenor').value;
+  const oc=+document.getElementById('s-oc').value/100,ec=+document.getElementById('s-ec').value/100,hc=Math.max(0,1-oc-ec);
   document.getElementById('sv-deal').textContent='$'+document.getElementById('s-deal').value+'m';
-  document.getElementById('sv-fee').textContent=parseFloat(document.getElementById('s-fee').value).toFixed(2)+'%';
+  document.getElementById('sv-fee').textContent=(+document.getElementById('s-fee').value).toFixed(2)+'%';
   document.getElementById('sv-strip').textContent=document.getElementById('s-strip').value+'bp';
   document.getElementById('sv-tenor').textContent=document.getElementById('s-tenor').value+'yr';
-  document.getElementById('sv-oc').textContent=Math.round(oc*100)+'%';
-  document.getElementById('sv-ec').textContent=Math.round(ec*100)+'%';
+  document.getElementById('sv-oc').textContent=Math.round(oc*100)+'%';document.getElementById('sv-ec').textContent=Math.round(ec*100)+'%';
   const fi=deal*fee,syr=deal*strip,stot=syr*tenor,tot=fi+stot;
-  document.getElementById('cfee').textContent=fmtM(fi);
-  document.getElementById('csyr').textContent=fmtM(syr);
-  document.getElementById('cstot').textContent=fmtM(stot);
-  document.getElementById('ctot').textContent=fmtM(tot);
-  document.getElementById('coe').textContent=fmtM(tot*oc);
-  document.getElementById('cee').textContent=fmtM(tot*ec);
-  document.getElementById('che').textContent=fmtM(tot*hc);
+  document.getElementById('cfee').textContent=fmtM(fi);document.getElementById('csyr').textContent=fmtM(syr);
+  document.getElementById('cstot').textContent=fmtM(stot);document.getElementById('ctot').textContent=fmtM(tot);
+  document.getElementById('coe').textContent=fmtM(tot*oc);document.getElementById('cee').textContent=fmtM(tot*ec);document.getElementById('che').textContent=fmtM(tot*hc);
   const n=document.getElementById('cnote');
-  if(strip===0){n.textContent='No strip selected — fee-only model. Add a strip rate to see the hybrid income comparison.';n.className='cg';}
-  else if(stot>fi){n.textContent='Strip income ('+fmtM(stot)+') exceeds the upfront fee ('+fmtM(fi)+') across the asset life — this is the equity value argument for Option D.';n.className='ck';}
-  else{n.textContent='Upfront fee ('+fmtM(fi)+') currently exceeds strip income ('+fmtM(stot)+') — try a longer tenor or higher strip rate.';n.className='cg';}
+  if(strip===0){n.textContent='No strip selected — fee-only model.';n.className='cg';}
+  else if(stot>fi){n.textContent='Strip income ('+fmtM(stot)+') exceeds the upfront fee ('+fmtM(fi)+') across the asset life — the equity value argument for Option D.';n.className='ck';}
+  else{n.textContent='Upfront fee ('+fmtM(fi)+') currently exceeds strip income ('+fmtM(stot)+').';n.className='cg';}
 };
 
-/* IROKO SLIDERS */
+/* ─── IROKO SLIDERS ──────────────────────────────────────────────────────── */
 window.updCW=()=>{
-  const adv=parseInt(document.getElementById('s-adv').value);
-  const mo=parseInt(document.getElementById('s-close').value);
+  const adv=+document.getElementById('s-adv').value,mo=+document.getElementById('s-close').value;
   let rate=1.0,rLbl='100%',prem=0;
-  if(mo<=3){rate=1.0;rLbl='100%';prem=0;}
-  else if(mo<=6){rate=1.08;rLbl='108%';prem=adv*0.08;}
-  else if(mo<=9){rate=1.15;rLbl='115%';prem=adv*0.15;}
-  else{rate=1.20;rLbl='120%';prem=adv*0.20;}
+  if(mo<=3){rate=1.0;rLbl='100%';prem=0;}else if(mo<=6){rate=1.08;rLbl='108%';prem=adv*.08;}
+  else if(mo<=9){rate=1.15;rLbl='115%';prem=adv*.15;}else{rate=1.20;rLbl='120%';prem=adv*.20;}
   const rep=Math.round(adv*rate);
-  document.getElementById('sv-adv').textContent=fmtR(adv);
-  document.getElementById('sv-close').textContent='Month '+mo;
-  document.getElementById('cwadv').textContent=fmtR(adv);
-  document.getElementById('cwrate').textContent=rLbl;
-  document.getElementById('cwrep').textContent=fmtR(rep);
-  document.getElementById('cwprem').textContent=prem===0?'None':fmtR(prem);
+  document.getElementById('sv-adv').textContent=fmtR(adv);document.getElementById('sv-close').textContent='Month '+mo;
+  document.getElementById('cwadv').textContent=fmtR(adv);document.getElementById('cwrate').textContent=rLbl;
+  document.getElementById('cwrep').textContent=fmtR(rep);document.getElementById('cwprem').textContent=prem===0?'None':fmtR(prem);
   const n=document.getElementById('cwnote');
-  if(mo<=3){n.textContent='Closing within 3 months — full advance repaid with no premium. Maximum incentive to close fast.';n.className='ck';}
-  else if(mo<=6){n.textContent='Closing in months 3–6 — 8% premium of '+fmtR(prem)+'. Still commercially sensible given the revenue it unlocks.';n.className='cg';}
-  else{n.textContent='Closing beyond month 6 — premium rises to '+Math.round((rate-1)*100)+'%. Deducted from fee on close, no cash payment required.';n.className='cw';}
+  if(mo<=3){n.textContent='Closing within 3 months — full advance repaid with no premium.';n.className='ck';}
+  else if(mo<=6){n.textContent='Closing in months 3–6 — 8% premium of '+fmtR(prem)+'.';n.className='cg';}
+  else{n.textContent='Closing beyond month 6 — premium rises to '+Math.round((rate-1)*100)+'%.';n.className='cw';}
 };
-
 window.updIS=()=>{
-  const deal=parseInt(document.getElementById('s-id').value)*1e6;
-  const strip=parseInt(document.getElementById('s-is').value)/10000;
-  const tenor=parseInt(document.getElementById('s-it').value);
-  const nd=parseInt(document.getElementById('s-nd').value);
+  const deal=+document.getElementById('s-id').value*1e6,strip=+document.getElementById('s-is').value/10000;
+  const tenor=+document.getElementById('s-it').value,nd=+document.getElementById('s-nd').value;
   document.getElementById('sv-id').textContent='$'+document.getElementById('s-id').value+'m';
   document.getElementById('sv-is').textContent=document.getElementById('s-is').value+'bp';
   document.getElementById('sv-it').textContent=document.getElementById('s-it').value+'yr';
   document.getElementById('sv-nd').textContent=nd;
   const yr=deal*strip,tot=yr*tenor,book=yr*nd,eq=book*6;
-  document.getElementById('isyr').textContent=fmtM(yr);
-  document.getElementById('istot').textContent=fmtM(tot);
-  document.getElementById('isbook').textContent=fmtM(book);
-  document.getElementById('isval').textContent=fmtM(eq);
-  const n=document.getElementById('isnote');
-  n.textContent=document.getElementById('s-is').value+'bp on $'+document.getElementById('s-id').value+'m generates '+fmtM(yr)+'/year for '+document.getElementById('s-it').value+' years. With '+nd+' similar deal'+(nd>1?'s':'')+', annual strip book income is '+fmtM(book)+' — valued at approximately '+fmtM(eq)+' at a 6x recurring revenue multiple.';
+  document.getElementById('isyr').textContent=fmtM(yr);document.getElementById('istot').textContent=fmtM(tot);
+  document.getElementById('isbook').textContent=fmtM(book);document.getElementById('isval').textContent=fmtM(eq);
+  document.getElementById('isnote').textContent=document.getElementById('s-is').value+'bp on $'+document.getElementById('s-id').value+'m generates '+fmtM(yr)+'/year for '+document.getElementById('s-it').value+' years. With '+nd+' deal'+(nd>1?'s':'')+', annual book income is '+fmtM(book)+' — valued at ~'+fmtM(eq)+' at 6x.';
 };
 
-/* TABS */
+/* ─── TABS / PILLARS / TREE / CHECKLIST ──────────────────────────────────── */
 window.cTab=(id,btn)=>{
   document.querySelectorAll('#v-commission .ctab').forEach(t=>t.classList.remove('on'));
   document.querySelectorAll('#v-commission .cv').forEach(v=>v.classList.remove('on'));
@@ -1111,47 +1736,26 @@ window.iTab=(id,btn)=>{
   btn.classList.add('on');document.getElementById('it-'+id).classList.add('on');
   if(id==='calc'){updCW();updIS();}
 };
-
-/* PILLAR NAV */
 window.showP=id=>{
-  ['1','2','3','4'].forEach(p=>{
-    document.getElementById('pn'+p).classList.toggle('on',p===id);
-    document.getElementById('pv'+p).classList.toggle('on',p===id);
-  });
+  ['1','2','3','4'].forEach(p=>{document.getElementById('pn'+p).classList.toggle('on',p===id);document.getElementById('pv'+p).classList.toggle('on',p===id);});
 };
-
-/* PARTNER DECISION TREE */
 window.showDT=(a,el)=>{
   const res={
-    a:'<strong>Recommended: commission-only introducer, not equity.</strong> A person with a specific client relationship is valuable but that value may be transactional. Start with a commission-only introducer agreement — they earn origination commission on deals they bring, with no equity and no salary. Reassess after 12 months of consistent delivery.',
-    b:'<strong>Clearly: employee.</strong> Capacity needs are solved with employment, not equity. A salaried analyst or associate with a discretionary bonus linked to team performance. No equity until they have demonstrated sustained senior contribution over 18–24 months. Consider phantom equity as a retention tool without diluting founding equity.',
-    c:'<strong>Possible: junior partner with vesting.</strong> A new service line capability is a genuine founding contribution. Consider meaningful equity (5–15%) with a 6-month cliff and 36-month vesting, commission rights within their service line, and board observer status initially. Full partner status with voting rights only after 24 months of sustained contribution.',
-    d:'<strong>Likely: strategic partner with negotiated equity.</strong> Capital or regulatory access warrants equity but this is a commercial negotiation. Agree equity, rights and exit terms as if dealing with an external investor. Get a lawyer involved before any offer is made.'
+    a:'<strong>Recommended: commission-only introducer, not equity.</strong> A specific client relationship is valuable but may be transactional. Start with a commission-only introducer agreement — they earn origination commission on deals they bring, no equity, no salary. Reassess after 12 months of consistent delivery.',
+    b:'<strong>Clearly: employee.</strong> Capacity needs are solved with employment, not equity. A salaried analyst or associate with discretionary bonus. No equity until 18–24 months of sustained senior contribution. Consider phantom equity as a retention tool.',
+    c:'<strong>Possible: junior partner with vesting.</strong> A new service line capability is a genuine founding contribution. Consider 5–15% equity with a 6-month cliff and 36-month vesting. Full partner status with voting rights only after 24 months.',
+    d:'<strong>Likely: strategic partner with negotiated equity.</strong> Capital or regulatory access warrants equity but this is a commercial negotiation. Agree equity, rights and exit terms as if dealing with an external investor. Get a lawyer involved first.'
   };
   document.querySelectorAll('#dto .rcard').forEach(c=>{c.style.borderColor='';c.style.background='';});
   el.style.borderColor='var(--gold)';el.style.background='var(--goldl)';
   const r=document.getElementById('dtres');r.innerHTML=res[a]||'';r.style.display='block';
 };
-
-/* ROADMAP CHECKLIST */
 window.updRM=()=>{
   const all=document.querySelectorAll('.rmchk'),done=document.querySelectorAll('.rmchk:checked');
   const pct=all.length?Math.round(done.length/all.length*100):0;
   document.getElementById('rmprog').style.width=pct+'%';
   document.getElementById('rmlbl').textContent=done.length+' of '+all.length+' items complete';
 };
-
-/* NUMBER FORMAT */
-function fmtM(n){
-  if(n>=1e6)return'$'+(Math.round(n/1e5)/10)+'m';
-  if(n>=1e3)return'$'+Math.round(n/1e3)+'k';
-  return'$'+Math.round(n);
-}
-function fmtR(n){
-  if(n>=1e6)return'R'+(Math.round(n/1e5)/10)+'m';
-  if(n>=1e3)return'R'+Math.round(n/1e3)+'k';
-  return'R'+Math.round(n);
-}
 
 init();
 </script>
