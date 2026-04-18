@@ -386,6 +386,7 @@ textarea.fi{resize:vertical;min-height:72px}
       <div class="nlogo">Alpha<span>Gen</span></div>
     </div>
     <div class="nr">
+      <div style="font-size:.68rem;color:rgba(250,248,244,.35);letter-spacing:.04em">v1.1 — built 18 Apr 2026 18:23 SAST</div>
       <div class="nuser">Signed in as <strong id="nname">&#8212;</strong></div>
       <button class="btnso" onclick="doSignout()">Sign out</button>
     </div>
@@ -944,7 +945,7 @@ import{createClient}from'https://esm.sh/@supabase/supabase-js@2';
 const SU='https://ewdloawwudqkdrstqfet.supabase.co';
 const SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV3ZGxvYXd3dWRxa2Ryc3RxZmV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxODc5NDYsImV4cCI6MjA5MTc2Mzk0Nn0.xMOdn6c9sQwrUoEpBk9MZUFHFSV0CLFTUrlyzkgRqUM';
 const sb=createClient(SU,SK);
-const SV='8';
+const SV='9';
 let me=null,myP=null,decs=[],users=[],coms=[],vers=[],atts=[],opps=[],docs=[],minutes=[],proposals=[],intros=[];
 window.introF=null;
 let zarMode=false;
@@ -1007,16 +1008,23 @@ async function loadAll(){
   // localStorage so it works correctly across all browsers/devices/partners.
   const seedMarker=decs.find(d=>d.title==='__seed_v'+SV);
   if(!seedMarker){
-    // Remove any stale seeds from previous versions (marker rows + untouched decisions)
+    // Clean slate: delete ALL existing decisions (duplicates, old seeds, old markers)
+    // Keep any that have comments or verifications so partner work is preserved
     const touched=new Set([...coms.map(x=>x.decision_id),...vers.map(x=>x.decision_id)]);
-    const stale=decs.filter(d=>!touched.has(d.id)||d.title.startsWith('__seed_v'));
-    if(stale.length)await sb.from('decisions').delete().in('id',stale.map(d=>d.id));
-    // Insert fresh seed decisions
-    await sb.from('decisions').insert(SEEDS.map(s=>({...s,status:'open',created_by:me.id})));
-    // Insert the marker so no other browser/device re-seeds
+    // Delete untouched decisions and ALL old seed markers regardless
+    const toDelete=decs.filter(d=>!touched.has(d.id)||d.title.startsWith('__seed_v'));
+    if(toDelete.length)await sb.from('decisions').delete().in('id',toDelete.map(d=>d.id));
+    // For touched decisions that are duplicates of seeds, keep only the one with most activity
+    // Re-fetch after delete to get clean state
+    const{data:remaining}=await sb.from('decisions').select('*');
+    const remainingTitles=new Set((remaining||[]).map(d=>d.title));
+    // Only insert seeds that don't already exist (avoids duplicates on touched items)
+    const toInsert=SEEDS.filter(s=>!remainingTitles.has(s.title));
+    if(toInsert.length)await sb.from('decisions').insert(toInsert.map(s=>({...s,status:'open',created_by:me.id})));
+    // Insert the new version marker
     await sb.from('decisions').insert({title:'__seed_v'+SV,description:'',phase:1,priority:'can',context:'Seed version marker — do not delete.',options:[],required_verifiers:[],status:'decided',created_by:me.id});
     const{data}=await sb.from('decisions').select('*').order('phase').order('created_at');
-    decs=(data||[]).filter(x=>!x.title.startsWith("__seed_v"));
+    decs=(data||[]).filter(x=>!x.title.startsWith('__seed_v'));
   }
   updBadge();
 }
